@@ -3,11 +3,15 @@
 #include <QSqlDatabase>
 #include <QSqlQueryModel>
 #include <QSqlQuery>
+#include <QFile>
 
 class Database : public QSqlDatabase
 {
 public:
     static Database* getInstance();
+    void initialDBPoputaion();
+    QStringList parseCSVFile();
+    void addNewTeam(QStringList);
 private:
     Database();
     static Database* instance;
