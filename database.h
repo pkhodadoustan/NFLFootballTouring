@@ -12,6 +12,8 @@ public:
     void initialDBPoputaion();
     QStringList parseCSVFile(QString&);
     void addNewTeam(QStringList);
+    QSqlQueryModel* getListOfNationalConferenceTeams();
+    QSqlQueryModel* getListOfOpenRoofStadiums();
 private:
     Database();
     static Database* instance;
