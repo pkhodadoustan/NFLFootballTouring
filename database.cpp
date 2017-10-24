@@ -214,3 +214,18 @@ QSqlQueryModel* Database::getListOfOpenRoofStadiums() {
     return model;
 }
 
+QSqlQueryModel* Database::getListOfAmericanConferenceTeams() {
+
+    QSqlQueryModel *model = new QSqlQueryModel;
+      model->setQuery("SELECT * FROM Teams WHERE Conference == 'American Football Conference'");
+      model->setHeaderData(0, Qt::Horizontal, "Team Name");
+      model->setHeaderData(1, Qt::Horizontal, "Stadium Name");
+      model->setHeaderData(1, Qt::Horizontal, "Seating Capacity");
+      model->setHeaderData(1, Qt::Horizontal, "Location");
+      model->setHeaderData(1, Qt::Horizontal, "Conference");
+      model->setHeaderData(1, Qt::Horizontal, "Surface Type");
+      model->setHeaderData(1, Qt::Horizontal, "Stadium Roof Type");
+      model->setHeaderData(1, Qt::Horizontal, "Star Player");
+
+    return model;
+}

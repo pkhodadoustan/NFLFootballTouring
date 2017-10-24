@@ -20,6 +20,8 @@ private slots:
 
     void on_NationalConfTeamsButton_clicked();
 
+    void on_AmericanConfTeamsButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

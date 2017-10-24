@@ -31,6 +31,13 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QPushButton" name="AmericanConfTeamsButton">
+        <property name="text">
+         <string>American Conference Teams</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
     <item>
@@ -57,7 +64,7 @@
      <x>0</x>
      <y>0</y>
      <width>700</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

@@ -13,6 +13,7 @@ public:
     QStringList parseCSVFile(QString&);
     void addNewTeam(QStringList);
     QSqlQueryModel* getListOfNationalConferenceTeams();
+    QSqlQueryModel* getListOfAmericanConferenceTeams();
     QSqlQueryModel* getListOfOpenRoofStadiums();
 private:
     Database();
