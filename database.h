@@ -10,7 +10,7 @@ class Database : public QSqlDatabase
 public:
     static Database* getInstance();
     void initialDBPoputaion();
-    QStringList parseCSVFile();
+    QStringList parseCSVFile(QString&);
     void addNewTeam(QStringList);
 private:
     Database();

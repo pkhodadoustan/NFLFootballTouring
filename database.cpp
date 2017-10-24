@@ -1,10 +1,17 @@
 #include "database.h"
 #include <QDir>
+#include <QSqlError>
 #include <QDebug>
 
 Database* Database::instance = nullptr;
 
 
+/**
+ * @brief Database::getInstance
+ * This function returns an instance of Database.  IF one is not created,
+ * one will be created
+ * @return Database*
+ */
 Database* Database::getInstance() {
     if (instance == nullptr)
         instance = new Database;
@@ -48,8 +55,10 @@ Database::Database(): QSqlDatabase(addDatabase("QSQLITE")) {
 
 /**
  * @brief Database::parseAndReturnCSVFile
+ * This function will take in a line as a QString of  a CSV file and input each item
+ * into a QStringList
  * @param string
- * @return
+ * @return QString list
  */
 QStringList Database::parseCSVFile(QString &string) {
     enum State {Normal, Quote} state = Normal;
@@ -112,17 +121,27 @@ QStringList Database::parseCSVFile(QString &string) {
     return fields;
 }
 
-Database::addNewTeam(QStringList newTeam) {
+/**
+ * @brief Database::addNewTeam
+ * @param newTeam
+ * This function adds a new Team on the Database.  It takes in a QString list and
+ * goes item by item and adds to DB
+ */
+void Database::addNewTeam(QStringList newTeam) {
     QSqlQuery query(*this);
-    query.prepare("INSERT INTO Teams (Stadium Name, Seating Capacity, Locations,"
-                  "Conference, Surface Type, Stadium Roof Type, Star Player)");
-    query.bindValue(":Stadium Name", newTeam.at(0));
-    query.bindValue(":Seating Capacity", newTeam.at(1));
-    query.bindValue(":Locations", newTeam.at(2));
-    query.bindValue(":Conference", newTeam.at(3));
-    query.bindValue(":Surface Type", newTeam.at(4));
-    query.bindValue(":Stadium Roof Type", newTeam.at(5));
-    query.bindValue(":Star Player", newTeam.at(6));
+    query.prepare("INSERT INTO Teams (Team_Name, Stadium_Name, Seating_Capacity, Location,"
+                  "Conference, Surface_Type, Stadium_Roof_Type, Star_Player) VALUES"
+                  "(:Team, :Stadium, :Seating, :Locations, :Conference, :Surface, :Stadium_Roof, :Star)");
+
+    query.bindValue(":Team", newTeam.at(0));
+    query.bindValue(":Stadium", newTeam.at(1));
+    query.bindValue(":Seating", newTeam.at(2));
+    query.bindValue(":Locations", newTeam.at(3));
+    query.bindValue(":Conference", newTeam.at(4));
+    query.bindValue(":Surface", newTeam.at(5));
+    query.bindValue(":Stadium_Roof", newTeam.at(6));
+    query.bindValue(":Star", newTeam.at(7));
+
 
     if (query.exec())
         qDebug() << "query was executed";
@@ -131,6 +150,11 @@ Database::addNewTeam(QStringList newTeam) {
 
 }
 
+/**
+ * @brief Database::initialDBPoputaion
+ * This function will initally poputlate the Database.  It will find the path of
+ * the relevent CSV file and call parseCSV and addTeams.
+ */
 void Database::initialDBPoputaion() {
     Database* db = Database::getInstance();
     QDir dir(QDir::currentPath()); //gets current path
