@@ -4,6 +4,7 @@
 #include <QSqlQueryModel>
 #include <QSqlQuery>
 #include <QFile>
+#include<vector>
 
 class Database : public QSqlDatabase
 {
@@ -15,6 +16,8 @@ public:
     QSqlQueryModel* getListOfNationalConferenceTeams();
     QSqlQueryModel* getListOfAmericanConferenceTeams();
     QSqlQueryModel* getListOfOpenRoofStadiums();
+    QSqlQueryModel* getSpecificTeamInfo(QString teamName);
+    std::vector<QString> getTeamNames();
 private:
     Database();
     static Database* instance;

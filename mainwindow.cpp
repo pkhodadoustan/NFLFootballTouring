@@ -2,11 +2,13 @@
 #include "ui_mainwindow.h"
 #include "database.h"
 #include <QDebug>
+#include<vector>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    makeTeamNameCombobox();
 }
 
 MainWindow::~MainWindow()
@@ -34,4 +36,24 @@ void MainWindow::on_AmericanConfTeamsButton_clicked()
     ui->Table->setModel(Database::getInstance()->getListOfAmericanConferenceTeams());
     QString input = QString("American Conference Teams: %1").arg(ui->Table->model()->rowCount());
     ui->label->setText(input);
+}
+
+
+void MainWindow::on_comboBox_currentIndexChanged(int index)
+{
+    if(index!=0)
+    {
+        QString teamName = ui->comboBox->currentText();
+        ui->Table->setModel(Database::getInstance()->getSpecificTeamInfo(teamName));
+    }
+
+}
+
+void MainWindow::makeTeamNameCombobox()
+{
+    std::vector<QString> teamNames = Database::getInstance()->getTeamNames();
+    for(unsigned int i =0; i<teamNames.size(); i++)
+    {
+        ui->comboBox->addItem(teamNames[i]);
+    }
 }

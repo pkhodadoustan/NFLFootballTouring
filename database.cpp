@@ -229,3 +229,34 @@ QSqlQueryModel* Database::getListOfAmericanConferenceTeams() {
 
     return model;
 }
+
+QSqlQueryModel* Database::getSpecificTeamInfo(QString teamName)
+{
+      QSqlQueryModel *model = new QSqlQueryModel;
+      model->setQuery("SELECT * FROM Teams WHERE Team_Name == '"+teamName+"'");
+      model->setHeaderData(0, Qt::Horizontal, "Team Name");
+      model->setHeaderData(1, Qt::Horizontal, "Stadium Name");
+      model->setHeaderData(1, Qt::Horizontal, "Seating Capacity");
+      model->setHeaderData(1, Qt::Horizontal, "Location");
+      model->setHeaderData(1, Qt::Horizontal, "Conference");
+      model->setHeaderData(1, Qt::Horizontal, "Surface Type");
+      model->setHeaderData(1, Qt::Horizontal, "Stadium Roof Type");
+      model->setHeaderData(1, Qt::Horizontal, "Star Player");
+
+      return model;
+
+}
+
+std::vector<QString> Database::getTeamNames()
+{
+    std::vector<QString> teamNames;
+    QSqlQuery query;
+    query.prepare("SELECT * FROM Teams");
+    if(!query.exec())
+        qDebug()<<"unable to execute query";
+    while(query.next())
+    {
+        teamNames.push_back(query.value(0).toString());
+    }
+    return teamNames;
+}
