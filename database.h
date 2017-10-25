@@ -14,6 +14,7 @@ public:
     void addNewTeam(QStringList);
     QSqlQueryModel* getListOfNationalConferenceTeams();
     QSqlQueryModel* getListOfOpenRoofStadiums();
+    void importDistancesFromFile();
 private:
     Database();
     static Database* instance;

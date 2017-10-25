@@ -214,3 +214,36 @@ QSqlQueryModel* Database::getListOfOpenRoofStadiums() {
     return model;
 }
 
+
+void Database::importDistancesFromFile() {
+    Database* db = Database::getInstance();
+    QDir dir(QDir::currentPath()); //gets current path
+    QString current;//holds new path
+    qDebug() << dir.absolutePath();
+
+
+    while(dir.dirName() != "NFLFootballTouring") {
+        dir.cdUp();
+    }
+    current = dir.absolutePath() + "/initialData/NFLCSV.csv";
+       QFile file(current);
+
+       if (!file.open(QIODevice::ReadOnly)) {
+            qDebug() << file.errorString();
+        } else {
+           qDebug() << "Input File is open";
+
+           while (!file.atEnd())
+           {
+               QString line = QString(file.readLine());
+               QStringList toAdd = db->parseCSVFile(line);
+               db->addNewTeam(toAdd);
+           }
+       }
+
+
+       Database* db = Database::getInstance();
+       QDir dir(QDir::currentPath());
+       QString path;
+       qDebug() << dir.absoluteFilePath();
+}
