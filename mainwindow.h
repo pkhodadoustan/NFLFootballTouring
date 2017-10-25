@@ -20,8 +20,13 @@ private slots:
 
     void on_NationalConfTeamsButton_clicked();
 
+    void on_AmericanConfTeamsButton_clicked();
+
+    void on_comboBox_currentIndexChanged(int index);
+
 private:
     Ui::MainWindow *ui;
+    void makeTeamNameCombobox();
 };
 
 #endif // MAINWINDOW_H

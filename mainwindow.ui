@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>700</width>
+    <width>717</width>
     <height>609</height>
    </rect>
   </property>
@@ -31,7 +31,23 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QPushButton" name="AmericanConfTeamsButton">
+        <property name="text">
+         <string>American Conference Teams</string>
+        </property>
+       </widget>
+      </item>
      </layout>
+    </item>
+    <item>
+     <widget class="QComboBox" name="comboBox">
+      <item>
+       <property name="text">
+        <string>Select a Team to Display Its Information</string>
+       </property>
+      </item>
+     </widget>
     </item>
     <item>
      <widget class="QTableView" name="Table"/>
@@ -56,8 +72,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>700</width>
-     <height>22</height>
+     <width>717</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>
