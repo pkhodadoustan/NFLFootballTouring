@@ -18,6 +18,8 @@ public:
     QSqlQueryModel* getListOfOpenRoofStadiums();
     QSqlQueryModel* getSpecificTeamInfo(QString teamName);
     std::vector<QString> getTeamNames();
+    void addStadiumDistancesFromFile();
+    void addNewDistance(QStringList);
 private:
     Database();
     static Database* instance;

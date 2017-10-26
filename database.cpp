@@ -260,3 +260,45 @@ std::vector<QString> Database::getTeamNames()
     }
     return teamNames;
 }
+
+void Database::addNewDistance(QStringList toAdd) {
+    QSqlQuery query(*this);
+    query.prepare("INSERT INTO StadiumDistances (Beginning, Ending, Distance)"
+                  "VALUES (:beg, :end, :dist)");
+
+    query.bindValue(":beg", toAdd.at(0));
+    query.bindValue(":end", toAdd.at(1));
+    query.bindValue(":dist", toAdd.at(2));
+
+    if(query.exec())
+        qDebug() << "distance was added";
+    else
+        qDebug() << "Distance was not added";
+}
+
+void Database::addStadiumDistancesFromFile() {
+    Database* db = Database::getInstance();
+    QDir dir(QDir::currentPath());
+    QString path;
+    qDebug() << dir.absolutePath();
+
+    while(dir.dirName() != "NFLFootballTouring") {
+        dir.cdUp();
+    }
+
+    path = dir.absolutePath() + "/Dist/NFLDistancesCSV/Distances-Table 1.csv";
+    QFile file(path);
+
+    if (!file.open(QIODevice::ReadOnly))
+        qDebug() << file.errorString();
+    else {
+        qDebug() << "Input file okay";
+
+        while(!file.atEnd())
+        {
+            QString line = QString(file.readLine());
+            QStringList toAdd = db->parseCSVFile(line);
+            db->addNewDistance(toAdd);
+        }
+    }
+}
