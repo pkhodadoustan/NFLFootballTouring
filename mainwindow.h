@@ -27,6 +27,7 @@ private:
     void displayAmericanConfTeams();
     void displayNationalConfTeams();
     void displayOpenRoof();
+    void displayAllTeams();
 
 };
 
