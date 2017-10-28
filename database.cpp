@@ -188,12 +188,12 @@ QSqlQueryModel* Database::createQueryModel(QString queryCommand)
       model->setQuery(queryCommand);
       model->setHeaderData(0, Qt::Horizontal, "Team Name");
       model->setHeaderData(1, Qt::Horizontal, "Stadium Name");
-      model->setHeaderData(1, Qt::Horizontal, "Seating Capacity");
-      model->setHeaderData(1, Qt::Horizontal, "Location");
-      model->setHeaderData(1, Qt::Horizontal, "Conference");
-      model->setHeaderData(1, Qt::Horizontal, "Surface Type");
-      model->setHeaderData(1, Qt::Horizontal, "Stadium Roof Type");
-      model->setHeaderData(1, Qt::Horizontal, "Star Player");
+      model->setHeaderData(2, Qt::Horizontal, "Seating Capacity");
+      model->setHeaderData(3, Qt::Horizontal, "Location");
+      model->setHeaderData(4, Qt::Horizontal, "Conference");
+      model->setHeaderData(5, Qt::Horizontal, "Surface Type");
+      model->setHeaderData(6, Qt::Horizontal, "Stadium Roof Type");
+      model->setHeaderData(7, Qt::Horizontal, "Star Player");
 
     return model;
 }
@@ -215,7 +215,7 @@ QSqlQueryModel* Database::getListOfAmericanConferenceTeams() {
 
 QSqlQueryModel* Database::getListOfAllTeams()
 {
-   return createQueryModel("SELECT * FROM Teams");
+   return createQueryModel("SELECT * FROM Teams ORDER By Team_Name");
 }
 
 QSqlQueryModel* Database::getSpecificTeamInfo(QString teamName)
@@ -278,4 +278,13 @@ void Database::addStadiumDistancesFromFile() {
             db->addNewDistance(toAdd);
         }
     }
+}
+
+QSqlQueryModel* Database::getListOfStarPLayers()
+{
+    QSqlQueryModel *model = new QSqlQueryModel;
+    model->setQuery("SELECT Star_Player, Team_Name FROM Teams ORDER BY Team_Name");
+    model->setHeaderData(0, Qt::Horizontal, "Star Player");
+    model->setHeaderData(1, Qt::Horizontal, "Team Name");
+    return model;
 }

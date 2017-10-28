@@ -19,6 +19,7 @@ public:
     QSqlQueryModel* getListOfAllTeams();
     QSqlQueryModel* getSpecificTeamInfo(QString teamName);
     std::vector<QString> getTeamNames();
+    QSqlQueryModel* getListOfStarPLayers();
     void addStadiumDistancesFromFile();
     void addNewDistance(QStringList);
 private:

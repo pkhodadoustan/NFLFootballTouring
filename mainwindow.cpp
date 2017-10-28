@@ -18,7 +18,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_OpenRoofButton_clicked()
+void MainWindow::displayOpenRoof()
 {
     ui->label->clear();
     ui->Table->setModel(Database::getInstance()->getListOfOpenRoofStadiums());
@@ -32,7 +32,7 @@ void MainWindow::on_OpenRoofButton_clicked()
 
 }
 
-void MainWindow::on_NationalConfTeamsButton_clicked()
+void MainWindow::displayNationalConfTeams()
 {
     ui->Table->setModel(Database::getInstance()->getListOfNationalConferenceTeams());
     QString input = QString("National Conference Teams: %1").arg(ui->Table->model()->rowCount());
@@ -46,7 +46,7 @@ void MainWindow::on_NationalConfTeamsButton_clicked()
 
 }
 
-void MainWindow::on_AmericanConfTeamsButton_clicked()
+void MainWindow::displayAmericanConfTeams()
 {
     ui->Table->setModel(Database::getInstance()->getListOfAmericanConferenceTeams());
     QString input = QString("American Conference Teams: %1").arg(ui->Table->model()->rowCount());
@@ -59,8 +59,19 @@ void MainWindow::on_AmericanConfTeamsButton_clicked()
     ui->Table->setSortingEnabled(true);
 }
 
+void MainWindow::makeTeamNameCombobox()
+{
+    //after index 0 and index 1 fill the comboBox with team names
+    std::vector<QString> teamNames = Database::getInstance()->getTeamNames();
+    for(unsigned int i =0; i<teamNames.size(); i++)
+    {
+        ui->comboBox->addItem(teamNames[i]);
+    }
+    ui->Table->setSortingEnabled(true);
 
-void MainWindow::on_comboBox_currentIndexChanged(int index)
+}
+
+void MainWindow::on_comboBox_activated(int index)
 {
     if(index!=0)
     {
@@ -80,14 +91,28 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
     }
 }
 
-void MainWindow::makeTeamNameCombobox()
+void MainWindow::on_comboBox_2_activated(int index)
 {
-    //after index 0 and index 1 fill the comboBox with team names
-    std::vector<QString> teamNames = Database::getInstance()->getTeamNames();
-    for(unsigned int i =0; i<teamNames.size(); i++)
+    if(ui->comboBox_2->currentIndex() == 1)
     {
-        ui->comboBox->addItem(teamNames[i]);
+        //To Be Done ... for requirment 4 and 10
     }
-    ui->Table->setSortingEnabled(true);
-
+    if(ui->comboBox_2->currentIndex() == 2)
+    {
+        displayAmericanConfTeams();
+    }
+    if(ui->comboBox_2->currentIndex() == 3)
+    {
+        displayNationalConfTeams();
+    }
+    if(ui->comboBox_2->currentIndex() == 4)
+    {
+        displayOpenRoof();
+    }
+    if(ui->comboBox_2->currentIndex() == 5)
+    {
+        ui->Table->setModel(Database::getInstance()->getListOfStarPLayers());
+    }
 }
+
+

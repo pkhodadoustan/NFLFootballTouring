@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include<QSqlQuery>
 
 namespace Ui {
 class MainWindow;
@@ -16,17 +17,17 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_OpenRoofButton_clicked();
+    void on_comboBox_activated(int index);
 
-    void on_NationalConfTeamsButton_clicked();
-
-    void on_AmericanConfTeamsButton_clicked();
-
-    void on_comboBox_currentIndexChanged(int index);
+    void on_comboBox_2_activated(int index);
 
 private:
     Ui::MainWindow *ui;
     void makeTeamNameCombobox();
+    void displayAmericanConfTeams();
+    void displayNationalConfTeams();
+    void displayOpenRoof();
+
 };
 
 #endif // MAINWINDOW_H
