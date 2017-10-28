@@ -47,6 +47,11 @@
         <string>Select a Team to Display Its Information</string>
        </property>
       </item>
+      <item>
+       <property name="text">
+        <string>Display All Team</string>
+       </property>
+      </item>
      </widget>
     </item>
     <item>

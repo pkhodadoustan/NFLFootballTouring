@@ -64,13 +64,25 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
 {
     if(index!=0)
     {
+        if(index == 1)
+        {
+            ui->Table->setModel(Database::getInstance()->getListOfAllTeams());
+            ui->Table->setSortingEnabled(true);
+            QSortFilterProxyModel *m=new QSortFilterProxyModel(this);
+            m->setDynamicSortFilter(true);
+            m->setSourceModel(Database::getInstance()->getListOfAllTeams());
+            ui->Table->setModel(m);
+            ui->Table->setSortingEnabled(true);
+        }else{
         QString teamName = ui->comboBox->currentText();
         ui->Table->setModel(Database::getInstance()->getSpecificTeamInfo(teamName));
+        }
     }
 }
 
 void MainWindow::makeTeamNameCombobox()
 {
+    //after index 0 and index 1 fill the comboBox with team names
     std::vector<QString> teamNames = Database::getInstance()->getTeamNames();
     for(unsigned int i =0; i<teamNames.size(); i++)
     {

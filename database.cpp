@@ -182,10 +182,10 @@ void Database::initialDBPoputaion() {
        }
 }
 
-QSqlQueryModel* Database::getListOfNationalConferenceTeams() {
-
+QSqlQueryModel* Database::createQueryModel(QString queryCommand)
+{
     QSqlQueryModel *model = new QSqlQueryModel;
-      model->setQuery("SELECT * FROM Teams WHERE Conference == 'National Football Conference'");
+      model->setQuery(queryCommand);
       model->setHeaderData(0, Qt::Horizontal, "Team Name");
       model->setHeaderData(1, Qt::Horizontal, "Stadium Name");
       model->setHeaderData(1, Qt::Horizontal, "Seating Capacity");
@@ -196,55 +196,32 @@ QSqlQueryModel* Database::getListOfNationalConferenceTeams() {
       model->setHeaderData(1, Qt::Horizontal, "Star Player");
 
     return model;
+}
+
+QSqlQueryModel* Database::getListOfNationalConferenceTeams() {
+
+    return createQueryModel("SELECT * FROM Teams WHERE Conference == 'National Football Conference'");
 }
 
 QSqlQueryModel* Database::getListOfOpenRoofStadiums() {
 
-    QSqlQueryModel *model = new QSqlQueryModel;
-      model->setQuery("SELECT * FROM Teams WHERE Stadium_Roof_Type == 'Open'");
-      model->setHeaderData(0, Qt::Horizontal, "Team Name");
-      model->setHeaderData(1, Qt::Horizontal, "Stadium Name");
-      model->setHeaderData(1, Qt::Horizontal, "Seating Capacity");
-      model->setHeaderData(1, Qt::Horizontal, "Location");
-      model->setHeaderData(1, Qt::Horizontal, "Conference");
-      model->setHeaderData(1, Qt::Horizontal, "Surface Type");
-      model->setHeaderData(1, Qt::Horizontal, "Stadium Roof Type");
-      model->setHeaderData(1, Qt::Horizontal, "Star Player");
-
-    return model;
+    return createQueryModel("SELECT * FROM Teams WHERE Stadium_Roof_Type == 'Open'");
 }
 
 QSqlQueryModel* Database::getListOfAmericanConferenceTeams() {
 
-    QSqlQueryModel *model = new QSqlQueryModel;
-      model->setQuery("SELECT * FROM Teams WHERE Conference == 'American Football Conference'");
-      model->setHeaderData(0, Qt::Horizontal, "Team Name");
-      model->setHeaderData(1, Qt::Horizontal, "Stadium Name");
-      model->setHeaderData(1, Qt::Horizontal, "Seating Capacity");
-      model->setHeaderData(1, Qt::Horizontal, "Location");
-      model->setHeaderData(1, Qt::Horizontal, "Conference");
-      model->setHeaderData(1, Qt::Horizontal, "Surface Type");
-      model->setHeaderData(1, Qt::Horizontal, "Stadium Roof Type");
-      model->setHeaderData(1, Qt::Horizontal, "Star Player");
+    return createQueryModel("SELECT * FROM Teams WHERE Conference == 'American Football Conference'");
+}
 
-    return model;
+QSqlQueryModel* Database::getListOfAllTeams()
+{
+   return createQueryModel("SELECT * FROM Teams");
 }
 
 QSqlQueryModel* Database::getSpecificTeamInfo(QString teamName)
 {
-      QSqlQueryModel *model = new QSqlQueryModel;
-      model->setQuery("SELECT * FROM Teams WHERE Team_Name == '"+teamName+"'");
-      model->setHeaderData(0, Qt::Horizontal, "Team Name");
-      model->setHeaderData(1, Qt::Horizontal, "Stadium Name");
-      model->setHeaderData(1, Qt::Horizontal, "Seating Capacity");
-      model->setHeaderData(1, Qt::Horizontal, "Location");
-      model->setHeaderData(1, Qt::Horizontal, "Conference");
-      model->setHeaderData(1, Qt::Horizontal, "Surface Type");
-      model->setHeaderData(1, Qt::Horizontal, "Stadium Roof Type");
-      model->setHeaderData(1, Qt::Horizontal, "Star Player");
-
-      return model;
-
+    QString command = "SELECT * FROM Teams WHERE Team_Name == '"+teamName+"'";
+    return createQueryModel(command);
 }
 
 std::vector<QString> Database::getTeamNames()

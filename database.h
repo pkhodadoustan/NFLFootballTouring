@@ -16,6 +16,7 @@ public:
     QSqlQueryModel* getListOfNationalConferenceTeams();
     QSqlQueryModel* getListOfAmericanConferenceTeams();
     QSqlQueryModel* getListOfOpenRoofStadiums();
+    QSqlQueryModel* getListOfAllTeams();
     QSqlQueryModel* getSpecificTeamInfo(QString teamName);
     std::vector<QString> getTeamNames();
     void addStadiumDistancesFromFile();
@@ -23,6 +24,7 @@ public:
 private:
     Database();
     static Database* instance;
+    QSqlQueryModel* createQueryModel(QString queryCommand); //creates amodel depending on the query command passed to it
 };
 
 #endif // DATABASE_H
