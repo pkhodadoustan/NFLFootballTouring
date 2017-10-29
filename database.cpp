@@ -198,6 +198,15 @@ QSqlQueryModel* Database::createQueryModel(QString queryCommand)
     return model;
 }
 
+long Database::getTotalNumberOfSeats()
+{
+    long total;
+    QSqlQuery m;
+    m.prepare("SELECT SUM(Seating_Capacity AS :total FROM Teams)");
+    m.bindValue(":total", total);
+
+    return total;
+}
 QSqlQueryModel* Database::getListOfNationalConferenceTeams() {
 
     return createQueryModel("SELECT * FROM Teams WHERE Conference == 'National Football Conference'");

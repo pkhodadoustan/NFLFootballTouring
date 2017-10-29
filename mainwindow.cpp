@@ -4,13 +4,19 @@
 #include <QDebug>
 #include <QSortFilterProxyModel>
 #include<vector>
-
+#include <qpixmap.h>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     makeTeamNameCombobox();
+
+//    QPixmap background(":/images/Images/stadium.jpg");
+//    background = background.scaled(this->size(), Qt::IgnoreAspectRatio);
+//    QPalette palette;
+//    palette.setBrush(QPalette::Background, background);
+//    this->setPalette(palette);
 }
 
 MainWindow::~MainWindow()
@@ -51,6 +57,8 @@ void MainWindow::displayAllTeams()
     ui->Table->setModel(Database::getInstance()->getListOfAllTeams());
     QString input = QString("Number of Teams: %1").arg(ui->Table->model()->rowCount());
     ui->label->setText(input);
+    QString input2 = QString("Total Number of Seats: %1").arg(Database::getInstance()->getTotalNumberOfSeats());
+    ui->label_3->setText(input2);
     QSortFilterProxyModel *m = new QSortFilterProxyModel(this);
     m->setDynamicSortFilter(true);
     m->setSourceModel(Database::getInstance()->getListOfAllTeams());

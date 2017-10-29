@@ -18,6 +18,7 @@ public:
     QSqlQueryModel* getListOfOpenRoofStadiums();
     QSqlQueryModel* getListOfAllTeams();
     QSqlQueryModel* getSpecificTeamInfo(QString teamName);
+    long getTotalNumberOfSeats();
     std::vector<QString> getTeamNames();
     QSqlQueryModel* getListOfStarPLayers();
     void addStadiumDistancesFromFile();
