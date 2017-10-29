@@ -30,6 +30,7 @@ void MainWindow::displayOpenRoof()
     ui->Table->setModel(Database::getInstance()->getListOfOpenRoofStadiums());
     QString input = QString("Open Roof Stadiums: %1").arg(ui->Table->model()->rowCount());
     ui->label->setText(input);
+    ui->label_3->setText("");
     QSortFilterProxyModel *m=new QSortFilterProxyModel(this);
     m->setDynamicSortFilter(true);
     m->setSourceModel(Database::getInstance()->getListOfOpenRoofStadiums());
@@ -43,6 +44,7 @@ void MainWindow::displayNationalConfTeams()
     ui->Table->setModel(Database::getInstance()->getListOfNationalConferenceTeams());
     QString input = QString("National Conference Teams: %1").arg(ui->Table->model()->rowCount());
     ui->label->setText(input);
+    ui->label_3->setText("");
     QSortFilterProxyModel *m=new QSortFilterProxyModel(this);
     m->setDynamicSortFilter(true);
     m->setSourceModel(Database::getInstance()->getListOfNationalConferenceTeams());
@@ -71,6 +73,7 @@ void MainWindow::displayAmericanConfTeams()
     ui->Table->setModel(Database::getInstance()->getListOfAmericanConferenceTeams());
     QString input = QString("American Conference Teams: %1").arg(ui->Table->model()->rowCount());
     ui->label->setText(input);
+    ui->label_3->setText("");
     ui->Table->setSortingEnabled(true);
     QSortFilterProxyModel *m=new QSortFilterProxyModel(this);
     m->setDynamicSortFilter(true);

@@ -198,12 +198,18 @@ QSqlQueryModel* Database::createQueryModel(QString queryCommand)
     return model;
 }
 
-long Database::getTotalNumberOfSeats()
+int Database::getTotalNumberOfSeats()
 {
-    long total;
-    QSqlQuery m;
-    m.prepare("SELECT SUM(Seating_Capacity AS :total FROM Teams)");
-    m.bindValue(":total", total);
+    int total = 0;
+    QSqlQuery m("SELECT * FROM Teams");
+
+    while(m.next())
+    {
+        total = total + m.value("Seating_Capacity").toInt();
+        qDebug() << m.value(0).toDouble();
+    }
+
+    qDebug() << total;
 
     return total;
 }
