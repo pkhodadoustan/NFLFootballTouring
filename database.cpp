@@ -303,3 +303,15 @@ QSqlQueryModel* Database::getListOfStarPLayers()
     model->setHeaderData(1, Qt::Horizontal, "Team Name");
     return model;
 }
+
+QSqlQueryModel* Database::getListOfSurfaceTypes()
+{
+    QSqlQueryModel *model = new QSqlQueryModel;
+    model->setQuery("SELECT Surface_Type, Team_Name, Location FROM Teams ORDER BY Surface_Type");
+    model->setHeaderData(0, Qt::Horizontal, "Surface Type");
+    model->setHeaderData(1, Qt::Horizontal, "Team Name");
+    model->setHeaderData(2, Qt::Horizontal, "Location");
+
+    return model;
+
+}

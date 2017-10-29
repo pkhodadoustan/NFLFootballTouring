@@ -59,13 +59,14 @@ void MainWindow::displayAllTeams()
     ui->Table->setModel(Database::getInstance()->getListOfAllTeams());
     QString input = QString("Number of Teams: %1").arg(ui->Table->model()->rowCount());
     ui->label->setText(input);
-    QString input2 = QString("Total Number of Seats: %1").arg(Database::getInstance()->getTotalNumberOfSeats());
-    ui->label_3->setText(input2);
     QSortFilterProxyModel *m = new QSortFilterProxyModel(this);
     m->setDynamicSortFilter(true);
     m->setSourceModel(Database::getInstance()->getListOfAllTeams());
     ui->Table->setModel(m);
     ui->Table->setSortingEnabled(true);
+
+    QString input2 = QString("Total Number of Seats: %1").arg(Database::getInstance()->getTotalNumberOfSeats());
+    ui->label_3->setText(input2);
 }
 
 void MainWindow::displayAmericanConfTeams()
@@ -135,6 +136,10 @@ void MainWindow::on_comboBox_2_activated(int index)
     if(ui->comboBox_2->currentIndex() == 5)
     {
         ui->Table->setModel(Database::getInstance()->getListOfStarPLayers());
+    }
+    if(ui->comboBox_2->currentIndex() == 6)
+    {
+        ui->Table->setModel(Database::getInstance()->getListOfSurfaceTypes());
     }
 }
 

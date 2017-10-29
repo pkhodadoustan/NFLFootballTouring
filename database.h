@@ -21,6 +21,7 @@ public:
     int getTotalNumberOfSeats();
     std::vector<QString> getTeamNames();
     QSqlQueryModel* getListOfStarPLayers();
+    QSqlQueryModel* getListOfSurfaceTypes();
     void addStadiumDistancesFromFile();
     void addNewDistance(QStringList);
 private:
