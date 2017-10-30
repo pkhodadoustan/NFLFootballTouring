@@ -1,0 +1,2 @@
+#include "noteditabledelegate.h"
+

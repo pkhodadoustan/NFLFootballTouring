@@ -25,9 +25,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    database.cpp
+    database.cpp \
+    informationwindow.cpp \
+    adminwindow.cpp \
+    noteditabledelegate.cpp \
+    addnewsouvenir.cpp
 
 HEADERS  += mainwindow.h \
-    database.h
+    database.h \
+    informationwindow.h \
+    adminwindow.h \
+    noteditabledelegate.h \
+    addnewsouvenir.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    informationwindow.ui \
+    adminwindow.ui \
+    addnewsouvenir.ui
+
+RESOURCES += \
+    res.qrc

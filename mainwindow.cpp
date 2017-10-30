@@ -5,6 +5,8 @@
 #include <QSortFilterProxyModel>
 #include<vector>
 #include <qpixmap.h>
+#include "adminwindow.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -27,4 +29,11 @@ void MainWindow::on_pushButton_Info_clicked()
 {
     InformationWindow* infoWin = new InformationWindow;
     infoWin->show();
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    AdminWindow* admin = new AdminWindow;
+    this->close();
+    admin->show();
 }
