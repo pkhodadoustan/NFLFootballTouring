@@ -14,9 +14,7 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QMainWindow{
-	background-color: rgb(104, 104, 104);
-}</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="enabled">
@@ -29,12 +27,20 @@
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
          <widget class="QFrame" name="frame">
+          <property name="styleSheet">
+           <string notr="true">background-color:transparent;
+border-image: url(:image1.jpg);
+background:none;
+border:none;
+background-repeat:none;</string>
+          </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
+          <zorder>pushButton_Info</zorder>
          </widget>
         </item>
         <item>
@@ -50,7 +56,70 @@
        </layout>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_4"/>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QFrame" name="frame_2">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <widget class="QPushButton" name="pushButton_customTrip">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>100</y>
+             <width>171</width>
+             <height>171</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Customize your Trip</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_2">
+           <property name="geometry">
+            <rect>
+             <x>280</x>
+             <y>100</y>
+             <width>171</width>
+             <height>171</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Trip from Memorial Coliseum</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_3">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>290</y>
+             <width>171</width>
+             <height>171</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Trip from FordField</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_4">
+           <property name="geometry">
+            <rect>
+             <x>280</x>
+             <y>290</y>
+             <width>171</width>
+             <height>171</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Amin</string>
+           </property>
+          </widget>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </item>
