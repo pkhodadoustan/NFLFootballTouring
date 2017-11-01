@@ -12,11 +12,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-//    QPixmap background(":/images/Images/stadium.jpg");
-//    background = background.scaled(this->size(), Qt::IgnoreAspectRatio);
-//    QPalette palette;
-//    palette.setBrush(QPalette::Background, background);
-//    this->setPalette(palette);
 }
 
 MainWindow::~MainWindow()

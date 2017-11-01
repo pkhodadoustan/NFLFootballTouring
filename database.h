@@ -24,6 +24,8 @@ public:
     QSqlQueryModel* getListOfSurfaceTypes();
     void addStadiumDistancesFromFile();
     void addNewDistance(QStringList);
+    void addIntialSouvenirTables();
+    void addSouvenir(QString team, QString price, QString souvenir);
 private:
     Database();
     static Database* instance;

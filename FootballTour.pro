@@ -29,19 +29,22 @@ SOURCES += main.cpp\
     informationwindow.cpp \
     adminwindow.cpp \
     noteditabledelegate.cpp \
-    addnewsouvenir.cpp
+    addnewsouvenir.cpp \
+    filebrowerdiag.cpp
 
 HEADERS  += mainwindow.h \
     database.h \
     informationwindow.h \
     adminwindow.h \
     noteditabledelegate.h \
-    addnewsouvenir.h
+    addnewsouvenir.h \
+    filebrowerdiag.h
 
 FORMS    += mainwindow.ui \
     informationwindow.ui \
     adminwindow.ui \
-    addnewsouvenir.ui
+    addnewsouvenir.ui \
+    filebrowerdiag.ui
 
 RESOURCES += \
     res.qrc

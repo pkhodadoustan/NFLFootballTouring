@@ -315,3 +315,74 @@ QSqlQueryModel* Database::getListOfSurfaceTypes()
     return model;
 
 }
+
+void Database::addIntialSouvenirTables() {
+    QSqlQuery query(*this);
+    QSqlQuery tableQuery(*this);
+    QSqlQuery toAdd(*this);
+
+    query.prepare("SELECT Team_Name FROM Teams");
+
+    if (query.exec())
+    {
+        qDebug() << "Query was executed";
+
+        while (query.next())
+        {
+
+            QString tableString = QString("CREATE TABLE %1_Souv ("
+                                  "'Souvenir' TEXT,"
+                                  "'Price' INTEGER)").arg(query.value(0).toString().replace(' ', "_"));
+            qDebug() << tableString;
+            tableQuery.prepare(tableString);
+            QString newTable = QString("INSERT INTO %1_Souv (Souvenir, Price)"
+                                       "VALUES (:Souv, :price)").arg(query.value(0).toString().replace(' ', "_"));
+
+            if (tableQuery.exec())
+            {
+                toAdd.prepare(newTable);
+                toAdd.bindValue(":Souv", "Signed Helmet");
+                toAdd.bindValue(":price", "71.99");
+                toAdd.exec();
+                toAdd.prepare(newTable);
+                toAdd.bindValue(":Souv", "Autographed Football");
+                toAdd.bindValue(":price", "79.39");
+                toAdd.exec();
+                toAdd.prepare(newTable);
+                toAdd.bindValue(":Souv", "Team Pennant");
+                toAdd.bindValue(":price", "17.99");
+                toAdd.exec();
+                toAdd.prepare(newTable);
+                toAdd.bindValue(":Souv", "Team Picture");
+                toAdd.bindValue(":price", "19.99");
+                toAdd.exec();
+                toAdd.prepare(newTable);
+                toAdd.bindValue(":Souv", "Team Jersey");
+                toAdd.bindValue(":price", "189.99");
+                toAdd.exec();
+            }
+            else {
+                qDebug() << query.lastError();
+            }
+        }
+
+
+    } else {
+        qDebug() << "Query was not executed";
+    }
+}
+
+void Database::addSouvenir(QString team, QString price, QString souvenir) {
+    QSqlQuery query(*this);
+    QString queryString = QString("INSERT INTO %1_Souv (Souvenir, Price)"
+                                  "VALUES (:souv, :price)").arg(team.replace(" ", "_"));
+
+    query.prepare(queryString);
+    query.bindValue(":souv", souvenir);
+    query.bindValue(":price", price);
+
+    if (query.exec())
+        qDebug() << "Item was successfully added";
+    else
+        qDebug() << query.lastError();
+}

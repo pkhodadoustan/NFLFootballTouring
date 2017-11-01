@@ -21,14 +21,22 @@ public:
     ~AdminWindow();
 
 private slots:
+    void onCustomContextMenu(const QPoint &point);
+    void deleteSelection();
+
     void on_backButton_clicked();
 
     void on_addSouvButton_clicked();
+
+    void on_TeamCombBox_currentIndexChanged(int index);
+
+    void on_addStadButton_clicked();
 
 private:
     Ui::AdminWindow *ui;
     void refreshList();
     QSqlTableModel* tableModel;
+
 };
 
 #endif // ADMINWINDOW_H

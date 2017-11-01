@@ -2,7 +2,8 @@
 #define ADDNEWSOUVENIR_H
 
 #include <QDialog>
-#include "database.h";
+#include "database.h"
+#include "adminwindow.h"
 
 namespace Ui {
 class AddNewSouvenir;
@@ -14,7 +15,11 @@ class AddNewSouvenir : public QDialog
 
 public:
     explicit AddNewSouvenir(QWidget *parent = 0);
+
     ~AddNewSouvenir();
+
+private slots:
+    void on_addButton_clicked();
 
 private:
     Ui::AddNewSouvenir *ui;
