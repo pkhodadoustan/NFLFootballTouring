@@ -17,6 +17,9 @@ public:
     explicit FileBrowerDiag(QWidget *parent = 0);
     ~FileBrowerDiag();
 
+private slots:
+    void on_folderTree_clicked(const QModelIndex &index);
+
 private:
     Ui::FileBrowerDiag *ui;
     QFileSystemModel *dirModel;

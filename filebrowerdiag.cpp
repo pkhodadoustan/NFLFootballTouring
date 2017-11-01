@@ -18,7 +18,7 @@ FileBrowerDiag::FileBrowerDiag(QWidget *parent) :
 
     //sets up paths for the folder Trees
     QString sPath = "";
-    dirModel  = new QFileSystemModel(this);
+    dirModel = new QFileSystemModel(this);
     dirModel->setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
     dirModel->setRootPath(sPath);
     ui->folderTree->setModel(dirModel);
@@ -33,4 +33,10 @@ FileBrowerDiag::FileBrowerDiag(QWidget *parent) :
 FileBrowerDiag::~FileBrowerDiag()
 {
     delete ui;
+}
+
+void FileBrowerDiag::on_folderTree_clicked(const QModelIndex &index)
+{
+    QString sPath = dirModel->fileInfo(index).absoluteFilePath();
+    ui->fileView->setRootIndex(fileModel->setRootPath(sPath));
 }
