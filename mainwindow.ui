@@ -118,7 +118,7 @@ background-repeat:none;</string>
                 </size>
                </property>
                <property name="text">
-                <string>Customize your Trip</string>
+                <string>Trip Starting from the Coliseum</string>
                </property>
               </widget>
              </item>
@@ -137,7 +137,7 @@ background-repeat:none;</string>
                 </size>
                </property>
                <property name="text">
-                <string>Trip from Memorial Coliseum</string>
+                <string>Custom Trip</string>
                </property>
               </widget>
              </item>
@@ -156,7 +156,7 @@ background-repeat:none;</string>
                 </size>
                </property>
                <property name="text">
-                <string>Trip from FordField</string>
+                <string>Trip starting from Ford Field</string>
                </property>
               </widget>
              </item>
@@ -175,7 +175,7 @@ background-repeat:none;</string>
                 </size>
                </property>
                <property name="text">
-                <string>Amin</string>
+                <string>Admin</string>
                </property>
               </widget>
              </item>
