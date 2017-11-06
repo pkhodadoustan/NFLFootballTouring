@@ -202,11 +202,12 @@ int Database::getTotalNumberOfSeats()
 {
     int total = 0;
     QSqlQuery m("SELECT * FROM Teams");
+    m.exec();
 
     while(m.next())
     {
-        total = total + m.value("Seating_Capacity").toInt();
-        qDebug() << m.value(0).toDouble();
+        total = total + m.value("Seating_Capacity").toString().remove(',').toInt();
+        qDebug() << m.value("Seating_Capacity").toString().remove(',').toInt();
     }
 
     qDebug() << total;
