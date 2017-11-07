@@ -201,7 +201,7 @@ QSqlQueryModel* Database::createQueryModel(QString queryCommand)
 int Database::getTotalNumberOfSeats()
 {
     int total = 0;
-    QSqlQuery m("SELECT * FROM Teams");
+    QSqlQuery m("SELECT * FROM Teams GROUP BY Stadium_Name");
     m.exec();
 
     while(m.next())
@@ -231,7 +231,7 @@ QSqlQueryModel* Database::getListOfAmericanConferenceTeams() {
 
 QSqlQueryModel* Database::getListOfAllTeams()
 {
-   return createQueryModel("SELECT * FROM Teams ORDER By Team_Name");
+   return createQueryModel("SELECT Team_Name, Stadium_Name, Seating_Capacity, Location FROM Teams ORDER By Team_Name");
 }
 
 QSqlQueryModel* Database::getSpecificTeamInfo(QString teamName)
