@@ -23,7 +23,7 @@ void AddNewSouvenir::on_addButton_clicked()
     QString selectedTeam =ui->TeamListCombo->currentText();
     QString price;
     QString souv;
-
+    ui->ErrorLabel->clear();
     if (!ui->SouvenirLineEdit->isModified() ||
             !ui->dollarLineEdit->isModified() ||
             !ui->CentLineEdit->isModified())
@@ -34,7 +34,14 @@ void AddNewSouvenir::on_addButton_clicked()
            qDebug() << "select: " << selectedTeam;
            qDebug() << "souv: " << souv;
            qDebug() << "price: " << price;
-           db->addSouvenir(selectedTeam, price, souv);
+
+           if (!db->checkForSouvenir(selectedTeam, price, souv))
+           {
+               db->addSouvenir(selectedTeam, price, souv);
+               ui->ErrorLabel->setText("Souvenir has been added");
+           } else {
+               ui->ErrorLabel->setText("The Souvenir exists for this team");
+           }
 
     }
 

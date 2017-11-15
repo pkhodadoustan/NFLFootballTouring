@@ -12,12 +12,9 @@ class AddNewSouvenir;
 class AddNewSouvenir : public QDialog
 {
     Q_OBJECT
-
 public:
     explicit AddNewSouvenir(QWidget *parent = 0);
-
     ~AddNewSouvenir();
-
 private slots:
     void on_addButton_clicked();
 

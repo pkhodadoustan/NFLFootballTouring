@@ -29,6 +29,7 @@ Database::Database(): QSqlDatabase(addDatabase("QSQLITE")) {
     QString current;//holds new path
     qDebug() << dir.absolutePath();
 
+    qDebug() << "TEsting";
 
     while(dir.dirName() != "NFLFootballTouring") {
         dir.cdUp();
@@ -386,4 +387,35 @@ void Database::addSouvenir(QString team, QString price, QString souvenir) {
         qDebug() << "Item was successfully added";
     else
         qDebug() << query.lastError();
+
+}
+
+bool Database::checkForSouvenir(QString team, QString price, QString souvenir) {
+    QSqlQuery query(*this);
+    QString queryString = QString("SELECT * FROM %1_Souv "
+                        "WHERE Souvenir == '" + souvenir + "'").arg(team.replace(" ", "_"));
+    query.prepare(queryString);
+
+    if (query.exec())
+    {
+        qDebug() << "executed";
+        if (query.next())
+            return true;
+        else
+            return false;
+    } else {
+        qDebug() << "Not executed";
+    }
+    return false;
+}
+
+void Database::deleteSouv(QString Team, QString souv) {
+    QSqlQuery query(*this);
+    QString queryString = QString("DELETE FROM %1_Souv "
+                        "WHERE Souvenir == '" + souv + "'").arg(Team.replace(" ", "_"));
+    query.prepare(queryString);
+    if (query.exec())
+        qDebug() << "deleted";
+    else
+        qDebug() << "not deleted";
 }

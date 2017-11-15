@@ -26,6 +26,8 @@ public:
     void addNewDistance(QStringList);
     void addIntialSouvenirTables();
     void addSouvenir(QString team, QString price, QString souvenir);
+    bool checkForSouvenir(QString team, QString price, QString souvenir);
+    void deleteSouv(QString Team, QString souv);
 private:
     Database();
     static Database* instance;
