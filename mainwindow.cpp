@@ -28,7 +28,7 @@ void MainWindow::on_pushButton_Info_clicked()
 
 void MainWindow::on_pushButton_4_clicked()
 {
-    AdminWindow* admin = new AdminWindow;
+    loginDialog* loginDlg = new loginDialog;
     this->close();
-    admin->show();
+    loginDlg->show();
 }
