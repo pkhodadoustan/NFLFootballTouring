@@ -1,5 +1,7 @@
 #include "logindialog.h"
 #include "ui_logindialog.h"
+#include "adminwindow.h"
+#include <QDebug>
 
 loginDialog::loginDialog(QWidget *parent) :
     QDialog(parent),
@@ -25,11 +27,12 @@ void loginDialog::on_loginButton_clicked()
          */
         if(ui->lineEdit_Username->text() == ADMIN_USERNAME && ui->lineEdit_Password->text() == ADMIN_PASSWORD)
         {
+
             //! If the password is correct then spawn the new AdminOptions window
             //QMessageBox::information(this, "Login", "Username and password is correct.");
-            AdminWindow* adminWindow = new AdminWindow();
-            adminWindow->show();
+            AdminWindow* admin = new AdminWindow();
             this->close();
+            admin->show();
         }
         else
         {

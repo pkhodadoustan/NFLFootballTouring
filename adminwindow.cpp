@@ -10,6 +10,7 @@ AdminWindow::AdminWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AdminWindow)
 {
+
     Database* db = Database::getInstance();
 
     ui->setupUi(this);
@@ -35,7 +36,11 @@ AdminWindow::AdminWindow(QWidget *parent) :
     ui->SouvView->resizeRowsToContents();
     ui->SouvView->verticalHeader()->setDefaultSectionSize(50);
 
+    ui->SouvView->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->SouvView, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(on_SouvView_customContextMenuRequested(const QPoint &)));
+    ui->SouvView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     refreshList();
+
 }
 
 AdminWindow::~AdminWindow()
@@ -77,8 +82,8 @@ void AdminWindow::refreshList() {
 void AdminWindow::on_addSouvButton_clicked()
 {
     AddNewSouvenir* addSouv = new AddNewSouvenir;
-//    addSouv->admin = this;
     addSouv->show();
+
 }
 
 void AdminWindow::onCustomContextMenu(const QPoint &point)
@@ -129,11 +134,49 @@ void AdminWindow::on_TeamCombBox_currentIndexChanged(int index)
     ui->SouvView->horizontalHeader()->setStretchLastSection(true);
     ui->SouvView->resizeRowsToContents();
     ui->SouvView->verticalHeader()->setDefaultSectionSize(50);
-
 }
 
 void AdminWindow::on_addStadButton_clicked()
 {
     FileBrowerDiag* file = new FileBrowerDiag;
     file->show();
+}
+
+void AdminWindow::on_SouvView_customContextMenuRequested(const QPoint &pos)
+{
+    //menu to delete item on right click
+    QMenu contextMenu(tr("Context menu"), this);
+
+    //if item is right clicked, option to delete item is offered
+    QAction action1("Delete Selection", this);
+    connect(&action1, SIGNAL(triggered()), this, SLOT(deleteSouv()));
+    contextMenu.addAction(&action1);
+    contextMenu.exec(ui->SouvView->mapToGlobal(pos));
+}
+
+void AdminWindow::deleteSouv() {
+    QString Souv; //souvenir type
+
+    //gets the selected items from the selected row
+    QItemSelectionModel* select = ui->SouvView->selectionModel();
+    Souv = select->selectedRows(0).value(0).data().toString();
+
+    Database* db = Database::getInstance();
+    db->deleteSouv(QString(ui->TeamCombBox->currentText()).replace(" ", "_"), Souv);
+
+    QString test = QString("%1_Souv").arg(ui->TeamCombBox->currentText()).replace(" ", "_");
+    qDebug() << test;
+    QSqlTableModel* test2 = new QSqlTableModel;
+    test2->setTable(test);
+    if(!test2->select())
+        qDebug() << "NOPE";
+    ui->SouvView->setModel(test2);
+    ui->SouvView->horizontalHeader()->setStretchLastSection(true);
+    ui->SouvView->resizeRowsToContents();
+    ui->SouvView->verticalHeader()->setDefaultSectionSize(50);
+
+    ui->SouvView->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->SouvView, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(on_SouvView_customContextMenuRequested(const QPoint &)));
+    ui->SouvView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    refreshList();
 }

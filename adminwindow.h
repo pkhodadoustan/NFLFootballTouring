@@ -23,6 +23,7 @@ public:
 private slots:
     void onCustomContextMenu(const QPoint &point);
     void deleteSelection();
+    void deleteSouv();
 
     void on_backButton_clicked();
 
@@ -32,11 +33,13 @@ private slots:
 
     void on_addStadButton_clicked();
 
+    void on_SouvView_customContextMenuRequested(const QPoint &pos);
+
 private:
     Ui::AdminWindow *ui;
     void refreshList();
     QSqlTableModel* tableModel;
-
+    AdminWindow* admin;
 };
 
 #endif // ADMINWINDOW_H
