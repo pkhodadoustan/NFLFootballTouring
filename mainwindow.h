@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include<QSqlQuery>
 #include"informationwindow.h"
+#include "logindialog.h"
 
 namespace Ui {
 class MainWindow;

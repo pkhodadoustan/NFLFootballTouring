@@ -6,7 +6,6 @@
 #include<vector>
 #include <qpixmap.h>
 #include "adminwindow.h"
-#include "logindialog.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
