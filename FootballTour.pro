@@ -30,8 +30,7 @@ SOURCES += main.cpp\
     adminwindow.cpp \
     noteditabledelegate.cpp \
     addnewsouvenir.cpp \
-    filebrowerdiag.cpp \
-    logindialog.cpp
+    filebrowerdiag.cpp
 
 HEADERS  += mainwindow.h \
     database.h \
@@ -39,15 +38,13 @@ HEADERS  += mainwindow.h \
     adminwindow.h \
     noteditabledelegate.h \
     addnewsouvenir.h \
-    filebrowerdiag.h \
-    logindialog.h
+    filebrowerdiag.h
 
 FORMS    += mainwindow.ui \
     informationwindow.ui \
     adminwindow.ui \
     addnewsouvenir.ui \
-    filebrowerdiag.ui \
-    logindialog.ui
+    filebrowerdiag.ui
 
 RESOURCES += \
     res.qrc

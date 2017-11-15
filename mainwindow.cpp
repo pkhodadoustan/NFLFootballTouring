@@ -6,7 +6,6 @@
 #include<vector>
 #include <qpixmap.h>
 #include "adminwindow.h"
-#include "logindialog.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -29,7 +28,7 @@ void MainWindow::on_pushButton_Info_clicked()
 
 void MainWindow::on_pushButton_4_clicked()
 {
-    loginDialog* loginDlg = new loginDialog;
+    AdminWindow* admin = new AdminWindow;
     this->close();
-    loginDlg->show();
+    admin->show();
 }
