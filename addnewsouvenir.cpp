@@ -2,6 +2,7 @@
 #include "ui_addnewsouvenir.h"
 #include <QDebug>
 #include "database.h"
+
 AddNewSouvenir::AddNewSouvenir(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddNewSouvenir)
@@ -10,6 +11,7 @@ AddNewSouvenir::AddNewSouvenir(QWidget *parent) :
     ui->setupUi(this);
     ui->TeamListCombo->setModel(db->getListOfAllTeams());
     ui->dollarLineEdit->setValidator(new QIntValidator(0, 100000, this));
+    ui->CentLineEdit->setValidator(new QIntValidator(0, 99, this));
 }
 
 AddNewSouvenir::~AddNewSouvenir()

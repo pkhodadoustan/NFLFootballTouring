@@ -83,7 +83,7 @@ void AdminWindow::on_addSouvButton_clicked()
 {
     AddNewSouvenir* addSouv = new AddNewSouvenir;
     addSouv->show();
-
+    admin = this;
 }
 
 void AdminWindow::onCustomContextMenu(const QPoint &point)
@@ -142,6 +142,24 @@ void AdminWindow::on_addStadButton_clicked()
     file->show();
 }
 
+void AdminWindow::refreshSouvList() {
+    QString test = QString("%1_Souv").arg(ui->TeamCombBox->currentText()).replace(" ", "_");
+    qDebug() << test;
+    QSqlTableModel* test2 = new QSqlTableModel;
+    test2->setTable(test);
+    if(!test2->select())
+        qDebug() << "NOPE";
+    ui->SouvView->setModel(test2);
+    ui->SouvView->horizontalHeader()->setStretchLastSection(true);
+    ui->SouvView->resizeRowsToContents();
+    ui->SouvView->verticalHeader()->setDefaultSectionSize(50);
+
+    ui->SouvView->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->SouvView, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(on_SouvView_customContextMenuRequested(const QPoint &)));
+    ui->SouvView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    refreshList();
+}
+
 void AdminWindow::on_SouvView_customContextMenuRequested(const QPoint &pos)
 {
     //menu to delete item on right click
@@ -164,19 +182,5 @@ void AdminWindow::deleteSouv() {
     Database* db = Database::getInstance();
     db->deleteSouv(QString(ui->TeamCombBox->currentText()).replace(" ", "_"), Souv);
 
-    QString test = QString("%1_Souv").arg(ui->TeamCombBox->currentText()).replace(" ", "_");
-    qDebug() << test;
-    QSqlTableModel* test2 = new QSqlTableModel;
-    test2->setTable(test);
-    if(!test2->select())
-        qDebug() << "NOPE";
-    ui->SouvView->setModel(test2);
-    ui->SouvView->horizontalHeader()->setStretchLastSection(true);
-    ui->SouvView->resizeRowsToContents();
-    ui->SouvView->verticalHeader()->setDefaultSectionSize(50);
-
-    ui->SouvView->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(ui->SouvView, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(on_SouvView_customContextMenuRequested(const QPoint &)));
-    ui->SouvView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-    refreshList();
+    refreshSouvList();
 }

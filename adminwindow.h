@@ -17,6 +17,7 @@ class AdminWindow : public QWidget
     Q_OBJECT
 
 public:
+    void refreshSouvList();
     explicit AdminWindow(QWidget *parent = 0);
     ~AdminWindow();
 
