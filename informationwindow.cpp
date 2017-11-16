@@ -55,8 +55,8 @@ void InformationWindow::displayAllTeams()
     ui->Table->setModel(m);
     ui->Table->setSortingEnabled(true);
 
-    QString input2 = QString("Total Number of Seats: %1").arg(Database::getInstance()->getTotalNumberOfSeats());
-    ui->label_3->setText(input2);
+    //QString input2 = QString("Total Number of Seats: %1").arg(Database::getInstance()->getTotalNumberOfSeats());
+    //ui->label_3->setText(input2);
 }
 
 void InformationWindow::displayAmericanConfTeams()
@@ -130,5 +130,11 @@ void InformationWindow::on_comboBox_2_activated(int index)
     if(ui->comboBox_2->currentIndex() == 6)
     {
         ui->Table->setModel(Database::getInstance()->getListOfSurfaceTypes());
+    }
+    if(ui->comboBox_2->currentIndex() == 7)
+    {
+        ui->Table->setModel(Database::getInstance()->getAllStadiumByCapacity());
+        QString input2 = QString("Total Number of Seats: %1").arg(Database::getInstance()->getTotalNumberOfSeats());
+        ui->label_3->setText(input2);
     }
 }

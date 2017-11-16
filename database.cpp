@@ -222,7 +222,13 @@ QSqlQueryModel* Database::getListOfNationalConferenceTeams() {
 
 QSqlQueryModel* Database::getListOfOpenRoofStadiums() {
 
-    return createQueryModel("SELECT * FROM Teams WHERE Stadium_Roof_Type == 'Open'");
+    QSqlQueryModel *model = new QSqlQueryModel;
+    model->setQuery("SELECT Stadium_Name, Team_Name, Stadium_Roof_Type FROM Teams WHERE Stadium_Roof_Type == 'Open' GROUP BY Stadium_Name");
+    model->setHeaderData(0, Qt::Horizontal, "Stadium Name");
+    model->setHeaderData(1, Qt::Horizontal, "Team Name");
+    model->setHeaderData(2, Qt::Horizontal, "Roof Type");
+
+    return model;
 }
 
 QSqlQueryModel* Database::getListOfAmericanConferenceTeams() {
@@ -309,10 +315,12 @@ QSqlQueryModel* Database::getListOfStarPLayers()
 QSqlQueryModel* Database::getListOfSurfaceTypes()
 {
     QSqlQueryModel *model = new QSqlQueryModel;
-    model->setQuery("SELECT Surface_Type, Team_Name, Location FROM Teams ORDER BY Surface_Type");
-    model->setHeaderData(0, Qt::Horizontal, "Surface Type");
-    model->setHeaderData(1, Qt::Horizontal, "Team Name");
-    model->setHeaderData(2, Qt::Horizontal, "Location");
+    model->setQuery("SELECT Team_Name, Stadium_Name, Surface_Type, Location FROM Teams ORDER BY Surface_Type");
+    model->setHeaderData(0, Qt::Horizontal, "Team Name");
+    model->setHeaderData(1, Qt::Horizontal, "Stadium Name");
+    model->setHeaderData(2, Qt::Horizontal, "Surface Type");
+    model->setHeaderData(3, Qt::Horizontal, "Location");
+
 
     return model;
 
@@ -419,3 +427,15 @@ void Database::deleteSouv(QString Team, QString souv) {
     else
         qDebug() << "not deleted";
 }
+
+QSqlQueryModel* Database::getAllStadiumByCapacity()
+{
+    QSqlQueryModel *model = new QSqlQueryModel;
+    model->setQuery("SELECT Stadium_Name, Team_Name, Seating_Capacity FROM Teams GROUP BY Stadium_Name ORDER BY Seating_Capacity");
+    model->setHeaderData(0, Qt::Horizontal, "Stadium Name");
+    model->setHeaderData(1, Qt::Horizontal, "Team Name");
+    model->setHeaderData(2, Qt::Horizontal, "Seating Capacity");
+
+    return model;
+}
+

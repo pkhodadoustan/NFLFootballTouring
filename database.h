@@ -16,6 +16,7 @@ public:
     QSqlQueryModel* getListOfNationalConferenceTeams();
     QSqlQueryModel* getListOfAmericanConferenceTeams();
     QSqlQueryModel* getListOfOpenRoofStadiums();
+    QSqlQueryModel* getAllStadiumByCapacity();
     QSqlQueryModel* getListOfAllTeams();
     QSqlQueryModel* getSpecificTeamInfo(QString teamName);
     int getTotalNumberOfSeats();
