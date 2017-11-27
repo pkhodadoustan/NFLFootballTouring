@@ -23,6 +23,8 @@ private slots:
 
     void on_pushButton_4_clicked();
 
+    void on_pushButton_customTrip_2_clicked();
+
 private:
     Ui::MainWindow *ui;
 

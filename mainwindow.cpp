@@ -6,6 +6,7 @@
 #include<vector>
 #include <qpixmap.h>
 #include "adminwindow.h"
+#include "customtrip.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -31,4 +32,11 @@ void MainWindow::on_pushButton_4_clicked()
     loginDialog* loginDlg = new loginDialog;
     this->close();
     loginDlg->show();
+}
+
+void MainWindow::on_pushButton_customTrip_2_clicked()
+{
+    CustomTrip* customTp = new CustomTrip;
+    this->close();
+    customTp->show();
 }
