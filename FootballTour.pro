@@ -33,7 +33,9 @@ SOURCES += main.cpp\
     filebrowerdiag.cpp \
     logindialog.cpp \
     customtrip.cpp \
-    purchasesouvenirs.cpp
+    purchasesouvenirs.cpp \
+    tripfromcoliseum.cpp \
+    tripfromfoldfield.cpp
 
 HEADERS  += mainwindow.h \
     database.h \
@@ -44,7 +46,9 @@ HEADERS  += mainwindow.h \
     filebrowerdiag.h \
     logindialog.h \
     customtrip.h \
-    purchasesouvenirs.h
+    purchasesouvenirs.h \
+    tripfromcoliseum.h \
+    tripfromfoldfield.h
 
 FORMS    += mainwindow.ui \
     informationwindow.ui \
@@ -53,7 +57,9 @@ FORMS    += mainwindow.ui \
     filebrowerdiag.ui \
     logindialog.ui \
     customtrip.ui \
-    purchasesouvenirs.ui
+    purchasesouvenirs.ui \
+    tripfromcoliseum.ui \
+    tripfromfoldfield.ui
 
 RESOURCES += \
     res.qrc

@@ -18,10 +18,14 @@ public:
 private slots:
     void on_pushButton_back_clicked();
 
-    void on_pushButton_purchase_clicked();
+    void on_comboBox_stadiums_currentIndexChanged(int index);
 
 private:
     Ui::CustomTrip *ui;
+
+    QVector<QString> souvenirName;
+    QVector<double>  souvenirPrice;
+    QVector<int>  souvenirQuantity;
 };
 
 #endif // CUSTOMTRIP_H

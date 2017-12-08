@@ -2,6 +2,7 @@
 #include "ui_logindialog.h"
 #include "adminwindow.h"
 #include <QDebug>
+#include "mainwindow.h"
 
 loginDialog::loginDialog(QWidget *parent) :
     QDialog(parent),
@@ -42,4 +43,11 @@ void loginDialog::on_loginButton_clicked()
             ui->lineEdit_Password->clear();
         }
 
+}
+
+void loginDialog::on_pushButton_clicked()
+{
+    MainWindow* main = new MainWindow;
+    this->close();
+    main->show();
 }

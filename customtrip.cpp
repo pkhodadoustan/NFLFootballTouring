@@ -9,15 +9,10 @@ CustomTrip::CustomTrip(QWidget *parent) :
 {
     ui->setupUi(this);
 
-   // ui->table1->setModel(Database::getInstance()->getAllStadiumByCapacity());
-   // QString input = QString("All Stadiums: %1").arg(ui->table1->model()->rowCount());
-    //ui->label->setText(input);
-    //ui->label_3->setText("");
-   // QSortFilterProxyModel *m=new QSortFilterProxyModel(this);
-   // m->setDynamicSortFilter(true);
-    //m->setSourceModel(Database::getInstance()->getAllStadiumByCapacity());
-    //ui->table1->setModel(m);
-    //ui->table1->setSortingEnabled(true);
+    ui->comboBox_stadiums->insertItem(0," (Choose a Stadium) ");
+    ui->comboBox_teams->insertItem(0," (Choose a Team) ");
+    ui->comboBox_souvenirs->insertItem(0," (Choose a Souvenir) ");
+
 }
 
 CustomTrip::~CustomTrip()
@@ -32,8 +27,10 @@ void CustomTrip::on_pushButton_back_clicked()
     main->show();
 }
 
-void CustomTrip::on_pushButton_purchase_clicked()
+
+void CustomTrip::on_comboBox_stadiums_currentIndexChanged(int index)
 {
-    PurchaseSouvenirs* purchaseS = new PurchaseSouvenirs;
-    purchaseS->show();
+    ui->comboBox_teams->clear();
+    ui->comboBox_souvenirs->clear();
+
 }

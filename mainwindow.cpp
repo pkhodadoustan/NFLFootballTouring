@@ -7,6 +7,8 @@
 #include <qpixmap.h>
 #include "adminwindow.h"
 #include "customtrip.h"
+#include "tripfromcoliseum.h"
+#include "tripfromfoldfield.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -39,4 +41,18 @@ void MainWindow::on_pushButton_customTrip_2_clicked()
     CustomTrip* customTp = new CustomTrip;
     this->close();
     customTp->show();
+}
+
+void MainWindow::on_pushButton_customTrip_clicked()
+{
+    TripFromColiseum* colismTrip = new TripFromColiseum;
+    this->close();
+    colismTrip->show();
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    TripFromFoldfield* foldfieldTrip = new TripFromFoldfield;
+    this->close();
+    foldfieldTrip->show();
 }
