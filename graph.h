@@ -60,6 +60,7 @@ class Graph
 {
 public:
     Graph( vector<string> vName);
+    Graph();
     void addAdjacentNoDirect(int indexV1, int indexV2, double dist);
     void printGraph();
     void DFS(int startingIndex);

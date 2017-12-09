@@ -439,3 +439,64 @@ QSqlQueryModel* Database::getAllStadiumByCapacity()
     return model;
 }
 
+QStringList Database::getAllStadiumNames() const {
+    QSqlQuery query(*this);
+    QStringList stadiums;
+    query.prepare("SELECT DISTINCT Beginning FROM StadiumDistances");
+    if (query.exec())
+    {
+        qDebug() << "Query was executed";
+
+        while (query.next())
+        {
+            stadiums.push_back(query.value(0).toString());
+        }
+    }
+    else
+        qDebug() << "Query was not executed";
+    return stadiums;
+}
+
+QSqlQuery Database::getAllDistances() const {
+    QSqlQuery query(*this);
+
+    query.prepare("SELECT * FROM StadiumDistances");
+    return query;
+}
+
+void Database::addSouvenirTable(QString newTeam) {
+    QSqlQuery toAdd(*this);
+    QSqlQuery tableQuery(*this);
+    QString tableString = QString("CREATE TABLE %1_Souv ("
+                          "'Souvenir' TEXT,"
+                          "'Price' INTEGER)").arg(newTeam.replace(' ', "_"));
+    tableQuery.prepare(tableString);
+    QString newTable = QString("INSERT INTO %1_Souv (Souvenir, Price)"
+                               "VALUES (:Souv, :price)").arg(newTeam.replace(' ', "_"));
+    if (tableQuery.exec())
+    {
+        toAdd.prepare(newTable);
+        toAdd.bindValue(":Souv", "Signed Helmet");
+        toAdd.bindValue(":price", "71.99");
+        toAdd.exec();
+        toAdd.prepare(newTable);
+        toAdd.bindValue(":Souv", "Autographed Football");
+        toAdd.bindValue(":price", "79.39");
+        toAdd.exec();
+        toAdd.prepare(newTable);
+        toAdd.bindValue(":Souv", "Team Pennant");
+        toAdd.bindValue(":price", "17.99");
+        toAdd.exec();
+        toAdd.prepare(newTable);
+        toAdd.bindValue(":Souv", "Team Picture");
+        toAdd.bindValue(":price", "19.99");
+        toAdd.exec();
+        toAdd.prepare(newTable);
+        toAdd.bindValue(":Souv", "Team Jersey");
+        toAdd.bindValue(":price", "189.99");
+        toAdd.exec();
+    }
+    else {
+        qDebug() << tableQuery.lastError();
+    }
+}

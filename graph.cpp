@@ -1,5 +1,9 @@
 #include "graph.h"
 
+Graph::Graph() {
+
+}
+
 Graph::Graph(vector<string> vNames):discoveryEdge(0),backEdge(0)
 {
     for(unsigned int i = 0; i<vNames.size(); i++)
@@ -18,6 +22,8 @@ Graph::Graph(vector<string> vNames):discoveryEdge(0),backEdge(0)
 // this function will add new vertexes (and consequently edges) to the graph
 void Graph::addAdjacentNoDirect(int indexV1, int indexV2, double dist) //O(n)
 {
+    lesserComparator obj;
+    bool has = false;
     /*
     //To Avoid Duplications Due to duplicatedclient code
     for(unsigned int i =0; i<adjacencyList[indexV1].size(); i++)
@@ -31,9 +37,19 @@ void Graph::addAdjacentNoDirect(int indexV1, int indexV2, double dist) //O(n)
     adjacentVertex.nodeName = adjacencyList[indexV2][0].nodeName;
     adjacentVertex.distance = dist;
     adjacentVertex.visited = false;
+    for (int i = 0; i < adjacencyList[indexV1].size(); i++)
+    {
+        if (adjacencyList[indexV1][i] == adjacentVertex)
+        {
+            has = true;
+            break;
+        }
+    }
+    if (!has)
+    {
     adjacencyList[indexV1].push_back(adjacentVertex);
-    sort(adjacencyList[indexV1].begin()+1, adjacencyList[indexV1].end());//sorts children of node at indexV2 according to distance
-
+    sort(adjacencyList[indexV1].begin()+1, adjacencyList[indexV1].end(), obj);//sorts children of node at indexV2 according to distance
+    }
     //since there is no direction, connecting v2 to v1
     //Comment out this part of you add all the edges
     vNode adjacentVertex2;
@@ -41,8 +57,20 @@ void Graph::addAdjacentNoDirect(int indexV1, int indexV2, double dist) //O(n)
     adjacentVertex2.nodeName = adjacencyList[indexV1][0].nodeName;
     adjacentVertex2.distance = dist;
     adjacentVertex2.visited = false;
+    has = false;
+    for (int i = 0; i < adjacencyList[indexV2].size(); i++)
+    {
+        if (adjacencyList[indexV2][i] == adjacentVertex2)
+        {
+            has = true;
+            break;
+        }
+    }
+    if (!has)
+    {
     adjacencyList[indexV2].push_back(adjacentVertex2);
-    sort(adjacencyList[indexV2].begin()+1, adjacencyList[indexV2].end()); //sorts children of node at indexV2 according to distance
+    sort(adjacencyList[indexV2].begin()+1, adjacencyList[indexV2].end(), obj);//sorts children of node at indexV2 according to distance
+    }
 }
 
 //this function will print the graph
@@ -108,7 +136,10 @@ void Graph::DFS(int startingIndex)
     clearEdges(); //remove changes of any previous traversals
     discoveryEdge.clear();
     backEdge.clear();
-    bool visited[12] = {false};
+    int size = adjacencyList.size();
+    bool visited[size];
+    for (int i = 0; i< size; i ++)
+        visited[i] = false;
  /*  Already sorted after ading an edge
   *  //to sort the adjacent vertices by distance(== operator is overloaded for vNode struct
     for(unsigned int i = 0; i<adjacencyList.size(); i++)

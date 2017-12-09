@@ -35,7 +35,8 @@ SOURCES += main.cpp\
     customtrip.cpp \
     purchasesouvenirs.cpp \
     tripfromcoliseum.cpp \
-    tripfromfoldfield.cpp
+    tripfromfoldfield.cpp \
+    graph.cpp
 
 HEADERS  += mainwindow.h \
     database.h \
@@ -48,7 +49,8 @@ HEADERS  += mainwindow.h \
     customtrip.h \
     purchasesouvenirs.h \
     tripfromcoliseum.h \
-    tripfromfoldfield.h
+    tripfromfoldfield.h \
+    graph.h
 
 FORMS    += mainwindow.ui \
     informationwindow.ui \

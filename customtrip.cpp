@@ -2,12 +2,18 @@
 #include "ui_customtrip.h"
 #include "mainwindow.h"
 #include "purchasesouvenirs.h"
+#include "database.h"
 
 CustomTrip::CustomTrip(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CustomTrip)
 {
     ui->setupUi(this);
+
+    db = Database::getInstance();     //Db instance
+    stadiumGraph = fillGraphWithDistances();
+   addDistances();
+
 
     ui->comboBox_souvenirs->hide();
     ui->comboBox_stadiums->hide();
@@ -189,4 +195,57 @@ void CustomTrip::on_pushButton_clicked()
     ui->lineEdit_quantity->show();
     ui->tableWidget_receipt->show();
     ui->tableWidget_total->show();
+}
+
+
+/**
+ * @brief CustomTrip::fillGraphWithDistances
+ * @return
+ */
+vector<string> CustomTrip::fillGraphWithDistances() {
+    stads =  db->getAllStadiumNames(); //gets and holds all stadiumNames
+    std::vector<string> lis;
+    for (int i =0; i < stads.size(); i++)
+    {
+        lis.push_back(stads.at(i).toStdString());
+    }
+
+
+    return  lis;
+}
+
+/**
+ * @brief CustomTrip::convertStadiumNameToIndex
+ * @param stad
+ * @return
+ */
+int CustomTrip::convertStadiumNameToIndex(QString stad) {
+    int index = -1;
+    for (int i = 0; i < stads.size(); i++)
+    {
+        if (stad == stads.at(i))
+        {
+            index = i;
+            break;
+        }
+    }
+    return index;
+}
+
+/**
+ * @brief CustomTrip::addDistances
+ */
+void CustomTrip::addDistances() {
+    QSqlQuery query = db->getAllDistances();
+    if (query.exec())
+    {
+        qDebug() << "Query was exec";
+        while (query.next())
+        {
+            stadiumGraph.addAdjacentNoDirect(convertStadiumNameToIndex(query.value(0).toString()),
+                                             convertStadiumNameToIndex(query.value(1).toString()),
+                                             query.value(2).toInt());
+        }
+    } else
+        qDebug() << "Query was not exec";
 }

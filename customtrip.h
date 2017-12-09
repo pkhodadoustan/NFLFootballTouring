@@ -1,8 +1,9 @@
 #ifndef CUSTOMTRIP_H
 #define CUSTOMTRIP_H
-
+#include <vector>
 #include <QDialog>
-
+#include "graph.h"
+#include "database.h"
 namespace Ui {
 class CustomTrip;
 }
@@ -32,7 +33,12 @@ private slots:
 
 private:
     Ui::CustomTrip *ui;
-
+    Database* db;
+    vector<string> fillGraphWithDistances();
+    Graph stadiumGraph;
+    int convertStadiumNameToIndex(QString);
+    void addDistances();
+    QStringList stads;
     QVector<QString> souvenirName;
     QVector<double>  souvenirPrice;
     QVector<int>  souvenirQuantity;

@@ -29,6 +29,9 @@ public:
     void addSouvenir(QString team, QString price, QString souvenir);
     bool checkForSouvenir(QString team, QString price, QString souvenir);
     void deleteSouv(QString Team, QString souv);
+    QStringList getAllStadiumNames() const;
+    QSqlQuery getAllDistances() const;
+    void addSouvenirTable(QString);
 private:
     Database();
     static Database* instance;
