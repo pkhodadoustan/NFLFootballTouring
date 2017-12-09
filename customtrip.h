@@ -31,14 +31,26 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_comboBox_AllStadiums_currentIndexChanged(int index);
+
+    void on_pushButton_findPath_clicked();
+
+    void on_comboBox_StartingPoint_currentIndexChanged(int index);
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_resetTrip_clicked();
+
 private:
     Ui::CustomTrip *ui;
     Database* db;
-    vector<string> fillGraphWithDistances();
+    vector<QString> fillGraphWithDistances();
     Graph stadiumGraph;
     int convertStadiumNameToIndex(QString);
     void addDistances();
     QStringList stads;
+    std::vector<vNode> selectedStadiums;
+    vNode startingPoint;
     QVector<QString> souvenirName;
     QVector<double>  souvenirPrice;
     QVector<int>  souvenirQuantity;

@@ -7,13 +7,15 @@
 #include<algorithm>
 #include<queue>
 #include<stack>
+#include<QString>
+#include<QDebug>
 using namespace std;
 
 
 struct vNode
 {
     int key;
-    string nodeName;
+    QString nodeName;
     double distance;
     bool visited;
     bool operator < (vNode other)
@@ -34,8 +36,8 @@ struct vNode
 
 struct edge
 {
-    string begining;
-    string end;
+    QString begining;
+    QString end;
     int distance;
     bool operator == (edge other)
     {
@@ -59,9 +61,10 @@ public :
 class Graph
 {
 public:
-    Graph( vector<string> vName);
+    Graph( vector<QString> vName);
     Graph();
     void addAdjacentNoDirect(int indexV1, int indexV2, double dist);
+    vector<vector<vNode> > getAdjacencyList();
     void printGraph();
     void DFS(int startingIndex);
     void BFS(int startingIndex);
@@ -69,8 +72,9 @@ public:
     void printDFSEdges();
     void printBFSEdges();
     int getTotalDiscoveryDistance();
-    void dijkstra(int sourceIndex);
+    vector<vNode> dijkstra(int sourceIndex);
     void mst(int sourceIndex);
+    void findEfficientPath(vector<vNode>& selectedStadiums, vNode startingPoint, vector<vNode>& visited);
 
 private:
     vector<vector<vNode> > adjacencyList; //vector of linkedLists of node type vertex

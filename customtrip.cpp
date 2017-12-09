@@ -13,7 +13,24 @@ CustomTrip::CustomTrip(QWidget *parent) :
     db = Database::getInstance();     //Db instance
     stadiumGraph = fillGraphWithDistances();
    addDistances();
+   stadiumGraph.printGraph();
 
+   //! setting up combo box for list of stadiums
+   ui->comboBox_AllStadiums->addItem("-- Select a Stadium from the List --");
+   for(unsigned int i = 0; i<stadiumGraph.getAdjacencyList().size(); i++)
+   {
+       //making the comboBox based on the stadiums in the graph
+       ui->comboBox_AllStadiums->addItem(stadiumGraph.getAdjacencyList()[i][0].nodeName);
+   }
+
+   //! setting up combo box for starting point
+   ui->comboBox_StartingPoint->addItem("-- Select a Starting point --");
+
+   //! setting up selected stadiums table
+   QStringList headerTitles;
+   headerTitles<<"Stadiums";
+   ui->tableWidget_selectedStadiums->setColumnCount(headerTitles.size());
+   ui->tableWidget_selectedStadiums->setHorizontalHeaderLabels(headerTitles);
 
     ui->comboBox_souvenirs->hide();
     ui->comboBox_stadiums->hide();
@@ -202,12 +219,12 @@ void CustomTrip::on_pushButton_clicked()
  * @brief CustomTrip::fillGraphWithDistances
  * @return
  */
-vector<string> CustomTrip::fillGraphWithDistances() {
+vector<QString> CustomTrip::fillGraphWithDistances() {
     stads =  db->getAllStadiumNames(); //gets and holds all stadiumNames
-    std::vector<string> lis;
+    std::vector<QString> lis;
     for (int i =0; i < stads.size(); i++)
     {
-        lis.push_back(stads.at(i).toStdString());
+        lis.push_back(stads.at(i));
     }
 
 
@@ -248,4 +265,132 @@ void CustomTrip::addDistances() {
         }
     } else
         qDebug() << "Query was not exec";
+}
+
+void CustomTrip::on_comboBox_AllStadiums_currentIndexChanged(int index)
+{
+    /*populating vector of selected Stadiums and table of selected stadiums*/
+    if(index!=0)//index 0 is not a name of a stadium; it is a message
+    {
+        QString newName = ui->comboBox_AllStadiums->currentText();
+        bool duplicated = false;
+
+        //to avoid selecting a stadium twice
+        //check for duplication
+        for(unsigned int i =0; i<selectedStadiums.size(); i++)
+        {
+            if(selectedStadiums.at(i).nodeName==newName) //if name is reapeted then item is duplicated
+            {
+                ui->labelWarning->setText("Warning: You have already added this college.");
+                duplicated=true;
+                break;
+            }
+        }
+        //if not duplicated
+        if(!duplicated)
+        {
+            /*adding a new selected stadium to the vecter of selected nodes*/
+            QString stadiumName = ui->comboBox_AllStadiums->currentText();
+            //find a vNode in a graph with same name and add it to the selectedStadiums vector
+            for(unsigned int i = 0; i<stadiumGraph.getAdjacencyList().size(); i++)
+            {
+                if(stadiumName == stadiumGraph.getAdjacencyList()[i][0].nodeName)
+                {
+                    selectedStadiums.push_back(stadiumGraph.getAdjacencyList()[i][0]);
+                }
+            }
+
+            //selectedStadiums.push_back(newStadium);
+
+            //! adding the selected item to table of selected stadiums
+            ui->tableWidget_selectedStadiums->insertRow(selectedStadiums.size()-1);
+            ui->tableWidget_selectedStadiums->setItem(selectedStadiums.size()-1, 0, new QTableWidgetItem(newName));
+
+            //! adding the selected item to list of stadiums in the cmbo box of starting point selection
+            ui->comboBox_StartingPoint->addItem(newName);
+
+            //! adding the selected item to list of stadiums in the cmbo box of selected stadiums for souvenirs
+            //ui->comboBoxSelectedColleges->addItem(newName);
+        }
+    }
+}
+
+//function to set the starting point
+void CustomTrip::on_comboBox_StartingPoint_currentIndexChanged(int index)
+{
+    if(ui->comboBox_StartingPoint->currentIndex() != 0)
+    {
+        for(unsigned int i = 0; i<stadiumGraph.getAdjacencyList().size(); i++)
+        {
+            if(ui->comboBox_StartingPoint->currentText() == stadiumGraph.getAdjacencyList()[i][0].nodeName)
+            {
+                startingPoint = stadiumGraph.getAdjacencyList()[i][0];
+            }
+        }
+    }
+    qDebug()<<startingPoint.nodeName<<endl;
+}
+
+//this function calls the graph method that finds the most efficient path
+void CustomTrip::on_pushButton_findPath_clicked()
+{
+    int totalDist = 0;
+    vector<vNode> visited;
+    stadiumGraph.findEfficientPath(selectedStadiums, startingPoint, visited);
+
+    ui->tableWidget_selectedStadiums->clear();
+    for(unsigned int i =0; i<visited.size(); i++)
+    {
+        //! adding the visited stadium to the table
+        ui->tableWidget_selectedStadiums->insertRow(i);
+        ui->tableWidget_selectedStadiums->setItem(i, 0, new QTableWidgetItem(visited[i].nodeName));
+
+        //finding total distance of the path
+        totalDist += visited[i].distance;
+    }
+    ui->label_totalDist->setText(QString::number(totalDist));
+}
+
+//trip from FordField to all stadiums
+void CustomTrip::on_pushButton_2_clicked()
+{
+    ui->tableWidget_selectedStadiums->clear();
+    vector<vNode> visited;
+    int totalDist = 0;
+
+    //fill the selected sadiums with all stadiums, and startingPoint
+    selectedStadiums.clear();
+    for(unsigned int i = 0; i<stadiumGraph.getAdjacencyList().size(); i++)
+    {
+        selectedStadiums.push_back(stadiumGraph.getAdjacencyList()[i][0]);
+        if(stadiumGraph.getAdjacencyList()[i][0].nodeName == "Ford Field")
+            startingPoint = stadiumGraph.getAdjacencyList()[i][0];
+    }
+
+    //find path
+    stadiumGraph.findEfficientPath(selectedStadiums, startingPoint, visited);
+
+    //displaying the result in the table
+    ui->tableWidget_selectedStadiums->clear();
+    for(unsigned int i =0; i<visited.size(); i++)
+    {
+        //! adding the visited stadium to the table
+        ui->tableWidget_selectedStadiums->insertRow(i);
+        ui->tableWidget_selectedStadiums->setItem(i, 0, new QTableWidgetItem(visited[i].nodeName));
+
+        //finding total distance of the path
+        totalDist += visited[i].distance;
+    }
+    //display total distance
+    ui->label_totalDist->setText(QString::number(totalDist));
+}
+
+void CustomTrip::on_pushButton_resetTrip_clicked()
+{
+    selectedStadiums.clear();
+    ui->tableWidget_selectedStadiums->clear();
+    ui->comboBox_StartingPoint->clear();
+    ui->comboBox_StartingPoint->addItem("-- Select a Starting point --");
+    vNode resetNode;
+    startingPoint = resetNode;
 }

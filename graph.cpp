@@ -4,7 +4,7 @@ Graph::Graph() {
 
 }
 
-Graph::Graph(vector<string> vNames):discoveryEdge(0),backEdge(0)
+Graph::Graph(vector<QString> vNames):discoveryEdge(0),backEdge(0)
 {
     for(unsigned int i = 0; i<vNames.size(); i++)
     {
@@ -73,17 +73,21 @@ void Graph::addAdjacentNoDirect(int indexV1, int indexV2, double dist) //O(n)
     }
 }
 
+vector<vector<vNode> > Graph::getAdjacencyList()
+{
+    return adjacencyList;
+}
 //this function will print the graph
 void Graph::printGraph()
 {
-    cout<<"printing"<<endl;
+    qDebug()<<"printing"<<endl;
     for(unsigned int i =0; i<adjacencyList.size(); i++)
     {
         for(unsigned int j = 0; j<adjacencyList[i].size();j++)
         {
-            cout<<adjacencyList[i][j].nodeName<<"   ";
+            qDebug()<<adjacencyList[i][j].nodeName<<"   ";
         }
-        cout<<endl;
+        qDebug()<<endl;
     }
 }
 
@@ -93,7 +97,7 @@ void Graph::partialDFS(int startingIndex, bool visited[])
 {
     if(!adjacencyList[startingIndex][0].visited)
     {
-        cout<<adjacencyList[startingIndex][0].nodeName<<"   ";
+        qDebug()<<adjacencyList[startingIndex][0].nodeName<<"   ";
         visited[startingIndex] = true;
         adjacencyList[startingIndex][0].visited = true;
     }
@@ -175,7 +179,7 @@ void Graph::partialBFS(vector<vNode> vList,  bool visited[])
     vector<vNode> newLevel(0);//next level nodesadjacencyList[vList[i].key][j]
     for(unsigned int i = 0; i < vList.size(); i++)
     {
-            cout<<vList[i].nodeName<<"  ";
+            qDebug()<<vList[i].nodeName<<"  ";
             visited[vList[i].key] = true;
             adjacencyList[vList[i].key][0].visited = true;
     }
@@ -251,7 +255,7 @@ void Graph::printEdgeList(vector<edge> v)
 {
     for(unsigned int i = 0; i<v.size(); i++)
     {
-        cout<<v[i].begining<<"________"<<v[i].end<<endl;
+        qDebug()<<v[i].begining<<"________"<<v[i].end<<endl;
         //totalDist+= v[i].distance;
     }
 }
@@ -295,7 +299,7 @@ void Graph::clearEdges()
     }
 }
 
-void Graph::dijkstra(int sourceIndex)
+vector<vNode> Graph::dijkstra(int sourceIndex)
 {
 
     vector<int> cost(adjacencyList.size(), 100000);
@@ -325,6 +329,21 @@ void Graph::dijkstra(int sourceIndex)
         }
     }
 
+    vector<vNode> vertices;//all the nodes and their distance from the starting point, exclusing starting point
+    for(unsigned int i = 0; i<cost.size()-1; i++)
+    {
+        if(cost[i]!=0)//exclude the node itself
+        {
+            vNode vertex = adjacencyList[i][0];
+            vertex.distance = cost[i];
+            vertices.push_back(vertex);
+        }
+    }
+    //sort from the closet to furthest
+    //operator "<" has been overloaded for vNode struct
+    sort(vertices.begin(), vertices.end());
+    return vertices;
+/*
     for(unsigned int i = 0; i<cost.size(); i++)
     {
         cout<<"vertex: "<<adjacencyList[i][0].nodeName<<", cost: "<<cost[i]<<endl;
@@ -347,7 +366,7 @@ void Graph::dijkstra(int sourceIndex)
             path.pop();
         }
         cout<<endl;
-    }
+    }*/
 }
 
 void Graph::mst(int sourceIndex)
@@ -399,7 +418,7 @@ void Graph::mst(int sourceIndex)
 
         if(parent[i] != -1)
         {
-            cout << "Edge: " << adjacencyList[i][0].nodeName << "----"
+            qDebug() << "Edge: " << adjacencyList[i][0].nodeName << "----"
                  << adjacencyList[parent[i]][0].nodeName << endl;
 
         }
@@ -407,4 +426,35 @@ void Graph::mst(int sourceIndex)
 
     cout << "\nTotal Mileage: " << total;
 
+}
+
+void Graph::findEfficientPath(vector<vNode>& selectedStadiums, vNode startingPoint, vector<vNode>& visited)
+{
+    visited.push_back(startingPoint);//distance filesd of starting point is based on previous parent
+
+    //find closest unvisited node and make it a starting opint of next recursive call
+    //destination is ordered from closest to furthest
+    if(selectedStadiums.size()>visited.size())
+    {
+        //dijkstra method returns All stadiums in graph sorted based on their sidtance to startnigPoint
+        vector<vNode> destinations = dijkstra(startingPoint.key);
+
+        for(unsigned int i = 0; i<destinations.size() ; i++)
+        {
+            //if destinations[i] is selected and is not visited, startingPoint = destination[i]
+            //operator "==" has been overloaded for vNode struct
+            if( find(visited.begin(), visited.end(), destinations[i])==visited.end()
+                &&
+                find(selectedStadiums.begin(), selectedStadiums.end(), destinations[i])!=selectedStadiums.end())
+            {
+                startingPoint = destinations[i];
+                break;
+            }
+        }
+        //next recursive call
+        findEfficientPath(selectedStadiums, startingPoint, visited);
+    }
+    //else: all the stadiums are visited
+    else
+        return;
 }
