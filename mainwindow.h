@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include<QSqlQuery>
+#include <QTimer>
 #include"informationwindow.h"
 #include "logindialog.h"
 

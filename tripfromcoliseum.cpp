@@ -8,8 +8,24 @@ TripFromColiseum::TripFromColiseum(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->comboBox_souvenirs->hide();
+    ui->comboBox_stadiums->hide();
+    ui->comboBox_teams->hide();
+    ui->label_2->hide();
+    ui->label_3->hide();
+    ui->label_4->hide();
+    ui->label_5->hide();
+    ui->label_6->hide();
+    ui->label_7->hide();
+    ui->label_add->hide();
+    ui->lineEdit_quantity->hide();
+    ui->pushButton_add->hide();
+    ui->pushButton_print->hide();
+    ui->tableWidget_receipt->hide();
+    ui->tableWidget_total->hide();
+
     //----------------------------------------------------------------------------
-    //tempprary vectors,they will be deleted ater reading from data base
+    //temporary vectors,they will be deleted after reading data from database
     tempStadiums.push_back("stadium 1");
     tempStadiums.push_back("stadium 2");
     tempStadiums.push_back("stadium 3");
@@ -33,15 +49,15 @@ TripFromColiseum::TripFromColiseum(QWidget *parent) :
 
     //----------------------------------------------------------------------------
 
-    ui->label_add->hide();
+    total = 0;        //stores the total cost
 
+    //initializing comboBox_stadiums with tempStadiums vector
     ui->comboBox_stadiums->insertItem(0," (Choose a Stadium) ");
     for(int i=0; i<tempStadiums.length(); i++)
     {
         ui->comboBox_stadiums->addItem(tempStadiums.at(i));
     }
 
-    total = 0;
 }
 
 TripFromColiseum::~TripFromColiseum()
@@ -88,6 +104,7 @@ void TripFromColiseum::on_comboBox_teams_currentIndexChanged(int index)
 void TripFromColiseum::on_comboBox_souvenirs_currentIndexChanged(int index)
 {
     if(index > 0) {
+        ui->pushButton_add->show();
         souvenirName.push_back(tempSouvenirs.at(index-1));
         souvenirPrice.push_back(tmpPrice.at(index-1));
     }
@@ -99,21 +116,78 @@ void TripFromColiseum::on_pushButton_add_clicked()
         if(ui->lineEdit_quantity->text().isEmpty())
         {
             souvenirQuantity.push_back(1);
+            ui->pushButton_print->show();
             ui->label_add->show();
-           // QTimer::singleShot(2000, ui->label_add, &QLabel::hide);
+            QTimer::singleShot(2000, ui->label_add, &QLabel::hide);
 
         }
         else
         {
             //if lineEdit is not empty, push what user entered into the vector
             souvenirQuantity.push_back((ui->lineEdit_quantity->text()).toInt());
+            ui->pushButton_print->show();
             ui->label_add->show();
-           // QTimer::singleShot(2000, ui->label_add, &QLabel::hide);
+            QTimer::singleShot(2000, ui->label_add, &QLabel::hide);
 
         }
 }
 
 void TripFromColiseum::on_pushButton_print_clicked()
 {
+    //calculate total price for each souvenir and store it in totalPrice
+    for(int i=0; i<souvenirName.length(); i++) {
+        totalPrice.push_back(souvenirQuantity.at(i) * souvenirPrice.at(i));
+    }
+
+
+       //set receipt table
+       ui->tableWidget_receipt->setRowCount(0);
+
+       ui->tableWidget_receipt->setColumnCount(3);
+       ui->tableWidget_receipt->setHorizontalHeaderItem(0, new QTableWidgetItem("Souvenir"));
+       ui->tableWidget_receipt->setHorizontalHeaderItem(1, new QTableWidgetItem("Quantity"));
+       ui->tableWidget_receipt->setHorizontalHeaderItem(2, new QTableWidgetItem("Price"));
+
+
+       for (int i = 0; i < souvenirName.size(); i++) {
+           ui->tableWidget_receipt->insertRow(ui->tableWidget_receipt->rowCount());
+           ui->tableWidget_receipt->setItem(ui->tableWidget_receipt->rowCount() - 1, 0,
+                                              new QTableWidgetItem(souvenirName.at(i)));
+           ui->tableWidget_receipt->setItem(ui->tableWidget_receipt->rowCount() - 1, 1,
+                                              new QTableWidgetItem(QString::number(souvenirQuantity.at(i))));
+           ui->tableWidget_receipt->setItem(ui->tableWidget_receipt->rowCount() - 1, 2,
+                                              new QTableWidgetItem("$" + QString::number(totalPrice.at(i))));
+           total = total + totalPrice.at(i);
+       }
+
+       //set total table
+       ui->tableWidget_total->setRowCount(0);
+       ui->tableWidget_total->setColumnCount(1);
+
+       ui->tableWidget_total->setHorizontalHeaderItem(0, new QTableWidgetItem("TOTAL"));
+       ui->tableWidget_total->insertRow(ui->tableWidget_total->rowCount());
+       ui->tableWidget_total->setItem(ui->tableWidget_total->rowCount() - 1, 0,
+                                          new QTableWidgetItem("$" + QString::number(total)));
+
+       //clear all the vectors after printing the receipt
+       souvenirName.clear();
+       souvenirPrice.clear();
+       souvenirQuantity.clear();
+       totalPrice.clear();
+}
+
+void TripFromColiseum::on_pushButton_start_clicked()
+{
+    ui->label_first->hide();
+    ui->comboBox_souvenirs->show();
+    ui->comboBox_stadiums->show();
+    ui->comboBox_teams->show();
+    ui->label_2->show();
+    ui->label_3->show();
+    ui->label_4->show();
+    ui->label_6->show();
+    ui->lineEdit_quantity->show();
+    ui->tableWidget_receipt->show();
+    ui->tableWidget_total->show();
 
 }

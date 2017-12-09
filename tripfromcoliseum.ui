@@ -162,10 +162,10 @@
    <widget class="QTableWidget" name="tableWidget_receipt">
     <property name="geometry">
      <rect>
-      <x>40</x>
+      <x>30</x>
       <y>240</y>
       <width>331</width>
-      <height>271</height>
+      <height>231</height>
      </rect>
     </property>
    </widget>
@@ -229,6 +229,67 @@
      </rect>
     </property>
    </widget>
+   <widget class="QTableWidget" name="tableWidget_total">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>470</y>
+      <width>111</width>
+      <height>51</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>490</y>
+      <width>51</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Total :</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_first">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>200</y>
+      <width>321</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>You can purchase souvenirs after you start your trip</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="pushButton_start">
+   <property name="geometry">
+    <rect>
+     <x>454</x>
+     <y>572</y>
+     <width>91</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Start the Trip</string>
+   </property>
   </widget>
  </widget>
  <resources/>

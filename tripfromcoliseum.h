@@ -28,6 +28,9 @@ private slots:
 
     void on_pushButton_print_clicked();
 
+
+    void on_pushButton_start_clicked();
+
 private:
     Ui::TripFromColiseum *ui;
 
