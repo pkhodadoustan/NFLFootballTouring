@@ -23,6 +23,17 @@ CustomTrip::CustomTrip(QWidget *parent) :
        ui->comboBox_AllStadiums->addItem(stadiumGraph.getAdjacencyList()[i][0].nodeName);
    }
 
+   //! setting up combo box for LA Destinations
+   ui->comboBox_LADest->addItem("-- Select a Stadium --");
+   for(unsigned int i = 0; i<stadiumGraph.getAdjacencyList().size(); i++)
+   {
+       if(stadiumGraph.getAdjacencyList()[i][0].nodeName != "Los Angeles Memorial Coliseum")
+       {
+            //making the comboBox based on the stadiums in the graph
+            ui->comboBox_LADest->addItem(stadiumGraph.getAdjacencyList()[i][0].nodeName);
+       }
+   }
+
    //! setting up combo box for starting point
    ui->comboBox_StartingPoint->addItem("-- Select a Starting point --");
 
@@ -414,4 +425,32 @@ void CustomTrip::on_pushButton_orderedTrip_clicked()
         totalDist += visited[i].distance;
     }
     ui->label_totalDist->setText(QString::number(totalDist));
+}
+
+void CustomTrip::on_comboBox_LADest_currentIndexChanged(int index)
+{
+    if(ui->comboBox_LADest->currentIndex()!=0)
+    {
+        //finding LA in the nodes of the graph
+        for(unsigned int i = 0; i<stadiumGraph.getAdjacencyList().size(); i++)
+        {
+            if(stadiumGraph.getAdjacencyList()[i][0].nodeName == "Los Angeles Memorial Coliseum")
+                startingPoint = stadiumGraph.getAdjacencyList()[i][0];
+        }
+        //calling Dijkstra from LA
+        vector<vNode> destinations = stadiumGraph.dijkstra(startingPoint.key);
+
+        //finding the destination that user has selected
+        vNode userDest;
+        for(unsigned int i = 0; i<destinations.size(); i++)
+        {
+            if(destinations[i].nodeName == ui->comboBox_LADest->currentText())
+            {
+                userDest = destinations[i];
+                break;
+            }
+
+        }
+        ui->label_totalDist_2->setText(QString::number(userDest.distance)+" miles");
+    }
 }

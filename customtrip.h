@@ -43,6 +43,8 @@ private slots:
 
     void on_pushButton_orderedTrip_clicked();
 
+    void on_comboBox_LADest_currentIndexChanged(int index);
+
 private:
     Ui::CustomTrip *ui;
     Database* db;

@@ -118,7 +118,7 @@ background-repeat:none;</string>
                 </size>
                </property>
                <property name="text">
-                <string>Trip Starting from the Coliseum</string>
+                <string>map</string>
                </property>
               </widget>
              </item>
@@ -137,7 +137,7 @@ background-repeat:none;</string>
                 </size>
                </property>
                <property name="text">
-                <string>Custom Trip</string>
+                <string>Plan Your Trip</string>
                </property>
               </widget>
              </item>
