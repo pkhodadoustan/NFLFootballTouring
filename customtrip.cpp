@@ -60,10 +60,9 @@ CustomTrip::CustomTrip(QWidget *parent) :
 
     total = 0;
 
-    //initializing comboBox_stadiums with tempStadiums vector
-    ui->comboBox_stadiums->insertItem(0," (Choose a Stadium) ");
-
     ui->lineEdit_quantity->setValidator(new QIntValidator(0, 100, this));
+
+    ui->tableWidget_selectedStadiums->setRowCount(0);
 }
 
 CustomTrip::~CustomTrip()
@@ -82,12 +81,12 @@ void CustomTrip::on_pushButton_back_clicked()
 void CustomTrip::on_comboBox_stadiums_currentIndexChanged(int index)
 {
     QStringList teams = db->getTeamInStadium(ui->comboBox_stadiums->currentText());
+
     ui->comboBox_teams->clear();
-    ui->comboBox_souvenirs->clear();
+    ui->comboBox_teams->addItem(" (Choose a Team) ");
 
     if(index > 0) {
         //initializing comboBox_teams with tempTeams vector
-        ui->comboBox_teams->insertItem(0," (Choose a Team) ");
         ui->comboBox_teams->addItems(teams);
     }
 }
@@ -100,12 +99,11 @@ void CustomTrip::on_comboBox_teams_currentIndexChanged(int index)
     //! Gets the prices for the souvenirs
     QStringList prices = db->getSouvPrices(ui->comboBox_teams->currentText());
 
-    //! Clears the combo box before populating
     ui->comboBox_souvenirs->clear();
+    ui->comboBox_souvenirs->addItem(" (Choose a Souvenir) ");
 
     if(index > 0) {
         //! initializing comboBox_souvenirs with souvenirs to specific team vector
-        ui->comboBox_souvenirs->insertItem(0," (Choose a Souvenir) ");
         ui->comboBox_souvenirs->addItems(souvs);
     }
 
@@ -142,11 +140,6 @@ void CustomTrip::on_pushButton_add_clicked()
             ui->label_add->show();
             QTimer::singleShot(2000, ui->label_add, &QLabel::hide);
         }
-
-        ui->lineEdit_quantity->setText("");
-        ui->comboBox_souvenirs->setCurrentIndex(0);
-        ui->comboBox_stadiums->setCurrentIndex(0);
-        ui->comboBox_teams->setCurrentIndex(0);
 }
 
 void CustomTrip::on_pushButton_print_clicked()
@@ -199,29 +192,40 @@ void CustomTrip::on_pushButton_print_clicked()
 
 void CustomTrip::on_pushButton_clicked()
 {
-    ui->comboBox_stadiums->clear();
-    ui->label_first->hide();
-    ui->comboBox_souvenirs->show();
-    ui->comboBox_stadiums->show();
-    ui->comboBox_teams->show();
-    ui->label_2->show();
-    ui->label_3->show();
-    ui->label_4->show();
-    ui->label->show();
-    ui->lineEdit_quantity->show();
-    ui->tableWidget_receipt->show();
-    ui->totalLabel->show();
-
-    // populate stadium combobox
-
-    QStringList listOfStadiums;
-
-    for(unsigned int i = 0; i < ui->tableWidget_selectedStadiums->rowCount(); i++)
+    if(ui->tableWidget_selectedStadiums->rowCount() == 0)
     {
-        listOfStadiums += ui->tableWidget_selectedStadiums->item(i,0)->text();
+        QMessageBox::critical(this, tr("Error"), tr("Please Plan a trip"));
     }
+    else
+    {
+        ui->tableWidget_receipt->clear();
+        ui->comboBox_stadiums->clear();
+        ui->comboBox_teams->clear();
+        ui->comboBox_souvenirs->clear();
+        ui->label_first->hide();
+        ui->comboBox_souvenirs->show();
+        ui->comboBox_stadiums->show();
+        ui->comboBox_teams->show();
+        ui->label_2->show();
+        ui->label_3->show();
+        ui->label_4->show();
+        ui->label->show();
+        ui->lineEdit_quantity->show();
+        ui->tableWidget_receipt->show();
+        ui->totalLabel->show();
 
-    ui->comboBox_stadiums->addItems(listOfStadiums);
+        // populate stadium combobox
+
+        QStringList listOfStadiums;
+
+        for(unsigned int i = 0; i < ui->tableWidget_selectedStadiums->rowCount(); i++)
+        {
+            listOfStadiums += ui->tableWidget_selectedStadiums->item(i,0)->text();
+        }
+
+        ui->comboBox_stadiums->addItem(" (Choose a Stadium) ");
+        ui->comboBox_stadiums->addItems(listOfStadiums);
+    }
 }
 
 
