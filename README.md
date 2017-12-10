@@ -19,6 +19,7 @@ Team Team has to follow these set of rules to assure the team adheres to scrum.
 6) For a feature to be done, the product owner must verify that
     it has met all the requirements
 7) Waffle.io is used to keep track of finished user stories
+8) DOXYGEN  will be used to properly document the program
 
 # Coding Style and Standards
 
@@ -26,3 +27,6 @@ Team Team has to follow these set of rules to assure the team adheres to scrum.
 2) Class Names must have a capitalized letter for each new word
 3) Must follow Doxygen rules for documentation
 4) Follow the MCV routine
+
+# Data Structures Used
+
