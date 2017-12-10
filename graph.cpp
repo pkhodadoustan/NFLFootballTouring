@@ -145,15 +145,15 @@ void Graph::DFS(int startingIndex)
     for (int i = 0; i< size; i ++)
         visited[i] = false;
  /*  Already sorted after ading an edge
-  *  //to sort the adjacent vertices by distance(== operator is overloaded for vNode struct
+  *  //to sort the adjacent vertices by distance(== operator is overloaded for vNode struct)*/
     for(unsigned int i = 0; i<adjacencyList.size(); i++)
     {
         sort(adjacencyList[i].begin()+1, adjacencyList[i].end());//sort children of node i in vList
-    }*/
+    }
     partialDFS(startingIndex, visited);
 
     //finding back edges after the traversal is done and adding them to backedge vector
-    for(unsigned int i = 0; i<adjacencyList.size(); i++)
+  /*  for(unsigned int i = 0; i<adjacencyList.size(); i++)
     {
         for(unsigned int j = 0; j<adjacencyList[i].size(); j++)
         {
@@ -168,7 +168,7 @@ void Graph::DFS(int startingIndex)
                 }
             }
         }
-    }
+    }*/
 }
 
 //This function will implement Breadth First Traversal level by level
@@ -249,6 +249,11 @@ void Graph::BFS(int startingIndex)
             }
         }
     }
+}
+
+vector<edge> Graph::getDiscoveryEdges()
+{
+    return discoveryEdge;
 }
 
 void Graph::printEdgeList(vector<edge> v)
@@ -422,24 +427,6 @@ vector<edge> Graph::mst(int sourceIndex)
             }
         }
         return edgesMST;
-
-/*    int total = 0;
-
-    qDebug() << "\n\nMST Edges:\n";
-    for(unsigned int i = 0; i < cost.size(); i++)
-    {
-        total += cost[i];
-
-        if(parent[i] != -1)
-        {
-            qDebug() << "Edge: " << adjacencyList[i][0].nodeName << "----"
-                 << adjacencyList[parent[i]][0].nodeName << endl;
-
-        }
-    }
-
-    qDebug() << "\nTotal Mileage: " << total;
-*/
 }
 
 void Graph::findEfficientPath(vector<vNode>& selectedStadiums, vNode startingPoint, vector<vNode>& visited)
