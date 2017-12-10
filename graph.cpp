@@ -369,9 +369,9 @@ vector<vNode> Graph::dijkstra(int sourceIndex)
     }*/
 }
 
-void Graph::mst(int sourceIndex)
+vector<edge> Graph::mst(int sourceIndex)
 {
-    vector<int> cost(adjacencyList.size(), 100000);
+    vector<int> cost(adjacencyList.size(), 1000000);
     vector<int> parent(adjacencyList.size(), -1);
     vector<bool> visited(adjacencyList.size(), false);
 
@@ -381,7 +381,6 @@ void Graph::mst(int sourceIndex)
     cost[sourceIndex] = 0;
     vNode temp;
     vertexPriorityQueue.push(adjacencyList[sourceIndex][0]);
-    //visited[sourceIndex] = true;
 
     while(!vertexPriorityQueue.empty())
     {
@@ -397,21 +396,36 @@ void Graph::mst(int sourceIndex)
         {
             //for each child of temp, cost[child] = min(cost[temp]+dist
             //(temp to child), current cost[child])
-            if(adjacencyList[temp.key][i].distance<cost[adjacencyList[temp.key][i].key]
+            if(adjacencyList[temp.key][i].distance < cost[adjacencyList[temp.key][i].key]
                && !visited[adjacencyList[temp.key][i].key])
             {
                 cost[adjacencyList[temp.key][i].key] = adjacencyList[temp.key][i].distance;
                 parent[adjacencyList[temp.key][i].key] = temp.key;
                 vertexPriorityQueue.push(adjacencyList[temp.key][i]);
-                //visited[adjacencyList[temp.key][i].key] = true;
 
             }
         }
     }
+    vector<edge> edgesMST;
+    //int total = 0;
 
-    int total = 0;
+        for(unsigned int i = 0; i < parent.size(); i++)
+        {
+            if(parent[i] != -1)
+            {
+                edge newEdge;
+                newEdge.begining = adjacencyList[i][0].nodeName;
+                newEdge.end = adjacencyList[parent[i]][0].nodeName;
+                newEdge.distance = cost[i];
+                edgesMST.push_back(newEdge);
 
-    cout << "\n\nMST Edges:\n";
+            }
+        }
+        return edgesMST;
+
+/*    int total = 0;
+
+    qDebug() << "\n\nMST Edges:\n";
     for(unsigned int i = 0; i < cost.size(); i++)
     {
         total += cost[i];
@@ -424,8 +438,8 @@ void Graph::mst(int sourceIndex)
         }
     }
 
-    cout << "\nTotal Mileage: " << total;
-
+    qDebug() << "\nTotal Mileage: " << total;
+*/
 }
 
 void Graph::findEfficientPath(vector<vNode>& selectedStadiums, vNode startingPoint, vector<vNode>& visited)

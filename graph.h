@@ -73,7 +73,7 @@ public:
     void printBFSEdges();
     int getTotalDiscoveryDistance();
     vector<vNode> dijkstra(int sourceIndex);
-    void mst(int sourceIndex);
+    vector<edge> mst(int sourceIndex);
     void findEfficientPath(vector<vNode>& selectedStadiums, vNode startingPoint, vector<vNode>& visited);
     void orderSpecifiedPath(vector<vNode>& selectedStadiums, vNode startingPoint, vector<vNode>& visited);
 

@@ -2,6 +2,10 @@
 #define TRIPFROMCOLISEUM_H
 
 #include <QDialog>
+#include <vector>
+#include <QDialog>
+#include "graph.h"
+#include "database.h"
 
 namespace Ui {
 class TripFromColiseum;
@@ -31,8 +35,18 @@ private slots:
 
     void on_pushButton_start_clicked();
 
+    void on_pushButton_2_clicked();
+
 private:
     Ui::TripFromColiseum *ui;
+    Database* db;
+    vector<QString> fillGraphWithDistances();
+    Graph stadiumGraph;
+    int convertStadiumNameToIndex(QString);
+    void addDistances();
+    QStringList stads;
+    std::vector<vNode> selectedStadiums;
+    vNode startingPoint;
 
     QVector<QString> souvenirName;
     QVector<double>  souvenirPrice;
