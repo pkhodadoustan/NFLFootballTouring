@@ -75,6 +75,7 @@ public:
     vector<vNode> dijkstra(int sourceIndex);
     void mst(int sourceIndex);
     void findEfficientPath(vector<vNode>& selectedStadiums, vNode startingPoint, vector<vNode>& visited);
+    void orderSpecifiedPath(vector<vNode>& selectedStadiums, vNode startingPoint, vector<vNode>& visited);
 
 private:
     vector<vector<vNode> > adjacencyList; //vector of linkedLists of node type vertex

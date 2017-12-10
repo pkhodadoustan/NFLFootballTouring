@@ -338,6 +338,7 @@ void CustomTrip::on_pushButton_findPath_clicked()
     stadiumGraph.findEfficientPath(selectedStadiums, startingPoint, visited);
 
     ui->tableWidget_selectedStadiums->clear();
+    ui->tableWidget_selectedStadiums->setRowCount(0);
     for(unsigned int i =0; i<visited.size(); i++)
     {
         //! adding the visited stadium to the table
@@ -353,7 +354,6 @@ void CustomTrip::on_pushButton_findPath_clicked()
 //trip from FordField to all stadiums
 void CustomTrip::on_pushButton_2_clicked()
 {
-    ui->tableWidget_selectedStadiums->clear();
     vector<vNode> visited;
     int totalDist = 0;
 
@@ -373,6 +373,7 @@ void CustomTrip::on_pushButton_2_clicked()
 
     //displaying the result in the table
     ui->tableWidget_selectedStadiums->clear();
+    ui->tableWidget_selectedStadiums->setRowCount(0);
     for(unsigned int i =0; i<visited.size(); i++)
     {
         //qDebug()<<visited[i].nodeName<<endl;
@@ -391,8 +392,26 @@ void CustomTrip::on_pushButton_resetTrip_clicked()
 {
     selectedStadiums.clear();
     ui->tableWidget_selectedStadiums->clear();
+    ui->tableWidget_selectedStadiums->setRowCount(0);
     ui->comboBox_StartingPoint->clear();
     ui->comboBox_StartingPoint->addItem("-- Select a Starting point --");
     vNode resetNode;
     startingPoint = resetNode;
+    ui->label_totalDist->setText("");
+}
+
+void CustomTrip::on_pushButton_orderedTrip_clicked()
+{
+    int totalDist = 0;
+    vector<vNode> visited;
+    if(ui->comboBox_StartingPoint->currentIndex()!=0)//starting point is selected
+    {
+        stadiumGraph.orderSpecifiedPath(selectedStadiums, startingPoint, visited);
+    }
+    for(unsigned int i =0; i<visited.size(); i++)
+    {
+        //finding total distance of the path
+        totalDist += visited[i].distance;
+    }
+    ui->label_totalDist->setText(QString::number(totalDist));
 }

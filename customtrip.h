@@ -41,6 +41,8 @@ private slots:
 
     void on_pushButton_resetTrip_clicked();
 
+    void on_pushButton_orderedTrip_clicked();
+
 private:
     Ui::CustomTrip *ui;
     Database* db;

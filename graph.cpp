@@ -459,3 +459,42 @@ void Graph::findEfficientPath(vector<vNode>& selectedStadiums, vNode startingPoi
     else
         return;
 }
+
+void Graph::orderSpecifiedPath(vector<vNode>& selectedStadiums, vNode startingPoint, vector<vNode>& visited)
+{
+    int index; //index of next stadium in the order in selected stadiums
+    visited.push_back(startingPoint);//distance filesd of starting point is based on previous parent
+    for(unsigned int j = 0 ; j<selectedStadiums.size(); j++)
+    {
+        if(startingPoint==selectedStadiums[j])
+        {
+            index = j+1;
+        }
+    }
+
+    //find closest unvisited node and make it a starting opint of next recursive call
+    //destination is ordered from closest to furthest
+    if(selectedStadiums.size()>visited.size())
+    {
+        //dijkstra method returns stadiums and their distance from starting point
+        vector<vNode> destinations = dijkstra(startingPoint.key);
+
+        for(unsigned int i = 0; i<destinations.size() ; i++)
+        {
+            //if destinations[i] is selected and is not visited, startingPoint = destination[i]
+            //operator "==" has been overloaded for vNode struct
+            if( find(visited.begin(), visited.end(), destinations[i])==visited.end()
+                &&
+                selectedStadiums[index]==destinations[i])
+            {
+                startingPoint = destinations[i];
+                break;
+            }
+        }
+        //next recursive call
+       orderSpecifiedPath(selectedStadiums, startingPoint, visited);
+    }
+    //else: all the stadiums are visited
+    else
+        return;
+}

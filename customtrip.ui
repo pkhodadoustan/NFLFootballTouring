@@ -342,7 +342,7 @@
     <rect>
      <x>60</x>
      <y>450</y>
-     <width>311</width>
+     <width>211</width>
      <height>31</height>
     </rect>
    </property>
@@ -389,6 +389,19 @@
   <widget class="QPushButton" name="pushButton_resetTrip">
    <property name="geometry">
     <rect>
+     <x>280</x>
+     <y>450</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Reset Trip</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_orderedTrip">
+   <property name="geometry">
+    <rect>
      <x>230</x>
      <y>520</y>
      <width>141</width>
@@ -396,7 +409,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Reset Trip</string>
+    <string>Find Order Specified Path</string>
    </property>
   </widget>
  </widget>
