@@ -221,17 +221,17 @@ void Graph::BFS(int startingIndex)
     crossEdge.clear();
 
     /* Already sorted: sorts after adding n new edge in addEdge method
-    //sort all the lists in the graph except for the beginning node in each
+    //sort all the lists in the graph except for the beginning node in each*/
     for(unsigned int i = 0; i<adjacencyList.size(); i++)
     {
         sort(adjacencyList[i].begin()+1, adjacencyList[i].end());//sort children of node i in vList
-    }*/
+    }
 
     bool visited[12] = {false};
     vector<vNode> start;
     start.push_back(adjacencyList[startingIndex][0]);
     partialBFS(start,visited);
-
+/*
     //finding back edges after the traversal is done and adding them to backedge vector
     for(unsigned int i = 0; i<adjacencyList.size(); i++)
     {
@@ -248,7 +248,7 @@ void Graph::BFS(int startingIndex)
                 }
             }
         }
-    }
+    }*/
 }
 
 vector<edge> Graph::getDiscoveryEdges()

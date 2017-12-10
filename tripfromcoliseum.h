@@ -39,6 +39,8 @@ private slots:
 
     void on_pushButton_DFS_clicked();
 
+    void on_pushButton_BFS_clicked();
+
 private:
     Ui::TripFromColiseum *ui;
     Database* db;
