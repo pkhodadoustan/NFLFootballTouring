@@ -328,7 +328,6 @@ void CustomTrip::on_comboBox_StartingPoint_currentIndexChanged(int index)
             }
         }
     }
-    qDebug()<<startingPoint.nodeName<<endl;
 }
 
 //this function calls the graph method that finds the most efficient path
@@ -365,7 +364,9 @@ void CustomTrip::on_pushButton_2_clicked()
         selectedStadiums.push_back(stadiumGraph.getAdjacencyList()[i][0]);
         if(stadiumGraph.getAdjacencyList()[i][0].nodeName == "Ford Field")
             startingPoint = stadiumGraph.getAdjacencyList()[i][0];
+        //qDebug()<<selectedStadiums[i].nodeName<<endl;
     }
+    //qDebug()<<selectedStadiums.size()<<endl;
 
     //find path
     stadiumGraph.findEfficientPath(selectedStadiums, startingPoint, visited);
@@ -374,6 +375,7 @@ void CustomTrip::on_pushButton_2_clicked()
     ui->tableWidget_selectedStadiums->clear();
     for(unsigned int i =0; i<visited.size(); i++)
     {
+        //qDebug()<<visited[i].nodeName<<endl;
         //! adding the visited stadium to the table
         ui->tableWidget_selectedStadiums->insertRow(i);
         ui->tableWidget_selectedStadiums->setItem(i, 0, new QTableWidgetItem(visited[i].nodeName));

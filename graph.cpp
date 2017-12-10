@@ -302,7 +302,7 @@ void Graph::clearEdges()
 vector<vNode> Graph::dijkstra(int sourceIndex)
 {
 
-    vector<int> cost(adjacencyList.size(), 100000);
+    vector<int> cost(adjacencyList.size(), 1000000);
     vector<int> parent(adjacencyList.size(), -1);
 
     //priority queue using STL priority_queue
@@ -330,7 +330,7 @@ vector<vNode> Graph::dijkstra(int sourceIndex)
     }
 
     vector<vNode> vertices;//all the nodes and their distance from the starting point, exclusing starting point
-    for(unsigned int i = 0; i<cost.size()-1; i++)
+    for(unsigned int i = 0; i<cost.size(); i++)
     {
         if(cost[i]!=0)//exclude the node itself
         {
@@ -430,7 +430,8 @@ void Graph::mst(int sourceIndex)
 
 void Graph::findEfficientPath(vector<vNode>& selectedStadiums, vNode startingPoint, vector<vNode>& visited)
 {
-    visited.push_back(startingPoint);//distance filesd of starting point is based on previous parent
+    qDebug()<<"********"<<startingPoint.nodeName<<"***********";
+    visited.push_back(startingPoint);//distance of starting point is based on previous parent
 
     //find closest unvisited node and make it a starting opint of next recursive call
     //destination is ordered from closest to furthest
@@ -438,9 +439,9 @@ void Graph::findEfficientPath(vector<vNode>& selectedStadiums, vNode startingPoi
     {
         //dijkstra method returns All stadiums in graph sorted based on their sidtance to startnigPoint
         vector<vNode> destinations = dijkstra(startingPoint.key);
-
         for(unsigned int i = 0; i<destinations.size() ; i++)
         {
+
             //if destinations[i] is selected and is not visited, startingPoint = destination[i]
             //operator "==" has been overloaded for vNode struct
             if( find(visited.begin(), visited.end(), destinations[i])==visited.end()
