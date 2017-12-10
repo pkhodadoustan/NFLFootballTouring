@@ -500,3 +500,68 @@ void Database::addSouvenirTable(QString newTeam) {
         qDebug() << tableQuery.lastError();
     }
 }
+
+QStringList Database::getTeamInStadium(QString stadium) const
+{
+    QSqlQuery query(*this);
+    QStringList teams;
+    query.prepare("SELECT Team_Name From Teams WHERE Stadium_Name == '" + stadium + "'");
+    if(query.exec())
+    {
+        qDebug() << "Executed";
+
+        while(query.next())
+        {
+            teams.push_back(query.value(0).toString());
+        }
+    }
+    else
+        qDebug() << "No Execute";
+
+    return teams;
+}
+
+QStringList Database::getSouvPrices(QString team) const
+{
+    QString test = QString("%1_Souv").arg(team.replace(" ", "_"));
+
+    QSqlQuery query(*this);
+    QStringList prices;
+    query.prepare("SELECT Price FROM '" + test + "'");
+    if(query.exec())
+    {
+        qDebug() << "Executed";
+
+        while(query.next())
+        {
+            prices.push_back(query.value(0).toString());
+        }
+    }
+    else
+        qDebug() << "No Execute";
+
+    return prices;
+}
+
+QStringList Database::getSouvenirsForTeam(QString team) const
+{
+
+    QString test = QString("%1_Souv").arg(team.replace(" ", "_"));
+
+    QSqlQuery query(*this);
+    QStringList souv;
+    query.prepare("SELECT Souvenir FROM '" + test + "'");
+    if(query.exec())
+    {
+        qDebug() << "Executed";
+
+        while(query.next())
+        {
+            souv.push_back(query.value(0).toString());
+        }
+    }
+    else
+        qDebug() << "No Execute";
+
+    return souv;
+}

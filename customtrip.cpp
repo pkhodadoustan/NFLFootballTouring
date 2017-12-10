@@ -51,47 +51,19 @@ CustomTrip::CustomTrip(QWidget *parent) :
     ui->label_4->hide();
     ui->label_5->hide();
     ui->label->hide();
-    ui->label_7->hide();
     ui->label_add->hide();
     ui->lineEdit_quantity->hide();
     ui->pushButton_add->hide();
     ui->pushButton_print->hide();
     ui->tableWidget_receipt->hide();
-    ui->tableWidget_total->hide();
+    ui->totalLabel->hide();
 
-    //----------------------------------------------------------------------------
-    //temporary vectors,they will be deleted after reading data from database
-    tempStadiums.push_back("stadium 1");
-    tempStadiums.push_back("stadium 2");
-    tempStadiums.push_back("stadium 3");
-    tempStadiums.push_back("stadium 4");
-    tempStadiums.push_back("stadium 5");
-
-    tempTeams.push_back("team 1");
-    tempTeams.push_back("team 2");
-    tempTeams.push_back("team 3");
-    tempTeams.push_back("team 4");
-
-    tempSouvenirs.push_back("item 1");
-    tempSouvenirs.push_back("item 2");
-    tempSouvenirs.push_back("item 3");
-    tempSouvenirs.push_back("item 4");
-
-    tmpPrice.push_back(10.99);
-    tmpPrice.push_back(20.99);
-    tmpPrice.push_back(30.99);
-    tmpPrice.push_back(40.99);
-
-    //----------------------------------------------------------------------------
-
-    total = 0;        //stores the total cost
+    total = 0;
 
     //initializing comboBox_stadiums with tempStadiums vector
     ui->comboBox_stadiums->insertItem(0," (Choose a Stadium) ");
-    for(int i=0; i<tempStadiums.length(); i++)
-    {
-        ui->comboBox_stadiums->addItem(tempStadiums.at(i));
-    }
+
+    ui->lineEdit_quantity->setValidator(new QIntValidator(0, 100, this));
 }
 
 CustomTrip::~CustomTrip()
@@ -109,29 +81,39 @@ void CustomTrip::on_pushButton_back_clicked()
 
 void CustomTrip::on_comboBox_stadiums_currentIndexChanged(int index)
 {
+    QStringList teams = db->getTeamInStadium(ui->comboBox_stadiums->currentText());
     ui->comboBox_teams->clear();
     ui->comboBox_souvenirs->clear();
 
     if(index > 0) {
         //initializing comboBox_teams with tempTeams vector
         ui->comboBox_teams->insertItem(0," (Choose a Team) ");
-        for(int i=0; i<tempTeams.length(); i++)
-        {
-            ui->comboBox_teams->addItem(tempTeams.at(i));
-        }
+        ui->comboBox_teams->addItems(teams);
     }
 }
 
 void CustomTrip::on_comboBox_teams_currentIndexChanged(int index)
 {
+
+    //! Gets the souvenir list for specific team
+    QStringList souvs = db->getSouvenirsForTeam(ui->comboBox_teams->currentText());
+    //! Gets the prices for the souvenirs
+    QStringList prices = db->getSouvPrices(ui->comboBox_teams->currentText());
+
+    //! Clears the combo box before populating
     ui->comboBox_souvenirs->clear();
+
     if(index > 0) {
-        //initializing comboBox_souvenirs with tempSouvenirs vector
+        //! initializing comboBox_souvenirs with souvenirs to specific team vector
         ui->comboBox_souvenirs->insertItem(0," (Choose a Souvenir) ");
-        for(int i=0; i<tempSouvenirs.length(); i++)
-        {
-            ui->comboBox_souvenirs->addItem(tempSouvenirs.at(i));
-        }
+        ui->comboBox_souvenirs->addItems(souvs);
+    }
+
+    //! stores the souvenirs and prices into vectors
+    for(int i = 0;i < souvs.length(); i++)
+    {
+        tempSouvenirs.push_back(souvs[i]);
+        tmpPrice.push_back(prices[i].remove(QChar('$')).toDouble());
     }
 }
 
@@ -146,13 +128,10 @@ void CustomTrip::on_comboBox_souvenirs_currentIndexChanged(int index)
 
 void CustomTrip::on_pushButton_add_clicked()
 {
-    //if lineEdit is empty, push 1 to vector
+    //! if lineEdit is empty, push 1 to vector
         if(ui->lineEdit_quantity->text().isEmpty())
         {
-            souvenirQuantity.push_back(1);
-            ui->pushButton_print->show();
-            ui->label_add->show();
-            QTimer::singleShot(2000, ui->label_add, &QLabel::hide);
+            QMessageBox::information(this, tr("Error"), tr("Please enter a value"));
 
         }
         else
@@ -162,56 +141,65 @@ void CustomTrip::on_pushButton_add_clicked()
             ui->pushButton_print->show();
             ui->label_add->show();
             QTimer::singleShot(2000, ui->label_add, &QLabel::hide);
-
         }
+
+        ui->lineEdit_quantity->setText("");
+        ui->comboBox_souvenirs->setCurrentIndex(0);
+        ui->comboBox_stadiums->setCurrentIndex(0);
+        ui->comboBox_teams->setCurrentIndex(0);
 }
 
 void CustomTrip::on_pushButton_print_clicked()
 {
-    //calculate total price for each souvenir and store it in totalPrice
-    for(int i=0; i<souvenirName.length(); i++) {
-        totalPrice.push_back(souvenirQuantity.at(i) * souvenirPrice.at(i));
-    }
+    QMessageBox::information(this, tr("Cart Emptied"), tr("The cart is now empty\n"
+                                                           "Printing receipt..."));
+
+     //calculate total price for each souvenir and store it in totalPrice
+     for(int i=0; i<souvenirName.length(); i++) {
+         totalPrice.push_back(souvenirQuantity.at(i) * souvenirPrice.at(i));
+     }
 
 
-       //set receipt table
-       ui->tableWidget_receipt->setRowCount(0);
+        //set receipt table
+        ui->tableWidget_receipt->setRowCount(0);
 
-       ui->tableWidget_receipt->setColumnCount(3);
-       ui->tableWidget_receipt->setHorizontalHeaderItem(0, new QTableWidgetItem("Souvenir"));
-       ui->tableWidget_receipt->setHorizontalHeaderItem(1, new QTableWidgetItem("Quantity"));
-       ui->tableWidget_receipt->setHorizontalHeaderItem(2, new QTableWidgetItem("Price"));
+        ui->tableWidget_receipt->setColumnCount(3);
+        ui->tableWidget_receipt->setHorizontalHeaderItem(0, new QTableWidgetItem("Souvenir"));
+        ui->tableWidget_receipt->setHorizontalHeaderItem(1, new QTableWidgetItem("Quantity"));
+        ui->tableWidget_receipt->setHorizontalHeaderItem(2, new QTableWidgetItem("Price"));
 
 
-       for (int i = 0; i < souvenirName.size(); i++) {
-           ui->tableWidget_receipt->insertRow(ui->tableWidget_receipt->rowCount());
-           ui->tableWidget_receipt->setItem(ui->tableWidget_receipt->rowCount() - 1, 0,
-                                              new QTableWidgetItem(souvenirName.at(i)));
-           ui->tableWidget_receipt->setItem(ui->tableWidget_receipt->rowCount() - 1, 1,
-                                              new QTableWidgetItem(QString::number(souvenirQuantity.at(i))));
-           ui->tableWidget_receipt->setItem(ui->tableWidget_receipt->rowCount() - 1, 2,
-                                              new QTableWidgetItem("$" + QString::number(totalPrice.at(i))));
-           total = total + totalPrice.at(i);
-       }
+        for (int i = 0; i < souvenirName.size(); i++) {
+            subtotal = 0;
+            ui->tableWidget_receipt->insertRow(ui->tableWidget_receipt->rowCount());
+            ui->tableWidget_receipt->setItem(ui->tableWidget_receipt->rowCount() - 1, 0,
+                                               new QTableWidgetItem(souvenirName.at(i)));
+            ui->tableWidget_receipt->setItem(ui->tableWidget_receipt->rowCount() - 1, 1,
+                                               new QTableWidgetItem(QString::number(souvenirQuantity.at(i))));
+            ui->tableWidget_receipt->setItem(ui->tableWidget_receipt->rowCount() - 1, 2,
+                                               new QTableWidgetItem("$" + QString::number(totalPrice.at(i))));
 
-       //set total table
-       ui->tableWidget_total->setRowCount(0);
-       ui->tableWidget_total->setColumnCount(1);
+            subtotal = totalPrice.at(i) * souvenirQuantity.at(i);
 
-       ui->tableWidget_total->setHorizontalHeaderItem(0, new QTableWidgetItem("TOTAL"));
-       ui->tableWidget_total->insertRow(ui->tableWidget_total->rowCount());
-       ui->tableWidget_total->setItem(ui->tableWidget_total->rowCount() - 1, 0,
-                                          new QTableWidgetItem("$" + QString::number(total)));
+            total = total + subtotal;
 
-       //clear all the vectors after printing the receipt
-       souvenirName.clear();
-       souvenirPrice.clear();
-       souvenirQuantity.clear();
-       totalPrice.clear();
+        }
+
+        //set total table
+
+        ui->totalLabel->setText("Total: $" + QString::number(total));
+
+        //clear all the vectors after printing the receipt
+        souvenirName.clear();
+        souvenirPrice.clear();
+        souvenirQuantity.clear();
+        totalPrice.clear();
+        total = 0;
 }
 
 void CustomTrip::on_pushButton_clicked()
 {
+    ui->comboBox_stadiums->clear();
     ui->label_first->hide();
     ui->comboBox_souvenirs->show();
     ui->comboBox_stadiums->show();
@@ -222,7 +210,18 @@ void CustomTrip::on_pushButton_clicked()
     ui->label->show();
     ui->lineEdit_quantity->show();
     ui->tableWidget_receipt->show();
-    ui->tableWidget_total->show();
+    ui->totalLabel->show();
+
+    // populate stadium combobox
+
+    QStringList listOfStadiums;
+
+    for(unsigned int i = 0; i < ui->tableWidget_selectedStadiums->rowCount(); i++)
+    {
+        listOfStadiums += ui->tableWidget_selectedStadiums->item(i,0)->text();
+    }
+
+    ui->comboBox_stadiums->addItems(listOfStadiums);
 }
 
 
@@ -292,7 +291,7 @@ void CustomTrip::on_comboBox_AllStadiums_currentIndexChanged(int index)
         {
             if(selectedStadiums.at(i).nodeName==newName) //if name is reapeted then item is duplicated
             {
-                ui->labelWarning->setText("Warning: You have already added this college.");
+                ui->labelWarning->setText("Warning: You have already added this stadium.");
                 duplicated=true;
                 break;
             }
@@ -429,14 +428,22 @@ void CustomTrip::on_pushButton_orderedTrip_clicked()
 
 void CustomTrip::on_comboBox_LADest_currentIndexChanged(int index)
 {
+    int row = 2;
+    ui->tableWidget_selectedStadiums->setRowCount(row);
+    ui->tableWidget_selectedStadiums->clear();
     if(ui->comboBox_LADest->currentIndex()!=0)
     {
         //finding LA in the nodes of the graph
         for(unsigned int i = 0; i<stadiumGraph.getAdjacencyList().size(); i++)
         {
             if(stadiumGraph.getAdjacencyList()[i][0].nodeName == "Los Angeles Memorial Coliseum")
+            {
+                selectedStadiums.push_back(stadiumGraph.getAdjacencyList()[i][0]);
+                ui->tableWidget_selectedStadiums->setItem(0, 0, new QTableWidgetItem("Los Angeles Memorial Coliseum"));
                 startingPoint = stadiumGraph.getAdjacencyList()[i][0];
+            }
         }
+
         //calling Dijkstra from LA
         vector<vNode> destinations = stadiumGraph.dijkstra(startingPoint.key);
 
@@ -453,4 +460,23 @@ void CustomTrip::on_comboBox_LADest_currentIndexChanged(int index)
         }
         ui->label_totalDist_2->setText(QString::number(userDest.distance)+" miles");
     }
+
+    /*adding a new selected stadium to the vecter of selected nodes*/
+    QString stadiumName = ui->comboBox_LADest->currentText();
+    //find a vNode in a graph with same name and add it to the selectedStadiums vector
+    for(unsigned int i = 0; i<stadiumGraph.getAdjacencyList().size(); i++)
+    {
+        if(stadiumName == stadiumGraph.getAdjacencyList()[i][0].nodeName)
+        {
+            selectedStadiums.push_back(stadiumGraph.getAdjacencyList()[i][0]);
+        }
+    }
+
+    //selectedStadiums.push_back(newStadium);
+
+    //! adding the selected item to table of selected stadiums
+    ui->tableWidget_selectedStadiums->setItem(1, 0, new QTableWidgetItem(stadiumName));
+
+    //! adding the selected item to list of stadiums in the cmbo box of starting point selection
+    ui->comboBox_StartingPoint->addItem(stadiumName);
 }

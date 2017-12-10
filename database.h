@@ -32,6 +32,10 @@ public:
     QStringList getAllStadiumNames() const;
     QSqlQuery getAllDistances() const;
     void addSouvenirTable(QString);
+    QStringList getSouvenirsForTeam(QString team) const;
+    QStringList getSouvPrices(QString team) const;
+    QStringList getTeamInStadium(QString stadium) const;
+
 private:
     Database();
     static Database* instance;

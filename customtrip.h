@@ -60,6 +60,7 @@ private:
     QVector<int>  souvenirQuantity;
     QVector<double>  totalPrice;
     double total;
+    double subtotal;
 
     //temporary vectors, they will be deleted when we could read from data base
     QVector<QString> tempStadiums;
