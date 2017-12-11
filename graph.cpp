@@ -64,7 +64,7 @@ void Graph::addAdjacentNoDirect(int indexV1, int indexV2, double dist) //O(n)
     if (!has)
     {
     adjacencyList[indexV1].push_back(adjacentVertex);
-    sort(adjacencyList[indexV1].begin()+1, adjacencyList[indexV1].end(), obj);//sorts children of node at indexV2 according to distance
+    sort(adjacencyList[indexV1].begin()+1, adjacencyList[indexV1].end());//sorts children of node at indexV2 according to distance
     }
     //since there is no direction, connecting v2 to v1
     //Comment out this part of you add all the edges
@@ -85,7 +85,7 @@ void Graph::addAdjacentNoDirect(int indexV1, int indexV2, double dist) //O(n)
     if (!has)
     {
     adjacencyList[indexV2].push_back(adjacentVertex2);
-    sort(adjacencyList[indexV2].begin()+1, adjacencyList[indexV2].end(), obj);//sorts children of node at indexV2 according to distance
+    sort(adjacencyList[indexV2].begin()+1, adjacencyList[indexV2].end());//sorts children of node at indexV2 according to distance
     }
 }
 
@@ -186,7 +186,7 @@ void Graph::DFS(int startingIndex)
   *  //to sort the adjacent vertices by distance(== operator is overloaded for vNode struct)*/
     for(unsigned int i = 0; i<adjacencyList.size(); i++)
     {
-        sort(adjacencyList[i].begin()+1, adjacencyList[i].end(), ibj);//sort children of node i in vList
+        sort(adjacencyList[i].begin()+1, adjacencyList[i].end());//sort children of node i in vList
     }
     partialDFS(startingIndex, visited);
 
@@ -433,7 +433,7 @@ vector<vNode> Graph::dijkstra(int sourceIndex)
     }
     //sort from the closet to furthest
     //operator "<" has been overloaded for vNode struct
-    sort(vertices.begin(), vertices.end(), obj);
+    sort(vertices.begin(), vertices.end());
     return vertices;
 /*
     for(unsigned int i = 0; i<cost.size(); i++)
