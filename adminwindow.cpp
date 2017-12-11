@@ -179,6 +179,8 @@ void AdminWindow::on_addStadButton_clicked()
 
 /**
  * @brief AdminWindow::refreshSouvList
+ * refreshes all the tables in the UI to reflect the items that are stored in the DB.
+ *
  */
 void AdminWindow::refreshSouvList() {
     QString test = QString("%1_Souv").arg(ui->TeamCombBox->currentText()).replace(" ", "_");
@@ -198,6 +200,11 @@ void AdminWindow::refreshSouvList() {
     refreshList();
 }
 
+/**
+ * @brief AdminWindow::on_SouvView_customContextMenuRequested
+ * @param pos
+ * used to allow the admin delete items from the table
+ */
 void AdminWindow::on_SouvView_customContextMenuRequested(const QPoint &pos)
 {
     //menu to delete item on right click
@@ -210,6 +217,10 @@ void AdminWindow::on_SouvView_customContextMenuRequested(const QPoint &pos)
     contextMenu.exec(ui->SouvView->mapToGlobal(pos));
 }
 
+/**
+ * @brief AdminWindow::deleteSouv
+ * this function is called when the context menu delete is selected
+ */
 void AdminWindow::deleteSouv() {
     QString Souv; //souvenir type
 

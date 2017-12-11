@@ -4,6 +4,10 @@
 
 #include <QItemDelegate>
 
+/**
+ * @brief The NotEditableDelegate class
+ * for delete in adminwindow
+ */
 class NotEditableDelegate : public QItemDelegate
 {
     Q_OBJECT

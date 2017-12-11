@@ -1,9 +1,17 @@
 #include "graph.h"
 
+/**
+ * @brief Graph::Graph
+ * defau
+ */
 Graph::Graph() {
 
 }
 
+/**
+ * @brief Graph::Graph
+ * @param vNames
+ */
 Graph::Graph(vector<QString> vNames):discoveryEdge(0),backEdge(0)
 {
     for(unsigned int i = 0; i<vNames.size(); i++)
@@ -19,7 +27,15 @@ Graph::Graph(vector<QString> vNames):discoveryEdge(0),backEdge(0)
     }
 }
 
+
 // this function will add new vertexes (and consequently edges) to the graph
+/**
+ * @brief Graph::addAdjacentNoDirect
+ * @param indexV1
+ * @param indexV2
+ * @param dist
+ * // this function will add new vertexes (and consequently edges) to the graph
+ */
 void Graph::addAdjacentNoDirect(int indexV1, int indexV2, double dist) //O(n)
 {
     lesserComparator obj;
@@ -73,11 +89,20 @@ void Graph::addAdjacentNoDirect(int indexV1, int indexV2, double dist) //O(n)
     }
 }
 
+/**
+ * @brief Graph::getAdjacencyList
+ * @return
+ * get adjacency list
+ */
 vector<vector<vNode> > Graph::getAdjacencyList()
 {
     return adjacencyList;
 }
 //this function will print the graph
+/**
+ * @brief Graph::printGraph
+ * prints gtaph
+ */
 void Graph::printGraph()
 {
     qDebug()<<"printing"<<endl;
@@ -93,6 +118,13 @@ void Graph::printGraph()
 
 //this function will implement and output the Depth First Traversal.
 //It also populates discoveryEdge vector, and backEdge vector
+/**
+ * @brief Graph::partialDFS
+ * @param startingIndex
+ * @param visited
+ * //this function will implement and output the Depth First Traversal.
+ * //It also populates discoveryEdge vector, and backEdge vector
+ */
 void Graph::partialDFS(int startingIndex, bool visited[])
 {
     if(!adjacencyList[startingIndex][0].visited)
@@ -135,6 +167,11 @@ void Graph::partialDFS(int startingIndex, bool visited[])
 }
 
 //DFS Traversal that fills creates discovery and back edge vectors
+/**
+ * @brief Graph::DFS
+ * @param startingIndex
+ * //DFS Traversal that fills creates discovery and back edge vectors
+ */
 void Graph::DFS(int startingIndex)
 {
     lesserComparator ibj;
@@ -175,6 +212,14 @@ void Graph::DFS(int startingIndex)
 //This function will implement Breadth First Traversal level by level
 //It also populates discoveryEdge vector
 //vList is current level nodes
+/**
+ * @brief Graph::partialBFS
+ * @param vList
+ * @param visited
+ * //This function will implement Breadth First Traversal level by level
+ * //It also populates discoveryEdge vector
+ * //vList is current level nodes
+ */
 void Graph::partialBFS(vector<vNode> vList,  bool visited[])
 {
     vector<vNode> newLevel(0);//next level nodesadjacencyList[vList[i].key][j]
@@ -215,6 +260,11 @@ void Graph::partialBFS(vector<vNode> vList,  bool visited[])
         return;
 }
 
+/**
+ * @brief Graph::BFS
+ * @param startingIndex
+ * preform BFS on the graph
+ */
 void Graph::BFS(int startingIndex)
 {
     lesserComparator obj;
@@ -253,11 +303,21 @@ void Graph::BFS(int startingIndex)
     }*/
 }
 
+/**
+ * @brief Graph::getDiscoveryEdges
+ * @return
+ * returns discovery edges
+ */
 vector<edge> Graph::getDiscoveryEdges()
 {
     return discoveryEdge;
 }
 
+/**
+ * @brief Graph::printEdgeList
+ * @param v
+ * print endge lsit
+ */
 void Graph::printEdgeList(vector<edge> v)
 {
     for(unsigned int i = 0; i<v.size(); i++)
@@ -267,6 +327,10 @@ void Graph::printEdgeList(vector<edge> v)
     }
 }
 
+/**
+ * @brief Graph::printDFSEdges
+ * print DFS edges
+ */
 void Graph::printDFSEdges()
 {
     cout<<"DFS Discovery Edges: "<<endl;
@@ -275,6 +339,10 @@ void Graph::printDFSEdges()
     printEdgeList(backEdge);
 }
 
+/**
+ * @brief Graph::printBFSEdges
+ * print BFS edges
+ */
 void Graph::printBFSEdges()
 {
     cout<<"BFS Discovery Edges: "<<endl;
@@ -284,6 +352,11 @@ void Graph::printBFSEdges()
 }
 
 //this function will return the Depth First Traversal total
+/**
+ * @brief Graph::getTotalDiscoveryDistance
+ * @return
+ * //this function will return the Depth First Traversal total
+ */
 int Graph::getTotalDiscoveryDistance()
 {
     int totalDist = 0;
@@ -295,6 +368,10 @@ int Graph::getTotalDiscoveryDistance()
 }
 
 //this function removes visited marks in the graph
+/**
+ * @brief Graph::clearEdges
+ * remvoes visited marks in the graph
+ */
 void Graph::clearEdges()
 {
     for(unsigned int i = 0; i<adjacencyList.size(); i++)
@@ -306,6 +383,12 @@ void Graph::clearEdges()
     }
 }
 
+/**
+ * @brief Graph::dijkstra
+ * @param sourceIndex
+ * @return
+ * dijtra
+ */
 vector<vNode> Graph::dijkstra(int sourceIndex)
 {
     lesserComparator obj;
@@ -376,6 +459,12 @@ vector<vNode> Graph::dijkstra(int sourceIndex)
     }*/
 }
 
+/**
+ * @brief Graph::mst
+ * @param sourceIndex
+ * @return
+ * gets the MSt
+ */
 vector<edge> Graph::mst(int sourceIndex)
 {
     vector<int> cost(adjacencyList.size(), 1000000);
@@ -431,6 +520,13 @@ vector<edge> Graph::mst(int sourceIndex)
         return edgesMST;
 }
 
+/**
+ * @brief Graph::findEfficientPath
+ * @param selectedStadiums
+ * @param startingPoint
+ * @param visited
+ * finds the most efficeint path from a starting point to another point
+ */
 void Graph::findEfficientPath(vector<vNode>& selectedStadiums, vNode startingPoint, vector<vNode>& visited)
 {
     qDebug()<<"********"<<startingPoint.nodeName<<"***********";
@@ -463,6 +559,13 @@ void Graph::findEfficientPath(vector<vNode>& selectedStadiums, vNode startingPoi
         return;
 }
 
+/**
+ * @brief Graph::orderSpecifiedPath
+ * @param selectedStadiums
+ * @param startingPoint
+ * @param visited
+ * order traversal to stadium
+ */
 void Graph::orderSpecifiedPath(vector<vNode>& selectedStadiums, vNode startingPoint, vector<vNode>& visited)
 {
     int index; //index of next stadium in the order in selected stadiums

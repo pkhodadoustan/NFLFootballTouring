@@ -35,6 +35,10 @@ private slots:
     void on_addButton_clicked();
 
 private:
+    /**
+     * @brief ui
+     * create ui pointer
+     */
     Ui::AddNewSouvenir *ui;
 };
 

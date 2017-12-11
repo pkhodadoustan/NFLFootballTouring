@@ -24,6 +24,36 @@
      </item>
     </layout>
    </item>
+   <item>
+    <widget class="QTableWidget" name="fileTable"/>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="souvTable"/>
+   </item>
+   <item>
+    <widget class="QPushButton" name="addBut">
+     <property name="text">
+      <string>ADD</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="add2">
+     <property name="text">
+      <string>ADD</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="errorLabel">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources/>

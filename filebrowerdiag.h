@@ -33,7 +33,15 @@ private slots:
      */
     void on_folderTree_clicked(const QModelIndex &index);
 
+    void on_fileView_clicked(const QModelIndex &index);
+
+    void on_addBut_clicked();
+
+    void on_add2_clicked();
+
 private:
+    void addOtherFromFile(const QModelIndex&);
+    QString otherPathToFile;
     /**
      * @brief ui
      * UI ptr

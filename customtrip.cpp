@@ -4,6 +4,11 @@
 #include "purchasesouvenirs.h"
 #include "database.h"
 
+/**
+ * @brief CustomTrip::CustomTrip
+ * @param parent
+ * sets up te Ui so that a user can create a custom trip.
+ */
 CustomTrip::CustomTrip(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CustomTrip)
@@ -65,11 +70,18 @@ CustomTrip::CustomTrip(QWidget *parent) :
     ui->tableWidget_selectedStadiums->setRowCount(0);
 }
 
+/**
+ * @brief CustomTrip::~CustomTrip
+ */
 CustomTrip::~CustomTrip()
 {
     delete ui;
 }
 
+/**
+ * @brief CustomTrip::on_pushButton_back_clicked
+ * goes back to the main window
+ */
 void CustomTrip::on_pushButton_back_clicked()
 {
     MainWindow* main = new MainWindow;
@@ -77,7 +89,11 @@ void CustomTrip::on_pushButton_back_clicked()
     main->show();
 }
 
-
+/**
+ * @brief CustomTrip::on_comboBox_stadiums_currentIndexChanged
+ * @param index
+ * gets the teams of the current team selected in the comvbo box
+ */
 void CustomTrip::on_comboBox_stadiums_currentIndexChanged(int index)
 {
     QStringList teams = db->getTeamInStadium(ui->comboBox_stadiums->currentText());
@@ -91,6 +107,11 @@ void CustomTrip::on_comboBox_stadiums_currentIndexChanged(int index)
     }
 }
 
+/**
+ * @brief CustomTrip::on_comboBox_teams_currentIndexChanged
+ * @param index
+ * creates a list for the souvs and prices
+ */
 void CustomTrip::on_comboBox_teams_currentIndexChanged(int index)
 {
 
@@ -115,6 +136,11 @@ void CustomTrip::on_comboBox_teams_currentIndexChanged(int index)
     }
 }
 
+/**
+ * @brief CustomTrip::on_comboBox_souvenirs_currentIndexChanged
+ * @param index
+ * changessouv list
+ */
 void CustomTrip::on_comboBox_souvenirs_currentIndexChanged(int index)
 {
     if(index > 0) {
@@ -124,6 +150,9 @@ void CustomTrip::on_comboBox_souvenirs_currentIndexChanged(int index)
     }
 }
 
+/**
+ * @brief CustomTrip::on_pushButton_add_clicked
+ */
 void CustomTrip::on_pushButton_add_clicked()
 {
         //if lineEdit is empty, Print error msg
@@ -142,6 +171,9 @@ void CustomTrip::on_pushButton_add_clicked()
         }
 }
 
+/**
+ * @brief CustomTrip::on_pushButton_print_clicked
+ */
 void CustomTrip::on_pushButton_print_clicked()
 {
    // QMessageBox::information(this, tr("Cart Emptied"), tr("The cart is now empty\n"
@@ -188,6 +220,9 @@ void CustomTrip::on_pushButton_print_clicked()
         total = 0;
 }
 
+/**
+ * @brief CustomTrip::on_pushButton_clicked
+ */
 void CustomTrip::on_pushButton_clicked()
 {
     if(ui->tableWidget_selectedStadiums->rowCount() == 0)
@@ -280,6 +315,10 @@ void CustomTrip::addDistances() {
         qDebug() << "Query was not exec";
 }
 
+/**
+ * @brief CustomTrip::on_comboBox_AllStadiums_currentIndexChanged
+ * @param index
+ */
 void CustomTrip::on_comboBox_AllStadiums_currentIndexChanged(int index)
 {
     /*populating vector of selected Stadiums and table of selected stadiums*/
@@ -328,7 +367,11 @@ void CustomTrip::on_comboBox_AllStadiums_currentIndexChanged(int index)
     }
 }
 
-//function to set the starting point
+/**
+ * @brief CustomTrip::on_comboBox_StartingPoint_currentIndexChanged
+ * @param index
+ * gets the starting points
+ */
 void CustomTrip::on_comboBox_StartingPoint_currentIndexChanged(int index)
 {
     if(ui->comboBox_StartingPoint->currentIndex() != 0)
@@ -344,6 +387,10 @@ void CustomTrip::on_comboBox_StartingPoint_currentIndexChanged(int index)
 }
 
 //this function calls the graph method that finds the most efficient path
+/**
+ * @brief CustomTrip::on_pushButton_findPath_clicked
+ * finds the most efficient path
+ */
 void CustomTrip::on_pushButton_findPath_clicked()
 {
     int totalDist = 0;
@@ -365,6 +412,10 @@ void CustomTrip::on_pushButton_findPath_clicked()
 }
 
 //trip from FordField to all stadiums
+/**
+ * @brief CustomTrip::on_pushButton_2_clicked
+ * creates a trip from fordfield
+ */
 void CustomTrip::on_pushButton_2_clicked()
 {
    vector<vNode> visited;
@@ -401,6 +452,10 @@ void CustomTrip::on_pushButton_2_clicked()
     ui->label_totalDist->setText(QString::number(totalDist));
 }
 
+/**
+ * @brief CustomTrip::on_pushButton_resetTrip_clicked
+ * resets the trip
+ */
 void CustomTrip::on_pushButton_resetTrip_clicked()
 {
     selectedStadiums.clear();
@@ -413,6 +468,10 @@ void CustomTrip::on_pushButton_resetTrip_clicked()
     ui->label_totalDist->setText("");
 }
 
+/**
+ * @brief CustomTrip::on_pushButton_orderedTrip_clicked
+ * creates an ordered trip
+ */
 void CustomTrip::on_pushButton_orderedTrip_clicked()
 {
 
@@ -434,6 +493,11 @@ void CustomTrip::on_pushButton_orderedTrip_clicked()
     ui->label_totalDist->setText(QString::number(totalDist));
 }
 
+/**
+ * @brief CustomTrip::on_comboBox_LADest_currentIndexChanged
+ * @param index
+ * selects LA destination
+ */
 void CustomTrip::on_comboBox_LADest_currentIndexChanged(int index)
 {
     int row = 2;

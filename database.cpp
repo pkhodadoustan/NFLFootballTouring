@@ -3,6 +3,10 @@
 #include <QSqlError>
 #include <QDebug>
 
+/**
+ * @brief Database::instance
+ * DB instance
+ */
 Database* Database::instance = nullptr;
 
 
@@ -148,7 +152,7 @@ void Database::addNewTeam(QStringList newTeam) {
         qDebug() << "query was executed";
     else
         qDebug() << "Query was not executed";
-
+    addSouvenirTable(newTeam.at(0));
 }
 
 /**
@@ -183,6 +187,12 @@ void Database::initialDBPoputaion() {
        }
 }
 
+/**
+ * @brief Database::createQueryModel
+ * @param queryCommand
+ * @return
+ * creates a query model
+ */
 QSqlQueryModel* Database::createQueryModel(QString queryCommand)
 {
     QSqlQueryModel *model = new QSqlQueryModel;
@@ -199,6 +209,11 @@ QSqlQueryModel* Database::createQueryModel(QString queryCommand)
     return model;
 }
 
+/**
+ * @brief Database::getTotalNumberOfSeats
+ * @return
+ * returns the total number of seats
+ */
 int Database::getTotalNumberOfSeats()
 {
     int total = 0;
@@ -215,11 +230,22 @@ int Database::getTotalNumberOfSeats()
 
     return total;
 }
+
+/**
+ * @brief Database::getListOfNationalConferenceTeams
+ * @return
+ * gets list of national conference teams
+ */
 QSqlQueryModel* Database::getListOfNationalConferenceTeams() {
 
     return createQueryModel("SELECT * FROM Teams WHERE Conference == 'National Football Conference'");
 }
 
+/**
+ * @brief Database::getListOfOpenRoofStadiums
+ * @return
+ * gets list of open roof stadiums
+ */
 QSqlQueryModel* Database::getListOfOpenRoofStadiums() {
 
     QSqlQueryModel *model = new QSqlQueryModel;
@@ -231,22 +257,43 @@ QSqlQueryModel* Database::getListOfOpenRoofStadiums() {
     return model;
 }
 
+/**
+ * @brief Database::getListOfAmericanConferenceTeams
+ * @return
+ * gets list of american confernce teams
+ */
 QSqlQueryModel* Database::getListOfAmericanConferenceTeams() {
 
     return createQueryModel("SELECT * FROM Teams WHERE Conference == 'American Football Conference'");
 }
 
+/**
+ * @brief Database::getListOfAllTeams
+ * @return
+ * gets all teams
+ */
 QSqlQueryModel* Database::getListOfAllTeams()
 {
    return createQueryModel("SELECT Team_Name, Stadium_Name, Seating_Capacity, Location FROM Teams ORDER By Team_Name");
 }
 
+/**
+ * @brief Database::getSpecificTeamInfo
+ * @param teamName
+ * @return
+ * gets specific tem infomation
+ */
 QSqlQueryModel* Database::getSpecificTeamInfo(QString teamName)
 {
     QString command = "SELECT * FROM Teams WHERE Team_Name == '"+teamName+"'";
     return createQueryModel(command);
 }
 
+/**
+ * @brief Database::getTeamNames
+ * @return
+ * returns all team names
+ */
 std::vector<QString> Database::getTeamNames()
 {
     std::vector<QString> teamNames;
@@ -261,6 +308,11 @@ std::vector<QString> Database::getTeamNames()
     return teamNames;
 }
 
+/**
+ * @brief Database::addNewDistance
+ * @param toAdd
+ * adds a new distance to team
+ */
 void Database::addNewDistance(QStringList toAdd) {
     QSqlQuery query(*this);
     query.prepare("INSERT INTO StadiumDistances (Beginning, Ending, Distance)"
@@ -276,6 +328,10 @@ void Database::addNewDistance(QStringList toAdd) {
         qDebug() << "Distance was not added";
 }
 
+/**
+ * @brief Database::addStadiumDistancesFromFile
+ * adds distances from a csv file
+ */
 void Database::addStadiumDistancesFromFile() {
     Database* db = Database::getInstance();
     QDir dir(QDir::currentPath());
@@ -303,6 +359,11 @@ void Database::addStadiumDistancesFromFile() {
     }
 }
 
+/**
+ * @brief Database::getListOfStarPLayers
+ * @return
+ * gets all star players
+ */
 QSqlQueryModel* Database::getListOfStarPLayers()
 {
     QSqlQueryModel *model = new QSqlQueryModel;
@@ -312,6 +373,11 @@ QSqlQueryModel* Database::getListOfStarPLayers()
     return model;
 }
 
+/**
+ * @brief Database::getListOfSurfaceTypes
+ * @return
+ * get list of surface type
+ */
 QSqlQueryModel* Database::getListOfSurfaceTypes()
 {
     QSqlQueryModel *model = new QSqlQueryModel;
@@ -326,6 +392,10 @@ QSqlQueryModel* Database::getListOfSurfaceTypes()
 
 }
 
+/**
+ * @brief Database::addIntialSouvenirTables
+ * adds initial souv tables
+ */
 void Database::addIntialSouvenirTables() {
     QSqlQuery query(*this);
     QSqlQuery tableQuery(*this);
@@ -382,6 +452,13 @@ void Database::addIntialSouvenirTables() {
     }
 }
 
+/**
+ * @brief Database::addSouvenir
+ * @param team
+ * @param price
+ * @param souvenir
+ * adds souvenir
+ */
 void Database::addSouvenir(QString team, QString price, QString souvenir) {
     QSqlQuery query(*this);
     QString queryString = QString("INSERT INTO %1_Souv (Souvenir, Price)"
@@ -398,6 +475,14 @@ void Database::addSouvenir(QString team, QString price, QString souvenir) {
 
 }
 
+/**
+ * @brief Database::checkForSouvenir
+ * @param team
+ * @param price
+ * @param souvenir
+ * @return
+ * checks for souvenits
+ */
 bool Database::checkForSouvenir(QString team, QString price, QString souvenir) {
     QSqlQuery query(*this);
     QString queryString = QString("SELECT * FROM %1_Souv "
@@ -417,6 +502,12 @@ bool Database::checkForSouvenir(QString team, QString price, QString souvenir) {
     return false;
 }
 
+/**
+ * @brief Database::deleteSouv
+ * @param Team
+ * @param souv
+ * deletes souvenir
+ */
 void Database::deleteSouv(QString Team, QString souv) {
     QSqlQuery query(*this);
     QString queryString = QString("DELETE FROM %1_Souv "
@@ -428,6 +519,11 @@ void Database::deleteSouv(QString Team, QString souv) {
         qDebug() << "not deleted";
 }
 
+/**
+ * @brief Database::getAllStadiumByCapacity
+ * @return
+ * get all stadium by capacity
+ */
 QSqlQueryModel* Database::getAllStadiumByCapacity()
 {
     QSqlQueryModel *model = new QSqlQueryModel;
@@ -439,6 +535,11 @@ QSqlQueryModel* Database::getAllStadiumByCapacity()
     return model;
 }
 
+/**
+ * @brief Database::getAllStadiumNames
+ * @return
+ * gets all staium names
+ */
 QStringList Database::getAllStadiumNames() const {
     QSqlQuery query(*this);
     QStringList stadiums;
@@ -457,6 +558,11 @@ QStringList Database::getAllStadiumNames() const {
     return stadiums;
 }
 
+/**
+ * @brief Database::getAllDistances
+ * @return
+ * gets all distacnes
+ */
 QSqlQuery Database::getAllDistances() const {
     QSqlQuery query(*this);
 
@@ -464,6 +570,11 @@ QSqlQuery Database::getAllDistances() const {
     return query;
 }
 
+/**
+ * @brief Database::addSouvenirTable
+ * @param newTeam
+ * adds souv table
+ */
 void Database::addSouvenirTable(QString newTeam) {
     QSqlQuery toAdd(*this);
     QSqlQuery tableQuery(*this);
@@ -501,6 +612,12 @@ void Database::addSouvenirTable(QString newTeam) {
     }
 }
 
+/**
+ * @brief Database::getTeamInStadium
+ * @param stadium
+ * @return
+ * gets team in a staums
+ */
 QStringList Database::getTeamInStadium(QString stadium) const
 {
     QSqlQuery query(*this);
@@ -521,6 +638,12 @@ QStringList Database::getTeamInStadium(QString stadium) const
     return teams;
 }
 
+/**
+ * @brief Database::getSouvPrices
+ * @param team
+ * @return
+ * gets souv price
+ */
 QStringList Database::getSouvPrices(QString team) const
 {
     QString test = QString("%1_Souv").arg(team.replace(" ", "_"));
@@ -543,6 +666,12 @@ QStringList Database::getSouvPrices(QString team) const
     return prices;
 }
 
+/**
+ * @brief Database::getSouvenirsForTeam
+ * @param team
+ * @return
+ * get souvinir for team
+ */
 QStringList Database::getSouvenirsForTeam(QString team) const
 {
 
