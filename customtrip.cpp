@@ -126,7 +126,7 @@ void CustomTrip::on_comboBox_souvenirs_currentIndexChanged(int index)
 
 void CustomTrip::on_pushButton_add_clicked()
 {
-    //! if lineEdit is empty, push 1 to vector
+        //if lineEdit is empty, Print error msg
         if(ui->lineEdit_quantity->text().isEmpty())
         {
             QMessageBox::information(this, tr("Error"), tr("Please enter a value"));
@@ -144,8 +144,8 @@ void CustomTrip::on_pushButton_add_clicked()
 
 void CustomTrip::on_pushButton_print_clicked()
 {
-    QMessageBox::information(this, tr("Cart Emptied"), tr("The cart is now empty\n"
-                                                           "Printing receipt..."));
+   // QMessageBox::information(this, tr("Cart Emptied"), tr("The cart is now empty\n"
+                                                           //"Printing receipt..."));
 
      //calculate total price for each souvenir and store it in totalPrice
      for(int i=0; i<souvenirName.length(); i++) {
@@ -163,7 +163,6 @@ void CustomTrip::on_pushButton_print_clicked()
 
 
         for (int i = 0; i < souvenirName.size(); i++) {
-            subtotal = 0;
             ui->tableWidget_receipt->insertRow(ui->tableWidget_receipt->rowCount());
             ui->tableWidget_receipt->setItem(ui->tableWidget_receipt->rowCount() - 1, 0,
                                                new QTableWidgetItem(souvenirName.at(i)));
@@ -172,9 +171,8 @@ void CustomTrip::on_pushButton_print_clicked()
             ui->tableWidget_receipt->setItem(ui->tableWidget_receipt->rowCount() - 1, 2,
                                                new QTableWidgetItem("$" + QString::number(totalPrice.at(i))));
 
-            subtotal = totalPrice.at(i) * souvenirQuantity.at(i);
 
-            total = total + subtotal;
+            total = total + totalPrice.at(i);
 
         }
 
@@ -209,6 +207,7 @@ void CustomTrip::on_pushButton_clicked()
         ui->label_2->show();
         ui->label_3->show();
         ui->label_4->show();
+        ui->label_5->show();
         ui->label->show();
         ui->lineEdit_quantity->show();
         ui->tableWidget_receipt->show();

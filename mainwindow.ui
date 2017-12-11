@@ -118,7 +118,7 @@ background-repeat:none;</string>
                 </size>
                </property>
                <property name="text">
-                <string>map</string>
+                <string>Map</string>
                </property>
               </widget>
              </item>
