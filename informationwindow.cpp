@@ -1,6 +1,10 @@
 #include "informationwindow.h"
 #include "ui_informationwindow.h"
 
+/**
+ * @brief InformationWindow::InformationWindow
+ * @param parent
+ */
 InformationWindow::InformationWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::InformationWindow)
@@ -9,11 +13,17 @@ InformationWindow::InformationWindow(QWidget *parent) :
     makeTeamNameCombobox();
 }
 
+/**
+ * @brief InformationWindow::~InformationWindow
+ */
 InformationWindow::~InformationWindow()
 {
     delete ui;
 }
 
+/**
+ * @brief InformationWindow::displayOpenRoof
+ */
 void InformationWindow::displayOpenRoof()
 {
     ui->label->clear();
@@ -29,6 +39,9 @@ void InformationWindow::displayOpenRoof()
 
 }
 
+/**
+ * @brief InformationWindow::displayNationalConfTeams
+ */
 void InformationWindow::displayNationalConfTeams()
 {
     ui->Table->setModel(Database::getInstance()->getListOfNationalConferenceTeams());
@@ -44,6 +57,9 @@ void InformationWindow::displayNationalConfTeams()
 
 }
 
+/**
+ * @brief InformationWindow::displayAllTeams
+ */
 void InformationWindow::displayAllTeams()
 {
     ui->Table->setModel(Database::getInstance()->getListOfAllTeams());
@@ -59,6 +75,9 @@ void InformationWindow::displayAllTeams()
     //ui->label_3->setText(input2);
 }
 
+/**
+ * @brief InformationWindow::displayAmericanConfTeams
+ */
 void InformationWindow::displayAmericanConfTeams()
 {
     ui->Table->setModel(Database::getInstance()->getListOfAmericanConferenceTeams());
@@ -73,6 +92,9 @@ void InformationWindow::displayAmericanConfTeams()
     ui->Table->setSortingEnabled(true);
 }
 
+/**
+ * @brief InformationWindow::makeTeamNameCombobox
+ */
 void InformationWindow::makeTeamNameCombobox()
 {
     //after index 0 and index 1 fill the comboBox with team names
@@ -85,6 +107,10 @@ void InformationWindow::makeTeamNameCombobox()
 
 }
 
+/**
+ * @brief InformationWindow::on_comboBox_activated
+ * @param index
+ */
 void InformationWindow::on_comboBox_activated(int index)
 {
     if(index!=0)
@@ -105,6 +131,10 @@ void InformationWindow::on_comboBox_activated(int index)
     }
 }
 
+/**
+ * @brief InformationWindow::on_comboBox_2_activated
+ * @param index
+ */
 void InformationWindow::on_comboBox_2_activated(int index)
 {
     if(ui->comboBox_2->currentIndex() == 1)

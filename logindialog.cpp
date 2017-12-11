@@ -3,7 +3,10 @@
 #include "adminwindow.h"
 #include <QDebug>
 #include "mainwindow.h"
-
+/**
+ * @brief loginDialog::loginDialog
+ * @param parent
+ */
 loginDialog::loginDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::loginDialog)
@@ -11,12 +14,17 @@ loginDialog::loginDialog(QWidget *parent) :
     ui->setupUi(this);
     ui->lineEdit_Password->setEchoMode(QLineEdit::Password);
 }
-
+/**
+ * @brief loginDialog::~loginDialog
+ */
 loginDialog::~loginDialog()
 {
     delete ui;
 }
 
+/**
+ * @brief loginDialog::on_loginButton_clicked
+ */
 void loginDialog::on_loginButton_clicked()
 {
     const QString ADMIN_USERNAME = "A"; //!hardcoded username
@@ -45,6 +53,9 @@ void loginDialog::on_loginButton_clicked()
 
 }
 
+/**
+ * @brief loginDialog::on_pushButton_clicked
+ */
 void loginDialog::on_pushButton_clicked()
 {
     MainWindow* main = new MainWindow;

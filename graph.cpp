@@ -267,6 +267,8 @@ void Graph::partialBFS(vector<vNode> vList,  bool visited[])
  */
 void Graph::BFS(int startingIndex)
 {
+    qDebug() << "here";
+
     lesserComparator obj;
     clearEdges();
     discoveryEdge.clear();
@@ -276,7 +278,7 @@ void Graph::BFS(int startingIndex)
     //sort all the lists in the graph except for the beginning node in each*/
     for(unsigned int i = 0; i<adjacencyList.size(); i++)
     {
-        sort(adjacencyList[i].begin()+1, adjacencyList[i].end(), obj);//sort children of node i in vList
+        sort(adjacencyList[i].begin()+1, adjacencyList[i].end());//sort children of node i in vList
     }
 
     bool visited[12] = {false};

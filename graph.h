@@ -29,6 +29,13 @@ struct vNode
         else
             return false;
     }
+    bool operator > (vNode other)
+    {
+        if(this->distance<other.distance)
+            return false;
+        else
+            return true;
+    }
     bool operator == (vNode other)
     {
         if(nodeName==other.nodeName)
@@ -66,6 +73,16 @@ public :
     bool operator () ( vNode& vertex1,  vNode& vertex2)
     {
         return(vertex2<vertex1);
+
+    }
+};
+
+class greaterComp
+{
+public :
+    bool operator () ( vNode& vertex1,  vNode& vertex2)
+    {
+        return(vertex2>vertex1);
 
     }
 };

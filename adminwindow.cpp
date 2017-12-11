@@ -175,6 +175,7 @@ void AdminWindow::on_addStadButton_clicked()
 {
     FileBrowerDiag* file = new FileBrowerDiag;
     file->show();
+    this->close();
 }
 
 /**

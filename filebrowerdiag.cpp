@@ -1,6 +1,7 @@
 #include "filebrowerdiag.h"
 #include "ui_filebrowerdiag.h"
 #include "database.h"
+#include "adminwindow.h"
 
 FileBrowerDiag::FileBrowerDiag(QWidget *parent) :
     QDialog(parent),
@@ -218,6 +219,8 @@ void FileBrowerDiag::on_add2_clicked()
             //confirmation message
             ui->errorLabel->setText("New stadiums added to database");
             added = true;
+            AdminWindow* ad = new AdminWindow;
+            ad->show();
         }
     }
 }

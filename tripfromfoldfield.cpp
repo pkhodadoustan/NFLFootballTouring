@@ -2,6 +2,10 @@
 #include "ui_tripfromfoldfield.h"
 #include "mainwindow.h"
 
+/**
+ * @brief TripFromFoldfield::TripFromFoldfield
+ * @param parent
+ */
 TripFromFoldfield::TripFromFoldfield(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::TripFromFoldfield)
@@ -59,11 +63,17 @@ TripFromFoldfield::TripFromFoldfield(QWidget *parent) :
     }
 }
 
+/**
+ * @brief TripFromFoldfield::~TripFromFoldfield
+ */
 TripFromFoldfield::~TripFromFoldfield()
 {
     delete ui;
 }
 
+/**
+ * @brief TripFromFoldfield::on_pushButton_clicked
+ */
 void TripFromFoldfield::on_pushButton_clicked()
 {
     MainWindow* main = new MainWindow;
@@ -71,6 +81,10 @@ void TripFromFoldfield::on_pushButton_clicked()
     main->show();
 }
 
+/**
+ * @brief TripFromFoldfield::on_comboBox_stadiums_currentIndexChanged
+ * @param index
+ */
 void TripFromFoldfield::on_comboBox_stadiums_currentIndexChanged(int index)
 {
     ui->comboBox_teams->clear();
@@ -86,7 +100,10 @@ void TripFromFoldfield::on_comboBox_stadiums_currentIndexChanged(int index)
     }
 }
 
-
+/**
+ * @brief TripFromFoldfield::on_comboBox_teams_currentIndexChanged
+ * @param index
+ */
 void TripFromFoldfield::on_comboBox_teams_currentIndexChanged(int index)
 {
     ui->comboBox_souvenirs->clear();
@@ -100,7 +117,10 @@ void TripFromFoldfield::on_comboBox_teams_currentIndexChanged(int index)
     }
 }
 
-
+/**
+ * @brief TripFromFoldfield::on_comboBox_souvenirs_currentIndexChanged
+ * @param index
+ */
 void TripFromFoldfield::on_comboBox_souvenirs_currentIndexChanged(int index)
 {
     if(index > 0) {
@@ -110,8 +130,9 @@ void TripFromFoldfield::on_comboBox_souvenirs_currentIndexChanged(int index)
     }
 }
 
-
-
+/**
+ * @brief TripFromFoldfield::on_pushButton_add_clicked
+ */
 void TripFromFoldfield::on_pushButton_add_clicked()
 {
        //if lineEdit is empty, push 1 to vector
@@ -134,8 +155,9 @@ void TripFromFoldfield::on_pushButton_add_clicked()
         }
 }
 
-
-
+/**
+ * @brief TripFromFoldfield::on_pushButton_print_clicked
+ */
 void TripFromFoldfield::on_pushButton_print_clicked()
 {
     //calculate total price for each souvenir and store it in totalPrice
@@ -180,6 +202,9 @@ void TripFromFoldfield::on_pushButton_print_clicked()
        totalPrice.clear();
 }
 
+/**
+ * @brief TripFromFoldfield::on_pushButton_start_clicked
+ */
 void TripFromFoldfield::on_pushButton_start_clicked()
 {
     ui->label_first->hide();
