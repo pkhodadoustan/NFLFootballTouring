@@ -49,10 +49,3 @@ void MainWindow::on_pushButton_customTrip_clicked()
     this->close();
     colismTrip->show();
 }
-
-void MainWindow::on_pushButton_3_clicked()
-{
-    TripFromFoldfield* foldfieldTrip = new TripFromFoldfield;
-    this->close();
-    foldfieldTrip->show();
-}
