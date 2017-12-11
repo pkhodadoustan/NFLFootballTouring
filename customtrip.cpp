@@ -367,8 +367,8 @@ void CustomTrip::on_pushButton_findPath_clicked()
 //trip from FordField to all stadiums
 void CustomTrip::on_pushButton_2_clicked()
 {
-    vector<vNode> visited;
-    int totalDist = 0;
+   vector<vNode> visited;
+   int totalDist = 0;
 
     //fill the selected sadiums with all stadiums, and startingPoint
     selectedStadiums.clear();
@@ -415,11 +415,16 @@ void CustomTrip::on_pushButton_resetTrip_clicked()
 
 void CustomTrip::on_pushButton_orderedTrip_clicked()
 {
+
     int totalDist = 0;
     vector<vNode> visited;
-    if(ui->comboBox_StartingPoint->currentIndex()!=0)//starting point is selected
+    for(unsigned int i = 0; i<stadiumGraph.getAdjacencyList().size(); i++)
     {
-        stadiumGraph.orderSpecifiedPath(selectedStadiums, startingPoint, visited);
+        if(ui->tableWidget_selectedStadiums->item(0,0)->text() == stadiumGraph.getAdjacencyList()[i][0].nodeName)
+        {
+            startingPoint = stadiumGraph.getAdjacencyList()[i][0];
+            stadiumGraph.orderSpecifiedPath(selectedStadiums, startingPoint, visited);
+        }
     }
     for(unsigned int i =0; i<visited.size(); i++)
     {
