@@ -33,7 +33,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = FootballTour1.0.0
-DISTDIR = /Users/andrewcabrera/Desktop/Football/NFLFootballTouring/build-FootballTour-Desktop_Qt_5_8_0_clang_64bit-Debug/.tmp/FootballTour1.0.0
+DISTDIR = /Users/andrewcabrera/Desktop/theFinalCopy/NFLFootballTouring/build-FootballTour-Desktop_Qt_5_8_0_clang_64bit-Debug/.tmp/FootballTour1.0.0
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -headerpad_max_install_names -stdlib=libc++ -Wl,-syslibroot,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk -mmacosx-version-min=10.9 $(EXPORT_QMAKE_XARCH_LFLAGS) -Wl,-rpath,/Users/andrewcabrera/Qt/5.8/clang_64/lib
 LIBS          = $(SUBLIBS) -F/Users/andrewcabrera/Qt/5.8/clang_64/lib -framework QtWidgets -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework QtSql -framework OpenGL -framework AGL 
@@ -50,11 +50,55 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../main.cpp \
 		../mainwindow.cpp \
-		../database.cpp moc_mainwindow.cpp
+		../database.cpp \
+		../informationwindow.cpp \
+		../adminwindow.cpp \
+		../noteditabledelegate.cpp \
+		../addnewsouvenir.cpp \
+		../filebrowerdiag.cpp \
+		../logindialog.cpp \
+		../customtrip.cpp \
+		../purchasesouvenirs.cpp \
+		../tripfromcoliseum.cpp \
+		../tripfromfoldfield.cpp \
+		../graph.cpp qrc_res.cpp \
+		moc_mainwindow.cpp \
+		moc_informationwindow.cpp \
+		moc_adminwindow.cpp \
+		moc_noteditabledelegate.cpp \
+		moc_addnewsouvenir.cpp \
+		moc_filebrowerdiag.cpp \
+		moc_logindialog.cpp \
+		moc_customtrip.cpp \
+		moc_purchasesouvenirs.cpp \
+		moc_tripfromcoliseum.cpp \
+		moc_tripfromfoldfield.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		database.o \
-		moc_mainwindow.o
+		informationwindow.o \
+		adminwindow.o \
+		noteditabledelegate.o \
+		addnewsouvenir.o \
+		filebrowerdiag.o \
+		logindialog.o \
+		customtrip.o \
+		purchasesouvenirs.o \
+		tripfromcoliseum.o \
+		tripfromfoldfield.o \
+		graph.o \
+		qrc_res.o \
+		moc_mainwindow.o \
+		moc_informationwindow.o \
+		moc_adminwindow.o \
+		moc_noteditabledelegate.o \
+		moc_addnewsouvenir.o \
+		moc_filebrowerdiag.o \
+		moc_logindialog.o \
+		moc_customtrip.o \
+		moc_purchasesouvenirs.o \
+		moc_tripfromcoliseum.o \
+		moc_tripfromfoldfield.o
 DIST          = /Users/Qt/5.8/clang_64/mkspecs/features/spec_pre.prf \
 		/Users/Qt/5.8/clang_64/mkspecs/qdevice.pri \
 		/Users/Qt/5.8/clang_64/mkspecs/features/device_config.prf \
@@ -232,9 +276,31 @@ DIST          = /Users/Qt/5.8/clang_64/mkspecs/features/spec_pre.prf \
 		/Users/Qt/5.8/clang_64/mkspecs/features/yacc.prf \
 		/Users/Qt/5.8/clang_64/mkspecs/features/lex.prf \
 		../../FootballTour.pro ../mainwindow.h \
-		../database.h ../main.cpp \
+		../database.h \
+		../informationwindow.h \
+		../adminwindow.h \
+		../noteditabledelegate.h \
+		../addnewsouvenir.h \
+		../filebrowerdiag.h \
+		../logindialog.h \
+		../customtrip.h \
+		../purchasesouvenirs.h \
+		../tripfromcoliseum.h \
+		../tripfromfoldfield.h \
+		../graph.h ../main.cpp \
 		../mainwindow.cpp \
-		../database.cpp
+		../database.cpp \
+		../informationwindow.cpp \
+		../adminwindow.cpp \
+		../noteditabledelegate.cpp \
+		../addnewsouvenir.cpp \
+		../filebrowerdiag.cpp \
+		../logindialog.cpp \
+		../customtrip.cpp \
+		../purchasesouvenirs.cpp \
+		../tripfromcoliseum.cpp \
+		../tripfromfoldfield.cpp \
+		../graph.cpp
 QMAKE_TARGET  = FootballTour
 DESTDIR       = 
 TARGET        = FootballTour.app/Contents/MacOS/FootballTour
@@ -243,7 +309,7 @@ TARGET        = FootballTour.app/Contents/MacOS/FootballTour
 first: all
 ####### Build rules
 
-$(TARGET): ui_mainwindow.h $(OBJECTS)  
+$(TARGET): ui_mainwindow.h ui_informationwindow.h ui_adminwindow.h ui_addnewsouvenir.h ui_filebrowerdiag.h ui_logindialog.h ui_customtrip.h ui_purchasesouvenirs.h ui_tripfromcoliseum.h ui_tripfromfoldfield.h $(OBJECTS)  
 	@test -d FootballTour.app/Contents/MacOS/ || mkdir -p FootballTour.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -424,6 +490,7 @@ Makefile: ../FootballTour.pro ../../../../Qt/5.8/clang_64/mkspecs/features/spec_
 		../../../../Qt/5.8/clang_64/mkspecs/features/yacc.prf \
 		../../../../Qt/5.8/clang_64/mkspecs/features/lex.prf \
 		../FootballTour.pro \
+		../res.qrc \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
 		../../../../Qt/5.8/clang_64/lib/QtGui.framework/QtGui.prl \
 		../../../../Qt/5.8/clang_64/lib/QtSql.framework/QtSql.prl \
@@ -606,6 +673,7 @@ Makefile: ../FootballTour.pro ../../../../Qt/5.8/clang_64/mkspecs/features/spec_
 ../../../../Qt/5.8/clang_64/mkspecs/features/yacc.prf:
 ../../../../Qt/5.8/clang_64/mkspecs/features/lex.prf:
 ../FootballTour.pro:
+../res.qrc:
 ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
 ../../../../Qt/5.8/clang_64/lib/QtGui.framework/QtGui.prl:
 ../../../../Qt/5.8/clang_64/lib/QtSql.framework/QtSql.prl:
@@ -639,10 +707,11 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../res.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Qt/5.8/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../mainwindow.h ../database.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../main.cpp ../mainwindow.cpp ../database.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../mainwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../mainwindow.h ../database.h ../informationwindow.h ../adminwindow.h ../noteditabledelegate.h ../addnewsouvenir.h ../filebrowerdiag.h ../logindialog.h ../customtrip.h ../purchasesouvenirs.h ../tripfromcoliseum.h ../tripfromfoldfield.h ../graph.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../main.cpp ../mainwindow.cpp ../database.cpp ../informationwindow.cpp ../adminwindow.cpp ../noteditabledelegate.cpp ../addnewsouvenir.cpp ../filebrowerdiag.cpp ../logindialog.cpp ../customtrip.cpp ../purchasesouvenirs.cpp ../tripfromcoliseum.cpp ../tripfromfoldfield.cpp ../graph.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../mainwindow.ui ../informationwindow.ui ../adminwindow.ui ../addnewsouvenir.ui ../filebrowerdiag.ui ../logindialog.ui ../customtrip.ui ../purchasesouvenirs.ui ../tripfromcoliseum.ui ../tripfromfoldfield.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -666,32 +735,558 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_res.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_res.cpp
+qrc_res.cpp: ../res.qrc \
+		../../../../Qt/5.8/clang_64/bin/rcc \
+		../image1.jpg
+	/Users/andrewcabrera/Qt/5.8/clang_64/bin/rcc -name res ../res.qrc -o qrc_res.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: ../../../../Qt/5.8/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk -mmacosx-version-min=10.9 $(EXPORT_QMAKE_XARCH_CFLAGS) -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h ../../../../Qt/5.8/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_informationwindow.cpp moc_adminwindow.cpp moc_noteditabledelegate.cpp moc_addnewsouvenir.cpp moc_filebrowerdiag.cpp moc_logindialog.cpp moc_customtrip.cpp moc_purchasesouvenirs.cpp moc_tripfromcoliseum.cpp moc_tripfromfoldfield.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_informationwindow.cpp moc_adminwindow.cpp moc_noteditabledelegate.cpp moc_addnewsouvenir.cpp moc_filebrowerdiag.cpp moc_logindialog.cpp moc_customtrip.cpp moc_purchasesouvenirs.cpp moc_tripfromcoliseum.cpp moc_tripfromfoldfield.cpp
 moc_mainwindow.cpp: ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../informationwindow.h \
+		../database.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQueryModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QSortFilterProxyModel \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsortfilterproxymodel.h \
+		../logindialog.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../adminwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlTableModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDesktopWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdesktopwidget.h \
+		../noteditabledelegate.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QItemDelegate \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qitemdelegate.h \
+		../addnewsouvenir.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		../mainwindow.h \
 		moc_predefs.h \
 		../../../../Qt/5.8/clang_64/bin/moc
-	/Users/andrewcabrera/Qt/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/andrewcabrera/Qt/5.8/clang_64/mkspecs/macx-clang -I/Users/andrewcabrera/Desktop/Football/NFLFootballTouring -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtSql.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/andrewcabrera/Qt/5.8/clang_64/lib ../mainwindow.h -o moc_mainwindow.cpp
+	/Users/andrewcabrera/Qt/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/andrewcabrera/Qt/5.8/clang_64/mkspecs/macx-clang -I/Users/andrewcabrera/Desktop/theFinalCopy/NFLFootballTouring -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtSql.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/andrewcabrera/Qt/5.8/clang_64/lib ../mainwindow.h -o moc_mainwindow.cpp
+
+moc_informationwindow.cpp: ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../database.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQueryModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QSortFilterProxyModel \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsortfilterproxymodel.h \
+		../informationwindow.h \
+		moc_predefs.h \
+		../../../../Qt/5.8/clang_64/bin/moc
+	/Users/andrewcabrera/Qt/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/andrewcabrera/Qt/5.8/clang_64/mkspecs/macx-clang -I/Users/andrewcabrera/Desktop/theFinalCopy/NFLFootballTouring -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtSql.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/andrewcabrera/Qt/5.8/clang_64/lib ../informationwindow.h -o moc_informationwindow.cpp
+
+moc_adminwindow.cpp: ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlTableModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDesktopWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdesktopwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../noteditabledelegate.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QItemDelegate \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qitemdelegate.h \
+		../addnewsouvenir.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../database.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQueryModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../adminwindow.h \
+		../adminwindow.h \
+		moc_predefs.h \
+		../../../../Qt/5.8/clang_64/bin/moc
+	/Users/andrewcabrera/Qt/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/andrewcabrera/Qt/5.8/clang_64/mkspecs/macx-clang -I/Users/andrewcabrera/Desktop/theFinalCopy/NFLFootballTouring -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtSql.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/andrewcabrera/Qt/5.8/clang_64/lib ../adminwindow.h -o moc_adminwindow.cpp
+
+moc_noteditabledelegate.cpp: ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QItemDelegate \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qitemdelegate.h \
+		../noteditabledelegate.h \
+		moc_predefs.h \
+		../../../../Qt/5.8/clang_64/bin/moc
+	/Users/andrewcabrera/Qt/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/andrewcabrera/Qt/5.8/clang_64/mkspecs/macx-clang -I/Users/andrewcabrera/Desktop/theFinalCopy/NFLFootballTouring -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtSql.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/andrewcabrera/Qt/5.8/clang_64/lib ../noteditabledelegate.h -o moc_noteditabledelegate.cpp
+
+moc_addnewsouvenir.cpp: ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../database.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQueryModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../adminwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlTableModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDesktopWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdesktopwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../noteditabledelegate.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QItemDelegate \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qitemdelegate.h \
+		../addnewsouvenir.h \
+		../addnewsouvenir.h \
+		moc_predefs.h \
+		../../../../Qt/5.8/clang_64/bin/moc
+	/Users/andrewcabrera/Qt/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/andrewcabrera/Qt/5.8/clang_64/mkspecs/macx-clang -I/Users/andrewcabrera/Desktop/theFinalCopy/NFLFootballTouring -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtSql.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/andrewcabrera/Qt/5.8/clang_64/lib ../addnewsouvenir.h -o moc_addnewsouvenir.cpp
+
+moc_filebrowerdiag.cpp: ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QtCore \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qglobal.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qabstractanimation.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qabstracteventdispatcher.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qabstractitemmodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qabstractnativeeventfilter.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qabstractproxymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qabstractstate.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qabstracttransition.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qalgorithms.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qanimationgroup.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qarraydata.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qarraydataops.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qarraydatapointer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qatomic.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qbasictimer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qbitarray.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qbuffer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qbytearray.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qbytearraylist.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qbytearraymatcher.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcache.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qchar.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcollator.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcommandlineoption.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcommandlineparser.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcompilerdetection.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcontainerfwd.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcontiguouscache.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcoreapplication.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcoreevent.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcryptographichash.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdeadlinetimer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdir.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdiriterator.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qeasingcurve.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qelapsedtimer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qendian.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qeventloop.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qeventtransition.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qexception.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfactoryinterface.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfiledevice.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfileinfo.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfileselector.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfilesystemwatcher.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfinalstate.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qflags.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfuture.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfutureinterface.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfuturesynchronizer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfuturewatcher.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qgenericatomic.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qglobalstatic.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qhash.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qhashfunctions.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qhistorystate.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qidentityproxymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qiodevice.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qisenum.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qitemselectionmodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qiterator.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qjsonarray.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qjsondocument.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qjsonvalue.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qlibrary.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qlibraryinfo.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qline.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qlinkedlist.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qlist.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qlocale.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qlockfile.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qloggingcategory.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmap.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmargins.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmath.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmessageauthenticationcode.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmetaobject.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmetatype.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmimedata.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmimedatabase.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmimetype.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmutex.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qnamespace.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qnumeric.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qobjectcleanuphandler.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qobjectdefs.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qpair.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qparallelanimationgroup.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qpauseanimation.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qplugin.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qpluginloader.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qpointer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qprocess.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qprocessordetection.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qpropertyanimation.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qqueue.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qreadwritelock.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qrect.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qrefcount.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qregexp.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qregularexpression.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qresource.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qresultstore.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qrunnable.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsavefile.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qscopedpointer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qscopedvaluerollback.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsemaphore.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsequentialanimationgroup.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qset.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsettings.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qshareddata.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsharedmemory.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsharedpointer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsignaltransition.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsize.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsocketnotifier.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsortfilterproxymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstack.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstandardpaths.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstate.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstatemachine.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstorageinfo.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstringbuilder.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstringlistmodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstringmatcher.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsysinfo.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsystemdetection.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsystemsemaphore.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtemporarydir.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtemporaryfile.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtextboundaryfinder.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtextcodec.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qthread.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qthreadpool.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qthreadstorage.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtimeline.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtimezone.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtranslator.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtypeinfo.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtypetraits.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qurl.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qurlquery.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/quuid.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvariant.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvariantanimation.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvarlengtharray.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qversionnumber.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qversiontagging.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qwaitcondition.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qwineventnotifier.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qxmlstream.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtcoreversion.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/QtGui \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtguiglobal.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qabstracttextdocumentlayout.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qaccessible.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qaccessiblebridge.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qaccessibleobject.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qaccessibleplugin.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qbackingstore.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qbitmap.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qclipboard.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qcursor.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qdesktopservices.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qdrag.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qfont.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qfontdatabase.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qfontinfo.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qfontmetrics.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qgenericmatrix.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qgenericplugin.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qgenericpluginfactory.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qglyphrun.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qguiapplication.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qicon.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qiconengine.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qiconengineplugin.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qimage.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qimageiohandler.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qimagereader.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qimagewriter.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qinputmethod.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qkeysequence.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qmatrix.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qmatrix4x4.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qmovie.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qoffscreensurface.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopengl.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglbuffer.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglcontext.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopengldebug.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglextrafunctions.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglframebufferobject.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglfunctions.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglpaintdevice.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglpixeltransferoptions.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglshaderprogram.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopengltexture.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopengltextureblitter.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopengltimerquery.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglversionfunctions.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglvertexarrayobject.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpagedpaintdevice.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpagelayout.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpagesize.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpaintdevice.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpaintdevicewindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpaintengine.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpainterpath.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpalette.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpdfwriter.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpen.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpicture.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpictureformatplugin.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpixelformat.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpixmapcache.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpolygon.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qquaternion.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qrasterwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qrawfont.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qregion.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qrgb.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qrgba64.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qscreen.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qsessionmanager.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qstandarditemmodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qstatictext.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qstylehints.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qsurface.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qsurfaceformat.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qsyntaxhighlighter.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextcursor.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextdocument.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextdocumentfragment.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextdocumentwriter.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextformat.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextlayout.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextlist.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextobject.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextoption.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtexttable.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtouchdevice.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtransform.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qvalidator.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qvector2d.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qvector3d.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qvector4d.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qwindowdefs.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtguiversion.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QFileSystemModel \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qfilesystemmodel.h \
+		../filebrowerdiag.h \
+		moc_predefs.h \
+		../../../../Qt/5.8/clang_64/bin/moc
+	/Users/andrewcabrera/Qt/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/andrewcabrera/Qt/5.8/clang_64/mkspecs/macx-clang -I/Users/andrewcabrera/Desktop/theFinalCopy/NFLFootballTouring -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtSql.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/andrewcabrera/Qt/5.8/clang_64/lib ../filebrowerdiag.h -o moc_filebrowerdiag.cpp
+
+moc_logindialog.cpp: ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../adminwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlTableModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDesktopWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdesktopwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../noteditabledelegate.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QItemDelegate \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qitemdelegate.h \
+		../addnewsouvenir.h \
+		../database.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQueryModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../logindialog.h \
+		moc_predefs.h \
+		../../../../Qt/5.8/clang_64/bin/moc
+	/Users/andrewcabrera/Qt/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/andrewcabrera/Qt/5.8/clang_64/mkspecs/macx-clang -I/Users/andrewcabrera/Desktop/theFinalCopy/NFLFootballTouring -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtSql.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/andrewcabrera/Qt/5.8/clang_64/lib ../logindialog.h -o moc_logindialog.cpp
+
+moc_customtrip.cpp: ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../graph.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../database.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQueryModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../customtrip.h \
+		moc_predefs.h \
+		../../../../Qt/5.8/clang_64/bin/moc
+	/Users/andrewcabrera/Qt/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/andrewcabrera/Qt/5.8/clang_64/mkspecs/macx-clang -I/Users/andrewcabrera/Desktop/theFinalCopy/NFLFootballTouring -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtSql.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/andrewcabrera/Qt/5.8/clang_64/lib ../customtrip.h -o moc_customtrip.cpp
+
+moc_purchasesouvenirs.cpp: ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../purchasesouvenirs.h \
+		moc_predefs.h \
+		../../../../Qt/5.8/clang_64/bin/moc
+	/Users/andrewcabrera/Qt/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/andrewcabrera/Qt/5.8/clang_64/mkspecs/macx-clang -I/Users/andrewcabrera/Desktop/theFinalCopy/NFLFootballTouring -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtSql.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/andrewcabrera/Qt/5.8/clang_64/lib ../purchasesouvenirs.h -o moc_purchasesouvenirs.cpp
+
+moc_tripfromcoliseum.cpp: ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../graph.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../database.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQueryModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../tripfromcoliseum.h \
+		moc_predefs.h \
+		../../../../Qt/5.8/clang_64/bin/moc
+	/Users/andrewcabrera/Qt/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/andrewcabrera/Qt/5.8/clang_64/mkspecs/macx-clang -I/Users/andrewcabrera/Desktop/theFinalCopy/NFLFootballTouring -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtSql.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/andrewcabrera/Qt/5.8/clang_64/lib ../tripfromcoliseum.h -o moc_tripfromcoliseum.cpp
+
+moc_tripfromfoldfield.cpp: ../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../tripfromfoldfield.h \
+		moc_predefs.h \
+		../../../../Qt/5.8/clang_64/bin/moc
+	/Users/andrewcabrera/Qt/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/andrewcabrera/Qt/5.8/clang_64/mkspecs/macx-clang -I/Users/andrewcabrera/Desktop/theFinalCopy/NFLFootballTouring -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtSql.framework/Headers -I/Users/andrewcabrera/Qt/5.8/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/andrewcabrera/Qt/5.8/clang_64/lib ../tripfromfoldfield.h -o moc_tripfromfoldfield.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h
+compiler_uic_make_all: ui_mainwindow.h ui_informationwindow.h ui_adminwindow.h ui_addnewsouvenir.h ui_filebrowerdiag.h ui_logindialog.h ui_customtrip.h ui_purchasesouvenirs.h ui_tripfromcoliseum.h ui_tripfromfoldfield.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h
+	-$(DEL_FILE) ui_mainwindow.h ui_informationwindow.h ui_adminwindow.h ui_addnewsouvenir.h ui_filebrowerdiag.h ui_logindialog.h ui_customtrip.h ui_purchasesouvenirs.h ui_tripfromcoliseum.h ui_tripfromfoldfield.h
 ui_mainwindow.h: ../mainwindow.ui \
 		../../../../Qt/5.8/clang_64/bin/uic
 	/Users/andrewcabrera/Qt/5.8/clang_64/bin/uic ../mainwindow.ui -o ui_mainwindow.h
+
+ui_informationwindow.h: ../informationwindow.ui \
+		../../../../Qt/5.8/clang_64/bin/uic
+	/Users/andrewcabrera/Qt/5.8/clang_64/bin/uic ../informationwindow.ui -o ui_informationwindow.h
+
+ui_adminwindow.h: ../adminwindow.ui \
+		../../../../Qt/5.8/clang_64/bin/uic
+	/Users/andrewcabrera/Qt/5.8/clang_64/bin/uic ../adminwindow.ui -o ui_adminwindow.h
+
+ui_addnewsouvenir.h: ../addnewsouvenir.ui \
+		../../../../Qt/5.8/clang_64/bin/uic
+	/Users/andrewcabrera/Qt/5.8/clang_64/bin/uic ../addnewsouvenir.ui -o ui_addnewsouvenir.h
+
+ui_filebrowerdiag.h: ../filebrowerdiag.ui \
+		../../../../Qt/5.8/clang_64/bin/uic
+	/Users/andrewcabrera/Qt/5.8/clang_64/bin/uic ../filebrowerdiag.ui -o ui_filebrowerdiag.h
+
+ui_logindialog.h: ../logindialog.ui \
+		../../../../Qt/5.8/clang_64/bin/uic
+	/Users/andrewcabrera/Qt/5.8/clang_64/bin/uic ../logindialog.ui -o ui_logindialog.h
+
+ui_customtrip.h: ../customtrip.ui \
+		../../../../Qt/5.8/clang_64/bin/uic
+	/Users/andrewcabrera/Qt/5.8/clang_64/bin/uic ../customtrip.ui -o ui_customtrip.h
+
+ui_purchasesouvenirs.h: ../purchasesouvenirs.ui \
+		../../../../Qt/5.8/clang_64/bin/uic
+	/Users/andrewcabrera/Qt/5.8/clang_64/bin/uic ../purchasesouvenirs.ui -o ui_purchasesouvenirs.h
+
+ui_tripfromcoliseum.h: ../tripfromcoliseum.ui \
+		../../../../Qt/5.8/clang_64/bin/uic
+	/Users/andrewcabrera/Qt/5.8/clang_64/bin/uic ../tripfromcoliseum.ui -o ui_tripfromcoliseum.h
+
+ui_tripfromfoldfield.h: ../tripfromfoldfield.ui \
+		../../../../Qt/5.8/clang_64/bin/uic
+	/Users/andrewcabrera/Qt/5.8/clang_64/bin/uic ../tripfromfoldfield.ui -o ui_tripfromfoldfield.h
 
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
@@ -701,28 +1296,92 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
 main.o: ../main.cpp ../mainwindow.h \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QApplication \
-		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../informationwindow.h \
 		../database.h \
 		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
 		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
 		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQueryModel \
 		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
-		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
-		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquery.h
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QSortFilterProxyModel \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsortfilterproxymodel.h \
+		../logindialog.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../adminwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlTableModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDesktopWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdesktopwidget.h \
+		../noteditabledelegate.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QItemDelegate \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qitemdelegate.h \
+		../addnewsouvenir.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QApplication \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../main.cpp
 
 mainwindow.o: ../mainwindow.cpp ../mainwindow.h \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		ui_mainwindow.h
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../informationwindow.h \
+		../database.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQueryModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QSortFilterProxyModel \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsortfilterproxymodel.h \
+		../logindialog.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../adminwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlTableModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDesktopWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdesktopwidget.h \
+		../noteditabledelegate.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QItemDelegate \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qitemdelegate.h \
+		../addnewsouvenir.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../ui_mainwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
+		../customtrip.h \
+		../graph.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../tripfromcoliseum.h \
+		../tripfromfoldfield.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../mainwindow.cpp
 
 database.o: ../database.cpp ../database.h \
@@ -732,14 +1391,867 @@ database.o: ../database.cpp ../database.h \
 		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
 		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
 		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDir \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdir.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlError \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlerror.h \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
 		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o database.o ../database.cpp
 
+informationwindow.o: ../informationwindow.cpp ../informationwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../database.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQueryModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QSortFilterProxyModel \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsortfilterproxymodel.h \
+		../ui_informationwindow.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o informationwindow.o ../informationwindow.cpp
+
+adminwindow.o: ../adminwindow.cpp ../adminwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlTableModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDesktopWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdesktopwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../noteditabledelegate.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QItemDelegate \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qitemdelegate.h \
+		../addnewsouvenir.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../database.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQueryModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../ui_adminwindow.h \
+		../mainwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../informationwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QSortFilterProxyModel \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsortfilterproxymodel.h \
+		../logindialog.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMenu \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmenu.h \
+		../filebrowerdiag.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QtCore \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qglobal.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qabstractanimation.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qabstracteventdispatcher.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qabstractitemmodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qabstractnativeeventfilter.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qabstractproxymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qabstractstate.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qabstracttransition.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qalgorithms.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qanimationgroup.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qarraydata.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qarraydataops.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qarraydatapointer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qatomic.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qbasictimer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qbitarray.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qbuffer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qbytearray.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qbytearraylist.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qbytearraymatcher.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcache.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qchar.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcollator.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcommandlineoption.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcommandlineparser.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcompilerdetection.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcontainerfwd.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcontiguouscache.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcoreapplication.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcoreevent.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcryptographichash.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdeadlinetimer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdir.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdiriterator.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qeasingcurve.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qelapsedtimer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qendian.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qeventloop.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qeventtransition.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qexception.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfactoryinterface.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfiledevice.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfileinfo.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfileselector.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfilesystemwatcher.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfinalstate.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qflags.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfuture.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfutureinterface.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfuturesynchronizer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfuturewatcher.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qgenericatomic.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qglobalstatic.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qhash.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qhashfunctions.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qhistorystate.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qidentityproxymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qiodevice.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qisenum.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qitemselectionmodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qiterator.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qjsonarray.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qjsondocument.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qjsonvalue.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qlibrary.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qlibraryinfo.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qline.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qlinkedlist.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qlist.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qlocale.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qlockfile.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qloggingcategory.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmap.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmargins.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmath.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmessageauthenticationcode.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmetaobject.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmetatype.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmimedata.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmimedatabase.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmimetype.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmutex.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qnamespace.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qnumeric.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qobjectcleanuphandler.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qobjectdefs.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qpair.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qparallelanimationgroup.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qpauseanimation.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qplugin.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qpluginloader.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qpointer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qprocess.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qprocessordetection.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qpropertyanimation.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qqueue.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qreadwritelock.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qrect.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qrefcount.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qregexp.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qregularexpression.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qresource.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qresultstore.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qrunnable.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsavefile.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qscopedpointer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qscopedvaluerollback.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsemaphore.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsequentialanimationgroup.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qset.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsettings.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qshareddata.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsharedmemory.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsharedpointer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsignaltransition.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsize.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsocketnotifier.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstack.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstandardpaths.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstate.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstatemachine.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstorageinfo.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstringbuilder.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstringlistmodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstringmatcher.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsysinfo.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsystemdetection.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsystemsemaphore.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtemporarydir.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtemporaryfile.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtextboundaryfinder.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtextcodec.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qthread.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qthreadpool.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qthreadstorage.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtimeline.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtimezone.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtranslator.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtypeinfo.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtypetraits.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qurl.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qurlquery.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/quuid.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvariant.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvariantanimation.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvarlengtharray.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qversionnumber.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qversiontagging.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qwaitcondition.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qwineventnotifier.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qxmlstream.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtcoreversion.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/QtGui \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtguiglobal.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qabstracttextdocumentlayout.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qaccessible.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qaccessiblebridge.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qaccessibleobject.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qaccessibleplugin.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qbackingstore.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qbitmap.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qclipboard.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qcursor.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qdesktopservices.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qdrag.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qfont.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qfontdatabase.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qfontinfo.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qfontmetrics.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qgenericmatrix.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qgenericplugin.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qgenericpluginfactory.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qglyphrun.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qguiapplication.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qicon.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qiconengine.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qiconengineplugin.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qimage.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qimageiohandler.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qimagereader.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qimagewriter.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qinputmethod.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qkeysequence.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qmatrix.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qmatrix4x4.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qmovie.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qoffscreensurface.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopengl.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglbuffer.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglcontext.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopengldebug.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglextrafunctions.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglframebufferobject.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglfunctions.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglpaintdevice.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglpixeltransferoptions.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglshaderprogram.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopengltexture.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopengltextureblitter.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopengltimerquery.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglversionfunctions.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglvertexarrayobject.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpagedpaintdevice.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpagelayout.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpagesize.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpaintdevice.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpaintdevicewindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpaintengine.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpainterpath.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpalette.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpdfwriter.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpen.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpicture.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpictureformatplugin.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpixelformat.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpixmapcache.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpolygon.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qquaternion.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qrasterwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qrawfont.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qregion.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qrgb.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qrgba64.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qscreen.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qsessionmanager.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qstandarditemmodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qstatictext.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qstylehints.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qsurface.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qsurfaceformat.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qsyntaxhighlighter.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextcursor.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextdocument.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextdocumentfragment.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextdocumentwriter.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextformat.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextlayout.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextlist.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextobject.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextoption.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtexttable.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtouchdevice.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtransform.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qvalidator.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qvector2d.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qvector3d.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qvector4d.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qwindowdefs.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtguiversion.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QFileSystemModel \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qfilesystemmodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QItemSelectionModel
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o adminwindow.o ../adminwindow.cpp
+
+noteditabledelegate.o: ../noteditabledelegate.cpp ../noteditabledelegate.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QItemDelegate \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qitemdelegate.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o noteditabledelegate.o ../noteditabledelegate.cpp
+
+addnewsouvenir.o: ../addnewsouvenir.cpp ../addnewsouvenir.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../database.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQueryModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../adminwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlTableModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDesktopWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdesktopwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../noteditabledelegate.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QItemDelegate \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qitemdelegate.h \
+		../ui_addnewsouvenir.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o addnewsouvenir.o ../addnewsouvenir.cpp
+
+filebrowerdiag.o: ../filebrowerdiag.cpp ../filebrowerdiag.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QtCore \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qglobal.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qabstractanimation.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qabstracteventdispatcher.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qabstractitemmodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qabstractnativeeventfilter.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qabstractproxymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qabstractstate.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qabstracttransition.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qalgorithms.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qanimationgroup.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qarraydata.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qarraydataops.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qarraydatapointer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qatomic.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qbasictimer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qbitarray.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qbuffer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qbytearray.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qbytearraylist.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qbytearraymatcher.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcache.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qchar.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcollator.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcommandlineoption.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcommandlineparser.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcompilerdetection.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcontainerfwd.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcontiguouscache.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcoreapplication.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcoreevent.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qcryptographichash.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdeadlinetimer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdir.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdiriterator.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qeasingcurve.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qelapsedtimer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qendian.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qeventloop.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qeventtransition.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qexception.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfactoryinterface.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfiledevice.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfileinfo.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfileselector.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfilesystemwatcher.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfinalstate.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qflags.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfuture.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfutureinterface.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfuturesynchronizer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfuturewatcher.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qgenericatomic.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qglobalstatic.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qhash.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qhashfunctions.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qhistorystate.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qidentityproxymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qiodevice.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qisenum.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qitemselectionmodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qiterator.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qjsonarray.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qjsondocument.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qjsonvalue.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qlibrary.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qlibraryinfo.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qline.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qlinkedlist.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qlist.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qlocale.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qlockfile.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qloggingcategory.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmap.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmargins.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmath.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmessageauthenticationcode.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmetaobject.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmetatype.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmimedata.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmimedatabase.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmimetype.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qmutex.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qnamespace.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qnumeric.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qobjectcleanuphandler.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qobjectdefs.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qpair.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qparallelanimationgroup.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qpauseanimation.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qplugin.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qpluginloader.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qpointer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qprocess.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qprocessordetection.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qpropertyanimation.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qqueue.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qreadwritelock.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qrect.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qrefcount.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qregexp.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qregularexpression.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qresource.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qresultstore.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qrunnable.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsavefile.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qscopedpointer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qscopedvaluerollback.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsemaphore.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsequentialanimationgroup.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qset.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsettings.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qshareddata.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsharedmemory.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsharedpointer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsignaltransition.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsize.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsocketnotifier.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsortfilterproxymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstack.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstandardpaths.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstate.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstatemachine.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstorageinfo.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstringbuilder.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstringlistmodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstringmatcher.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsysinfo.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsystemdetection.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsystemsemaphore.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtemporarydir.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtemporaryfile.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtextboundaryfinder.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtextcodec.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qthread.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qthreadpool.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qthreadstorage.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtimeline.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtimezone.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtranslator.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtypeinfo.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtypetraits.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qurl.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qurlquery.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/quuid.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvariant.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvariantanimation.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvarlengtharray.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qversionnumber.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qversiontagging.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qwaitcondition.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qwineventnotifier.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qxmlstream.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtcoreversion.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/QtGui \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtguiglobal.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qabstracttextdocumentlayout.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qaccessible.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qaccessiblebridge.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qaccessibleobject.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qaccessibleplugin.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qbackingstore.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qbitmap.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qclipboard.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qcursor.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qdesktopservices.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qdrag.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qfont.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qfontdatabase.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qfontinfo.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qfontmetrics.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qgenericmatrix.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qgenericplugin.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qgenericpluginfactory.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qglyphrun.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qguiapplication.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qicon.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qiconengine.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qiconengineplugin.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qimage.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qimageiohandler.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qimagereader.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qimagewriter.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qinputmethod.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qkeysequence.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qmatrix.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qmatrix4x4.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qmovie.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qoffscreensurface.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopengl.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglbuffer.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglcontext.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopengldebug.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglextrafunctions.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglframebufferobject.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglfunctions.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglpaintdevice.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglpixeltransferoptions.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglshaderprogram.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopengltexture.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopengltextureblitter.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopengltimerquery.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglversionfunctions.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglvertexarrayobject.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qopenglwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpagedpaintdevice.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpagelayout.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpagesize.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpaintdevice.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpaintdevicewindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpaintengine.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpainterpath.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpalette.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpdfwriter.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpen.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpicture.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpictureformatplugin.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpixelformat.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpixmapcache.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qpolygon.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qquaternion.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qrasterwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qrawfont.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qregion.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qrgb.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qrgba64.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qscreen.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qsessionmanager.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qstandarditemmodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qstatictext.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qstylehints.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qsurface.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qsurfaceformat.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qsyntaxhighlighter.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextcursor.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextdocument.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextdocumentfragment.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextdocumentwriter.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextformat.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextlayout.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextlist.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextobject.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtextoption.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtexttable.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtouchdevice.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtransform.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qvalidator.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qvector2d.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qvector3d.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qvector4d.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qwindowdefs.h \
+		../../../../Qt/5.8/clang_64/lib/QtGui.framework/Headers/qtguiversion.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QFileSystemModel \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qfilesystemmodel.h \
+		../ui_filebrowerdiag.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o filebrowerdiag.o ../filebrowerdiag.cpp
+
+logindialog.o: ../logindialog.cpp ../logindialog.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../adminwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlTableModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDesktopWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdesktopwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../noteditabledelegate.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QItemDelegate \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qitemdelegate.h \
+		../addnewsouvenir.h \
+		../database.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQueryModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../ui_logindialog.h \
+		../mainwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../informationwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QSortFilterProxyModel \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsortfilterproxymodel.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o logindialog.o ../logindialog.cpp
+
+customtrip.o: ../customtrip.cpp ../customtrip.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../graph.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../database.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQueryModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../ui_customtrip.h \
+		../mainwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../informationwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QSortFilterProxyModel \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsortfilterproxymodel.h \
+		../logindialog.h \
+		../adminwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlTableModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDesktopWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdesktopwidget.h \
+		../noteditabledelegate.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QItemDelegate \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qitemdelegate.h \
+		../addnewsouvenir.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../purchasesouvenirs.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o customtrip.o ../customtrip.cpp
+
+purchasesouvenirs.o: ../purchasesouvenirs.cpp ../purchasesouvenirs.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../ui_purchasesouvenirs.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o purchasesouvenirs.o ../purchasesouvenirs.cpp
+
+tripfromcoliseum.o: ../tripfromcoliseum.cpp ../tripfromcoliseum.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../graph.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../database.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQueryModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../ui_tripfromcoliseum.h \
+		../mainwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../informationwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QSortFilterProxyModel \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsortfilterproxymodel.h \
+		../logindialog.h \
+		../adminwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlTableModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDesktopWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdesktopwidget.h \
+		../noteditabledelegate.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QItemDelegate \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qitemdelegate.h \
+		../addnewsouvenir.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tripfromcoliseum.o ../tripfromcoliseum.cpp
+
+tripfromfoldfield.o: ../tripfromfoldfield.cpp ../tripfromfoldfield.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../ui_tripfromfoldfield.h \
+		../mainwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../informationwindow.h \
+		../database.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlQueryModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QSortFilterProxyModel \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qsortfilterproxymodel.h \
+		../logindialog.h \
+		../adminwindow.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/QSqlTableModel \
+		../../../../Qt/5.8/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QDesktopWidget \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qdesktopwidget.h \
+		../noteditabledelegate.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QItemDelegate \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qitemdelegate.h \
+		../addnewsouvenir.h \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../../Qt/5.8/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tripfromfoldfield.o ../tripfromfoldfield.cpp
+
+graph.o: ../graph.cpp ../graph.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o graph.o ../graph.cpp
+
+qrc_res.o: qrc_res.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_res.o qrc_res.cpp
+
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+
+moc_informationwindow.o: moc_informationwindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_informationwindow.o moc_informationwindow.cpp
+
+moc_adminwindow.o: moc_adminwindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_adminwindow.o moc_adminwindow.cpp
+
+moc_noteditabledelegate.o: moc_noteditabledelegate.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_noteditabledelegate.o moc_noteditabledelegate.cpp
+
+moc_addnewsouvenir.o: moc_addnewsouvenir.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_addnewsouvenir.o moc_addnewsouvenir.cpp
+
+moc_filebrowerdiag.o: moc_filebrowerdiag.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_filebrowerdiag.o moc_filebrowerdiag.cpp
+
+moc_logindialog.o: moc_logindialog.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_logindialog.o moc_logindialog.cpp
+
+moc_customtrip.o: moc_customtrip.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_customtrip.o moc_customtrip.cpp
+
+moc_purchasesouvenirs.o: moc_purchasesouvenirs.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_purchasesouvenirs.o moc_purchasesouvenirs.cpp
+
+moc_tripfromcoliseum.o: moc_tripfromcoliseum.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_tripfromcoliseum.o moc_tripfromcoliseum.cpp
+
+moc_tripfromfoldfield.o: moc_tripfromfoldfield.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_tripfromfoldfield.o moc_tripfromfoldfield.cpp
 
 ####### Install
 

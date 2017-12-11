@@ -3,6 +3,9 @@
 
 #include <QDialog>
 
+/**
+ * purchase souvenirs
+ */
 namespace Ui {
 class PurchaseSouvenirs;
 }

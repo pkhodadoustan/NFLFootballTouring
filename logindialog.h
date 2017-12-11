@@ -5,10 +5,17 @@
 #include "adminwindow.h"
 #include <QMessageBox>
 
+/**
+ *class login
+ */
 namespace Ui {
 class loginDialog;
 }
 
+/**
+ * @brief The loginDialog class
+ * allows the admin to login
+ */
 class loginDialog : public QDialog
 {
     Q_OBJECT
@@ -18,8 +25,16 @@ public:
     ~loginDialog();
 
 private slots:
+    /**
+     * @brief on_loginButton_clicked
+     * verified credentials
+     */
     void on_loginButton_clicked();
 
+    /**
+     * @brief on_pushButton_clicked
+     * back button to main wind
+     */
     void on_pushButton_clicked();
 
 private:

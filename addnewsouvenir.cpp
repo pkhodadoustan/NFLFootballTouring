@@ -3,6 +3,11 @@
 #include <QDebug>
 #include "database.h"
 
+/**
+ * @brief AddNewSouvenir::AddNewSouvenir
+ * @param parent
+ * allows user to add a new souvenir to the DB
+ */
 AddNewSouvenir::AddNewSouvenir(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddNewSouvenir)
@@ -19,6 +24,11 @@ AddNewSouvenir::~AddNewSouvenir()
     delete ui;
 }
 
+/**
+ * @brief AddNewSouvenir::on_addButton_clicked
+ * once the add button is clicked, it checks to see that the item to be added
+ * is not allready in the Db.  if it is, it will not add it and let the user know
+ */
 void AddNewSouvenir::on_addButton_clicked()
 {
     Database* db = Database::getInstance();

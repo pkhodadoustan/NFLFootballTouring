@@ -137,6 +137,7 @@ void Graph::partialDFS(int startingIndex, bool visited[])
 //DFS Traversal that fills creates discovery and back edge vectors
 void Graph::DFS(int startingIndex)
 {
+    lesserComparator ibj;
     clearEdges(); //remove changes of any previous traversals
     discoveryEdge.clear();
     backEdge.clear();
@@ -148,7 +149,7 @@ void Graph::DFS(int startingIndex)
   *  //to sort the adjacent vertices by distance(== operator is overloaded for vNode struct)*/
     for(unsigned int i = 0; i<adjacencyList.size(); i++)
     {
-        sort(adjacencyList[i].begin()+1, adjacencyList[i].end());//sort children of node i in vList
+        sort(adjacencyList[i].begin()+1, adjacencyList[i].end(), ibj);//sort children of node i in vList
     }
     partialDFS(startingIndex, visited);
 
@@ -216,6 +217,7 @@ void Graph::partialBFS(vector<vNode> vList,  bool visited[])
 
 void Graph::BFS(int startingIndex)
 {
+    lesserComparator obj;
     clearEdges();
     discoveryEdge.clear();
     crossEdge.clear();
@@ -224,7 +226,7 @@ void Graph::BFS(int startingIndex)
     //sort all the lists in the graph except for the beginning node in each*/
     for(unsigned int i = 0; i<adjacencyList.size(); i++)
     {
-        sort(adjacencyList[i].begin()+1, adjacencyList[i].end());//sort children of node i in vList
+        sort(adjacencyList[i].begin()+1, adjacencyList[i].end(), obj);//sort children of node i in vList
     }
 
     bool visited[12] = {false};
@@ -306,7 +308,7 @@ void Graph::clearEdges()
 
 vector<vNode> Graph::dijkstra(int sourceIndex)
 {
-
+    lesserComparator obj;
     vector<int> cost(adjacencyList.size(), 1000000);
     vector<int> parent(adjacencyList.size(), -1);
 
@@ -346,7 +348,7 @@ vector<vNode> Graph::dijkstra(int sourceIndex)
     }
     //sort from the closet to furthest
     //operator "<" has been overloaded for vNode struct
-    sort(vertices.begin(), vertices.end());
+    sort(vertices.begin(), vertices.end(), obj);
     return vertices;
 /*
     for(unsigned int i = 0; i<cost.size(); i++)

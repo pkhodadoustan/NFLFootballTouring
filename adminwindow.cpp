@@ -6,6 +6,12 @@
 #include "filebrowerdiag.h"
 #include <QItemSelectionModel>
 
+/**
+ * @brief AdminWindow::AdminWindow
+ * @param parent
+ * constructor for the admin window.  this links withe DB and fills all the tables
+ * with the information from the stadim
+ */
 AdminWindow::AdminWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AdminWindow)
@@ -43,11 +49,18 @@ AdminWindow::AdminWindow(QWidget *parent) :
 
 }
 
+/**
+ * @brief AdminWindow::~AdminWindow
+ */
 AdminWindow::~AdminWindow()
 {
     delete ui;
 }
 
+/**
+ * @brief AdminWindow::on_backButton_clicked
+ * back to main
+ */
 void AdminWindow::on_backButton_clicked()
 {
     MainWindow* main = new MainWindow;
@@ -55,6 +68,10 @@ void AdminWindow::on_backButton_clicked()
     main->show();
 }
 
+/**
+ * @brief AdminWindow::refreshList
+ * refreshs the tables so that all the information displayed is up to date with DB
+ */
 void AdminWindow::refreshList() {
     tableModel = new QSqlTableModel; //creates new table model
 
@@ -79,6 +96,10 @@ void AdminWindow::refreshList() {
 
 }
 
+/**
+ * @brief AdminWindow::on_addSouvButton_clicked
+ * adds a souvenir
+ */
 void AdminWindow::on_addSouvButton_clicked()
 {
     AddNewSouvenir* addSouv = new AddNewSouvenir;
@@ -86,6 +107,11 @@ void AdminWindow::on_addSouvButton_clicked()
     admin = this;
 }
 
+/**
+ * @brief AdminWindow::onCustomContextMenu
+ * @param point
+ * deletes the items
+ */
 void AdminWindow::onCustomContextMenu(const QPoint &point)
 {
     //menu to delete item on right click
@@ -122,6 +148,11 @@ void AdminWindow::deleteSelection() {
     refreshList();
 }
 
+/**
+ * @brief AdminWindow::on_TeamCombBox_currentIndexChanged
+ * @param index
+ * diplays the selected team souvenirs to the souvenir table
+ */
 void AdminWindow::on_TeamCombBox_currentIndexChanged(int index)
 {
     QString test = QString("%1_Souv").arg(ui->TeamCombBox->currentText()).replace(" ", "_");
@@ -136,12 +167,19 @@ void AdminWindow::on_TeamCombBox_currentIndexChanged(int index)
     ui->SouvView->verticalHeader()->setDefaultSectionSize(50);
 }
 
+/**
+ * @brief AdminWindow::on_addStadButton_clicked
+ * creates new file browser to select stadium additions
+ */
 void AdminWindow::on_addStadButton_clicked()
 {
     FileBrowerDiag* file = new FileBrowerDiag;
     file->show();
 }
 
+/**
+ * @brief AdminWindow::refreshSouvList
+ */
 void AdminWindow::refreshSouvList() {
     QString test = QString("%1_Souv").arg(ui->TeamCombBox->currentText()).replace(" ", "_");
     qDebug() << test;
